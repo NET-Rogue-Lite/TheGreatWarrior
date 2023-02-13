@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] Stages;
     public int stageIndex;
     public bool Next;
+    public GameObject Player;
     // Start is called before the first frame update
     public void IsNext(bool isNext)
     {
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
         {
             Stages[stageIndex].SetActive(false);
             Stages[++stageIndex].SetActive(true);
-
+            Player.transform.position = Vector2.zero;
         }
         else
         {
