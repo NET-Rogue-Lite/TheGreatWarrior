@@ -226,6 +226,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: IsAttacking 0
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -341,7 +347,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: 27e91ba9dca3cf3499ab23b4e5a5b269, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: 
+  m_MirrorParameter: IsJumping
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1102 &7124524038199348227

@@ -14,7 +14,7 @@ public class BasicAttack : MonoBehaviour
     {
         if ( gameObject.GetComponent<CircleCollider2D>().enabled == true)
             anim.SetBool("IsAttacking",true);
-            Invoke("DisAppear",0.2f);
+            Invoke("DisAppear",0.3f);
     }
     void DisAppear()
     {

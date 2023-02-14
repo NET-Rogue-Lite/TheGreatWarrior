@@ -54,10 +54,14 @@ public class PlayerMove : MonoBehaviour
         //키를 떼면 잘 멈추게 하는 코드
         if (Input.GetButtonUp("Horizontal"))
         {
-            // rigid.velocity = new Vector2(0, rigid.velocity.y);
-            rigid.velocity = new Vector2(
-                0.1f * rigid.velocity.normalized.x
-             , rigid.velocity.y);
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
+            if (!anim.GetBool("IsJumping") && rigid.velocity.y > 0)
+            {
+                rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y*0.1f);
+            }
+            // rigid.velocity = new Vector2(
+            //     0.1f * rigid.velocity.normalized.x
+            //  , rigid.velocity.y);
         }
         //쳐다보는 방향에 관한 코드
         if (Input.GetButton("Horizontal"))
@@ -74,6 +78,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (anim.GetBool("IsAttacking") == false)
             {
+
                 anim.SetBool("IsAttacking", true);
                 GameObject BasicAttack = transform.Find(Class).gameObject.transform
                 .Find("BasicAttack").gameObject;
@@ -89,11 +94,11 @@ public class PlayerMove : MonoBehaviour
                 }
             }
         }
-        if (transform.Find(Class).gameObject.transform
-                .Find("BasicAttack").gameObject.GetComponent<CircleCollider2D>().enabled == false)
-        {
-            anim.SetBool("IsAttacking", false);
-        }
+        // if (transform.Find(Class).gameObject.transform
+        //         .Find("BasicAttack").gameObject.GetComponent<CircleCollider2D>().enabled == false)
+        // {
+        //     anim.SetBool("IsAttacking", false);
+        // }
         //대쉬
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -103,6 +108,8 @@ public class PlayerMove : MonoBehaviour
             anim.SetBool("IsDashing", true);
             rigid.AddForce(Vector2.right * h * maxSpeedx * 5, ForceMode2D.Impulse);
             gameObject.layer = LayerMask.NameToLayer("Imortal");
+            CancelInvoke();
+            Invoke("BeBack", 0.35f);
         }
         //밧줄 타는 코드
         float v = Input.GetAxisRaw("Vertical");
@@ -148,8 +155,8 @@ public class PlayerMove : MonoBehaviour
     }
     void BeBack()
     {
-        gameObject.layer = LayerMask.NameToLayer("Default");
         anim.SetBool("IsDashing", false);
+        gameObject.layer = LayerMask.NameToLayer("Default");
     }
     void AttckingTurn()
     {
@@ -208,9 +215,27 @@ public class PlayerMove : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Map"))
+        GameObject Other = other.gameObject;
+        string Tag = other.gameObject.tag;
+        int Layer = other.gameObject.layer;
+        if (Layer == LayerMask.NameToLayer("Map"))
         {
             anim.SetBool("IsJumping", true);
+        }
+        if (Tag == "Monster")
+        {
+            if (gameObject.layer != LayerMask.NameToLayer("Imortal"))
+            {
+                hPManager.OnDamaged(FindMonsterAd(Other.name));
+                //맞으면 플레이어가 밀려나기
+                int dirc = transform.position.x - other.transform.position.x > 0 ? 1 : -1;
+                // rigid.AddForce(new Vector2(dirc, 0.2f) * 5, ForceMode2D.Impulse);
+                rigid.velocity = new Vector2(dirc, 0.6f) * 5;
+                anim.SetBool("IsJumping", true);
+                CancelInvoke();
+                gameObject.layer = LayerMask.NameToLayer("Imortal");
+                Invoke("BeBack", 0.8f);
+            }
         }
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -227,9 +252,26 @@ public class PlayerMove : MonoBehaviour
             boxcollider.isTrigger = true;
             GetComponent<CapsuleCollider2D>().isTrigger = true;
         }
+
+    }
+    void OnCollisionStay2D(Collision2D other)
+    {
+        GameObject Other = other.gameObject;
+        string Tag = other.gameObject.tag;
+        int Layer = other.gameObject.layer;
         if (Tag == "Monster")
         {
-            hPManager.OnDamaged(FindMonsterAd(Other.name));
+            if (gameObject.layer != LayerMask.NameToLayer("Imortal"))
+            {
+                hPManager.OnDamaged(FindMonsterAd(Other.name));
+                //맞으면 플레이어가 밀려나기
+                int dirc = transform.position.x - other.transform.position.x > 0 ? 1 : -1;
+                rigid.velocity = new Vector2(dirc, 0.6f) * 5; //, ForceMode2D.Impulse);
+                anim.SetBool("IsJumping", true);
+                CancelInvoke();
+                gameObject.layer = LayerMask.NameToLayer("Imortal");
+                Invoke("BeBack", 0.8f);
+            }
         }
     }
     void OnCollisionEnter2D(Collision2D other)
@@ -237,10 +279,7 @@ public class PlayerMove : MonoBehaviour
         GameObject Other = other.gameObject;
         string Tag = other.gameObject.tag;
         int Layer = other.gameObject.layer;
-        if (Tag == "Monster")
-        {
-            hPManager.OnDamaged(FindMonsterAd(Other.name));
-        }
+
     }
     float FindMonsterAd(string name)
     {

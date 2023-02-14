@@ -53,13 +53,13 @@ public class MonsterController : MonoBehaviour
     {
         if (playerDistance <= Attack_range)
         {
-            CancelInvoke();
+            // CancelInvoke();
             isPlayer_close = true;
             isAttack = true;
         }
         else if (playerDistance <= Close_range)
         {
-            CancelInvoke();
+            // CancelInvoke();
             Speed = Chase_speed;
             isPlayer_close = true;
             isAttack = false;
@@ -98,7 +98,7 @@ public class MonsterController : MonoBehaviour
         else
         {
             rigid.velocity = new Vector2(0, rigid.velocity.y);
-            CancelInvoke();
+            // CancelInvoke();
         }
     }
 
@@ -147,10 +147,6 @@ public class MonsterController : MonoBehaviour
     {
         Debug.Log("OnDamaged");
         Hp -= damage;
-        Hit = true;
-        CancelInvoke();
-        Invoke("HitFalse",0.5f);
-
         if (Hp <= 0)
         {
             anim.SetBool("IsDied", true);
@@ -167,9 +163,7 @@ public class MonsterController : MonoBehaviour
 
         // Invoke("DeActive", 2.0f);
     }
-
-    void HitFalse()
-    {
+    void HitFalse(){
         Hit = false;
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -177,6 +171,11 @@ public class MonsterController : MonoBehaviour
         Debug.Log(other.gameObject.tag);
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
+            if(!Hit){
+                Invoke("HitFalse", 1f);
+                Debug.Log("HitFalse");
+            }
+            Hit = true;
             OnDamaged(PlayerDamage(other.gameObject.tag) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
         }
     }
