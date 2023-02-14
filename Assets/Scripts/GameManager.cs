@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
+    public int Diff;
     public GameObject[] Stages;
     public int stageIndex;
     public bool Next;

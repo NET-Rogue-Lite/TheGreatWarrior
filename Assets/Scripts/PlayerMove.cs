@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public HPManager hPManager;
     public GameManager gameManager;
     Rigidbody2D rigid;
     public SpriteRenderer spriteRenderer;
@@ -71,19 +72,27 @@ public class PlayerMove : MonoBehaviour
         //기본공격
         if (Input.GetKeyDown(KeyCode.LeftControl) && !anim.GetBool("IsClimb"))
         {
-            anim.SetBool("IsAttacking", true);
-            GameObject BasicAttack = transform.Find(Class).gameObject.transform
-            .Find("BasicAttack").gameObject;
-            BasicAttack.SetActive(true);
-            //자신의 직업 자식의 기본공격을 ON시킴.
-            if (spriteRenderer.flipX == true)
+            if (anim.GetBool("IsAttacking") == false)
             {
-                BasicAttack.transform.rotation = Quaternion.Euler(0, 0, 180);
+                anim.SetBool("IsAttacking", true);
+                GameObject BasicAttack = transform.Find(Class).gameObject.transform
+                .Find("BasicAttack").gameObject;
+                BasicAttack.GetComponent<CircleCollider2D>().enabled = true;
+                //자신의 직업 자식의 기본공격을 ON시킴.
+                if (spriteRenderer.flipX == true)
+                {
+                    BasicAttack.transform.rotation = Quaternion.Euler(0, 180, 0);
+                }
+                else
+                {
+                    BasicAttack.transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
             }
-            else
-            {
-                BasicAttack.transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
+        }
+        if (transform.Find(Class).gameObject.transform
+                .Find("BasicAttack").gameObject.GetComponent<CircleCollider2D>().enabled == false)
+        {
+            anim.SetBool("IsAttacking", false);
         }
         //대쉬
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -206,36 +215,39 @@ public class PlayerMove : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Rope")
+        GameObject Other = other.gameObject;
+        string Tag = other.gameObject.tag;
+        int Layer = other.gameObject.layer;
+        if (Tag == "Rope")
         {
             CanClimb = true;
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Map"))
+        if (Layer == LayerMask.NameToLayer("Map"))
         {
             boxcollider.isTrigger = true;
             GetComponent<CapsuleCollider2D>().isTrigger = true;
-
         }
-        // if (other.gameObject.tag == "Item")
-        // {
-        //     bool IsBronze = other.gameObject.name.Contains("Bronze");
-        //     bool IsSilver = other.gameObject.name.Contains("Silver");
-        //     bool IsGold = other.gameObject.name.Contains("Gold");
-        //     if (IsBronze)
-        //         gameManager.stagePoint += 50;
-        //     else if (IsSilver)
-        //         gameManager.stagePoint += 100;
-        //     else if (IsGold)
-        //         gameManager.stagePoint += 300;
-
-        //     gameManager.GETBullet(1);
-        //     other.gameObject.SetActive(false);
-        //     PlaySound("ITEM");
-        // }
-        // if (other.gameObject.tag == "Finish")
-        // {
-        //     PlaySound("FINISH");
-        //     gameManager.NextStage();
-        // }
+        if (Tag == "Monster")
+        {
+            hPManager.OnDamaged(FindMonsterAd(Other.name));
+        }
+    }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        GameObject Other = other.gameObject;
+        string Tag = other.gameObject.tag;
+        int Layer = other.gameObject.layer;
+        if (Tag == "Monster")
+        {
+            hPManager.OnDamaged(FindMonsterAd(Other.name));
+        }
+    }
+    float FindMonsterAd(string name)
+    {
+        if (name == "Bat")
+        {
+            return 3;
+        }
+        return 1;
     }
 }

@@ -5,13 +5,21 @@ using UnityEngine;
 public class BasicAttack : MonoBehaviour
 {
     // Start is called before the first frame update
+    Animator anim;
+
+    void Awake() {
+        anim = GetComponent<Animator>();
+    }
     void Update()
     {
-        Debug.Log("aa");
-        Invoke("DisAppear",0.3f);
+        if ( gameObject.GetComponent<CircleCollider2D>().enabled == true)
+            anim.SetBool("IsAttacking",true);
+            Invoke("DisAppear",0.2f);
     }
     void DisAppear()
     {
-        gameObject.SetActive(false);
+        CancelInvoke();
+        anim.SetBool("IsAttacking",false);
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
     }
 }
