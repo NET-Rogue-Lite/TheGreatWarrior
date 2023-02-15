@@ -1991,6 +1991,55 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &965221225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 965221226}
+  - component: {fileID: 965221227}
+  m_Layer: 0
+  m_Name: EquipManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &965221226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965221225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.276152, y: 4.251568, z: -0.82035846}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &965221227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965221225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb069ae832df7734ea29fb4e67216c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurRune: 
+  CurArmor: 
+  CurHat: 
+  CurGlove: 
+  statManager: {fileID: 1148075035}
 --- !u!1 &1148075034
 GameObject:
   m_ObjectHideFlags: 0
@@ -2021,6 +2070,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Def: 100
+  Ad: 100
+  MaxHp: 0
+  Class: 
+  Type: 0
 --- !u!4 &1148075036
 Transform:
   m_ObjectHideFlags: 0
@@ -90988,7 +91041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &1726467120
 Grid:
   m_ObjectHideFlags: 0
@@ -91035,7 +91088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!156049354 &1805523241
 Grid:
   m_ObjectHideFlags: 0
@@ -100933,6 +100986,9 @@ MonoBehaviour:
   stageIndex: 0
   Next: 0
   Player: {fileID: 8912564214739163645}
+  PM: {fileID: 8912564214739163639}
+  statManager: {fileID: 1148075035}
+  equipManager: {fileID: 965221227}
 --- !u!1 &4045403175994209812
 GameObject:
   m_ObjectHideFlags: 0
@@ -101009,6 +101065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b47e984f30b8d428b810cab222f5c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statManager: {fileID: 1148075035}
   hPManager: {fileID: 1443275840}
   gameManager: {fileID: 227444620325401086}
   spriteRenderer: {fileID: 0}

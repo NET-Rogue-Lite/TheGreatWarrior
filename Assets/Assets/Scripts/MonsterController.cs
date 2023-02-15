@@ -19,12 +19,16 @@ public class MonsterController : MonoBehaviour
 
     private float playerDistance;
     private GameObject Player;
-
+    public StatManager statManager;
     Rigidbody2D rigid;
     public float nextMove;
     SpriteRenderer spriteRenderer;
     CapsuleCollider2D capuslecollider;
     public bool Hit;
+    public int CurType;
+    int StrongType;
+    int WeakType;
+    //1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -34,6 +38,9 @@ public class MonsterController : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         spriteRenderer.flipX = (nextMove == -1);
         Think();
+        
+        StrongType = (CurType +1) % 5;
+        WeakType = (CurType -1) % 5;
         //Invoke("Think", 5);
     }
 
@@ -163,7 +170,8 @@ public class MonsterController : MonoBehaviour
 
         // Invoke("DeActive", 2.0f);
     }
-    void HitFalse(){
+    void HitFalse()
+    {
         Hit = false;
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -171,7 +179,8 @@ public class MonsterController : MonoBehaviour
         Debug.Log(other.gameObject.tag);
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
-            if(!Hit){
+            if (!Hit)
+            {
                 Invoke("HitFalse", 1f);
                 Debug.Log("HitFalse");
             }
@@ -181,7 +190,24 @@ public class MonsterController : MonoBehaviour
     }
     float PlayerDamage(string name)
     {
-
+        if (name == "BasicAttack")
+        {
+            float Damage = statManager.Ad;
+            if (statManager.Type == WeakType)
+                return Damage * 2;
+            else if (statManager.Type == StrongType)
+                return Damage / 2;
+            return Damage;
+        }
+        else if (name == "SkillAttack1")
+        {
+            float Damage = statManager.Ad*2;
+            if (statManager.Type == WeakType)
+                return Damage* 2;
+            else if (statManager.Type == StrongType)
+                return Damage/ 2;
+            return Damage;
+        }
         return 5;
     }
 }

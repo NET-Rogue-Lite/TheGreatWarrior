@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public StatManager statManager;
     public HPManager hPManager;
     public GameManager gameManager;
     Rigidbody2D rigid;
@@ -32,7 +33,10 @@ public class PlayerMove : MonoBehaviour
     {
 
     }
-
+    public void SetClass()
+    {
+        Class = statManager.Class;
+    }
     // Update is called once per frame
     void Update()
     {
