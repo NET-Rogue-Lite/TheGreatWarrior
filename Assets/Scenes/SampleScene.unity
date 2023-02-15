@@ -182,6 +182,14 @@ PrefabInstance:
       propertyPath: Hp
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1251270993776802967, guid: 46ba33ddac5e22e4188a63d30c3ac8fc, type: 3}
+      propertyPath: CurType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251270993776802967, guid: 46ba33ddac5e22e4188a63d30c3ac8fc, type: 3}
+      propertyPath: statManager
+      value: 
+      objectReference: {fileID: 1148075035}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46ba33ddac5e22e4188a63d30c3ac8fc, type: 3}
 --- !u!1001 &178575409
@@ -244,6 +252,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7819188732891663374, guid: 2c10ff1731238c441bf8e72e41cff345, type: 3}
+      propertyPath: statManager
+      value: 
+      objectReference: {fileID: 1148075035}
+    - target: {fileID: 7819188732891663374, guid: 2c10ff1731238c441bf8e72e41cff345, type: 3}
       propertyPath: Attack_range
       value: 1.1
       objectReference: {fileID: 0}
@@ -277,6 +289,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c10ff1731238c441bf8e72e41cff345, type: 3}
+--- !u!1 &248998544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 248998546}
+  - component: {fileID: 248998545}
+  m_Layer: 0
+  m_Name: EquipManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &248998545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248998544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ca5bb0fdaba094d8859ed0c8b37917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurRune: 
+  CurArmor: 
+  CurHat: 
+  CurGlove: 
+  statManager: {fileID: 1148075035}
+--- !u!4 &248998546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248998544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.7984234, y: -4.3157544, z: -0.14636096}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &498065367
 GameObject:
   m_ObjectHideFlags: 0
@@ -2192,6 +2253,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Def: 100
+  Ad: 5
+  MaxHp: 0
+  Class: 
+  Type: 0
 --- !u!4 &1148075036
 Transform:
   m_ObjectHideFlags: 0
@@ -91159,7 +91224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &1726467120
 Grid:
   m_ObjectHideFlags: 0
@@ -91206,7 +91271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!156049354 &1805523241
 Grid:
   m_ObjectHideFlags: 0
@@ -101148,6 +101213,9 @@ MonoBehaviour:
   stageIndex: 0
   Next: 0
   Player: {fileID: 8912564214739163645}
+  PM: {fileID: 8912564214739163639}
+  statManager: {fileID: 1148075035}
+  equipManager: {fileID: 248998545}
 --- !u!1 &4045403175994209812
 GameObject:
   m_ObjectHideFlags: 0
@@ -101178,11 +101246,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249433424478987904, guid: aea668f329781c34693ee60adcff25b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.71
+      value: 42.97
       objectReference: {fileID: 0}
     - target: {fileID: 8249433424478987904, guid: aea668f329781c34693ee60adcff25b0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.37
+      value: 28.34
       objectReference: {fileID: 0}
     - target: {fileID: 8249433424478987904, guid: aea668f329781c34693ee60adcff25b0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -101216,6 +101284,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8249433424478987908, guid: aea668f329781c34693ee60adcff25b0, type: 3}
+      propertyPath: statManager
+      value: 
+      objectReference: {fileID: 1148075035}
     - target: {fileID: 8249433424478987908, guid: aea668f329781c34693ee60adcff25b0, type: 3}
       propertyPath: Attack_range
       value: 1.3
@@ -101289,6 +101361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b47e984f30b8d428b810cab222f5c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statManager: {fileID: 0}
   monsterManager: {fileID: 2090794867}
   hPManager: {fileID: 1443275840}
   gameManager: {fileID: 227444620325401086}
@@ -101589,7 +101662,7 @@ GameObject:
   - component: {fileID: 8912564215087094989}
   m_Layer: 6
   m_Name: BasicAttack
-  m_TagString: WarriorAttack1
+  m_TagString: 1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

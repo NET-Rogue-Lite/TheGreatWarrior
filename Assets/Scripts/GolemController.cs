@@ -16,17 +16,20 @@ public class GolemController : MonoBehaviour
 
     private bool isPlayer_close = false;
     private bool isAttack = false;
-    public bool Hit;
-    private bool IsAwake = false;
 
     private float playerDistance;
     private GameObject Player;
-
+    public StatManager statManager;
     Rigidbody2D rigid;
     public float nextMove;
     SpriteRenderer spriteRenderer;
     CapsuleCollider2D capuslecollider;
-    
+    public bool Hit;
+    public int CurType;
+    int StrongType;
+    int WeakType;
+    //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6
+    bool IsAwake = false;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -36,6 +39,9 @@ public class GolemController : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         spriteRenderer.flipX = (nextMove == -1);
         Think();
+
+        StrongType = (CurType + 1) % 5;
+        WeakType = (CurType - 1) % 5;
         //Invoke("Think", 5);
     }
 
@@ -44,7 +50,8 @@ public class GolemController : MonoBehaviour
         playerDistance = Vector3.Distance(transform.position, Player.transform.position);
         CheckPlayerClose();
         Attack();
-        if(IsAwake){
+        if (IsAwake)
+        {
             Move();
         }
         if (Hit)
@@ -67,7 +74,8 @@ public class GolemController : MonoBehaviour
             Speed = Chase_speed;
             isPlayer_close = true;
             isAttack = false;
-            if (!IsAwake){
+            if (!IsAwake)
+            {
                 anim.SetBool("IsPlayerClose", true);
                 Invoke("g_awake", 1);
             }
@@ -84,17 +92,20 @@ public class GolemController : MonoBehaviour
         }
     }
 
-    void g_awake(){
+    void g_awake()
+    {
         IsAwake = true;
     }
 
     private void Attack()
     {
         anim.SetBool("PlayerClosetoAttack", isAttack);
-        if(isAttack){
+        if (isAttack)
+        {
             GetComponent<PolygonCollider2D>().enabled = true;
         }
-        else{
+        else
+        {
             GetComponent<PolygonCollider2D>().enabled = false;
         }
     }
@@ -151,7 +162,7 @@ public class GolemController : MonoBehaviour
     void Think()
     {
         Debug.Log("Thinking...");
-        if(IsAwake)
+        if (IsAwake)
             nextMove = Random.Range(-1, 2);
         else
             nextMove = 0;
@@ -187,7 +198,8 @@ public class GolemController : MonoBehaviour
 
         // Invoke("DeActive", 2.0f);
     }
-    void HitFalse(){
+    void HitFalse()
+    {
         Hit = false;
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -195,7 +207,8 @@ public class GolemController : MonoBehaviour
         Debug.Log(other.gameObject.tag);
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
-            if(!Hit){
+            if (!Hit)
+            {
                 Invoke("HitFalse", 1f);
                 Debug.Log("HitFalse");
             }
@@ -203,9 +216,15 @@ public class GolemController : MonoBehaviour
             OnDamaged(PlayerDamage(other.gameObject.tag) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
         }
     }
-    float PlayerDamage(string name)
+    float PlayerDamage(string tag)
     {
+        float Damage = float.Parse(tag) * statManager.Ad;
 
-        return 5;
+        if (statManager.Type == WeakType) // 약점타입
+            return Damage * 2;
+        else if (statManager.Type == StrongType) // 강점타입
+            return Damage / 2;
+        return Damage; // 일반타입
+
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public StatManager statManager;
     public MonsterManager monsterManager;
     public HPManager hPManager;
     public GameManager gameManager;
@@ -33,7 +34,10 @@ public class PlayerMove : MonoBehaviour
     {
 
     }
-
+    public void SetClass()
+    {
+        Class = statManager.Class;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -280,7 +284,5 @@ public class PlayerMove : MonoBehaviour
         GameObject Other = other.gameObject;
         string Tag = other.gameObject.tag;
         int Layer = other.gameObject.layer;
-
     }
-
 }
