@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public MonsterManager monsterManager;
     public HPManager hPManager;
     public GameManager gameManager;
     Rigidbody2D rigid;
@@ -226,7 +227,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (gameObject.layer != LayerMask.NameToLayer("Imortal"))
             {
-                hPManager.OnDamaged(FindMonsterAd(Other.name));
+                hPManager.OnDamaged(monsterManager.GetMonsterDamage(Other.name));
                 //맞으면 플레이어가 밀려나기
                 int dirc = transform.position.x - other.transform.position.x > 0 ? 1 : -1;
                 // rigid.AddForce(new Vector2(dirc, 0.2f) * 5, ForceMode2D.Impulse);
@@ -263,7 +264,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (gameObject.layer != LayerMask.NameToLayer("Imortal"))
             {
-                hPManager.OnDamaged(FindMonsterAd(Other.name));
+                hPManager.OnDamaged(monsterManager.GetMonsterDamage(Other.name));
                 //맞으면 플레이어가 밀려나기
                 int dirc = transform.position.x - other.transform.position.x > 0 ? 1 : -1;
                 rigid.velocity = new Vector2(dirc, 0.6f) * 5; //, ForceMode2D.Impulse);
@@ -281,12 +282,5 @@ public class PlayerMove : MonoBehaviour
         int Layer = other.gameObject.layer;
 
     }
-    float FindMonsterAd(string name)
-    {
-        if (name == "Bat")
-        {
-            return 3;
-        }
-        return 1;
-    }
+
 }

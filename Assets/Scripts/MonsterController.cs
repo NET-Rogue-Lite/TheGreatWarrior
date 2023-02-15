@@ -5,7 +5,7 @@ using UnityEngine;
 public class MonsterController : MonoBehaviour
 {
     Animator anim;
-    public float Hp = 100;
+    public float Hp;
     public float Ad;
     private float Speed;
     public float Idle_speed;
@@ -79,6 +79,12 @@ public class MonsterController : MonoBehaviour
     private void Attack()
     {
         anim.SetBool("PlayerClosetoAttack", isAttack);
+        if(isAttack){
+            GetComponent<PolygonCollider2D>().enabled = true;
+        }
+        else{
+            GetComponent<PolygonCollider2D>().enabled = false;
+        }
     }
 
     private void Move()
@@ -152,6 +158,7 @@ public class MonsterController : MonoBehaviour
             anim.SetBool("IsDied", true);
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<CapsuleCollider2D>().enabled = false;
+            GetComponent<PolygonCollider2D>().enabled = false;
             Destroy(gameObject, 1);
         }
         nextMove = spriteRenderer.flipX == true ? -1 : 1;
