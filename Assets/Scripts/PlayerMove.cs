@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public SkillManager skillManager;
     public StatManager statManager;
     public MonsterManager monsterManager;
     public HPManager hPManager;
@@ -43,6 +44,10 @@ public class PlayerMove : MonoBehaviour
     {
         time += Time.deltaTime;
         float h = spriteRenderer.flipX == false ? 1 : -1;
+        //스킬 시전중 정지
+        if(anim.GetBool("IsCasting")){
+            rigid.velocity = new Vector2(0,0);
+        }
         //점프에 관한 코드
         if (Input.GetButtonDown("Jump") && !(anim.GetBool("IsJumping")))
         {
@@ -62,7 +67,7 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity = new Vector2(0, rigid.velocity.y);
             if (!anim.GetBool("IsJumping") && rigid.velocity.y > 0)
             {
-                rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y*0.1f);
+                rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y * 0.1f);
             }
             // rigid.velocity = new Vector2(
             //     0.1f * rigid.velocity.normalized.x
@@ -79,7 +84,7 @@ public class PlayerMove : MonoBehaviour
         else
             anim.SetBool("IsWalking", true);
         //기본공격
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !anim.GetBool("IsClimb"))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !anim.GetBool("IsClimb")&& !anim.GetBool("IsCasting"))
         {
             if (anim.GetBool("IsAttacking") == false)
             {
@@ -99,6 +104,20 @@ public class PlayerMove : MonoBehaviour
                 }
             }
         }
+        if (Input.GetKeyDown(KeyCode.Q) && !anim.GetBool("IsClimb"))
+        {
+            if(skillManager.SkillCast(0))
+            {
+                anim.SetBool("IsCasting",true);
+            }//Q1 / W2 / E3/ R4
+            // GameObject Attack = transform.Find(Class).gameObject.transform
+            // .Find("WarriorSkill5").gameObject;
+            // Attack.SetActive(true);
+            // gameObject.layer = LayerMask.NameToLayer("Imortal");
+            // CancelInvoke();
+            // Invoke("BeBack", 2.6f);
+            // Invoke("SkillCastingPause",2.5f);
+        }
         // if (transform.Find(Class).gameObject.transform
         //         .Find("BasicAttack").gameObject.GetComponent<CircleCollider2D>().enabled == false)
         // {
@@ -107,6 +126,7 @@ public class PlayerMove : MonoBehaviour
         //대쉬
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            anim.SetBool("IsCasting",false);
             if (DashCoolTime > 0) return;
             maxSpeedx = 12;
             DashCoolTime = 2;
@@ -157,6 +177,9 @@ public class PlayerMove : MonoBehaviour
         DashCoolTime -= Time.deltaTime;
 
 
+    }
+    void SkillCastingPause(){
+        anim.SetBool("IsCasting",false);
     }
     void BeBack()
     {
@@ -242,6 +265,12 @@ public class PlayerMove : MonoBehaviour
                 Invoke("BeBack", 0.8f);
             }
         }
+        if (Other.layer == LayerMask.NameToLayer("Skill"))
+        {
+            if (skillManager.SkillEquip(Other.name)) // 스킬장착 -> 성공 -> 파괴
+                Destroy(other.gameObject);
+            //실패 -> 냄겨둠
+        }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -254,8 +283,11 @@ public class PlayerMove : MonoBehaviour
         }
         if (Layer == LayerMask.NameToLayer("Map"))
         {
-            boxcollider.isTrigger = true;
-            GetComponent<CapsuleCollider2D>().isTrigger = true;
+            if (gameObject.name == "Player")
+            {
+                boxcollider.isTrigger = true;
+                GetComponent<CapsuleCollider2D>().isTrigger = true;
+            }
         }
 
     }
