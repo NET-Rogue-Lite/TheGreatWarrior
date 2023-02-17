@@ -101361,7 +101361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b47e984f30b8d428b810cab222f5c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statManager: {fileID: 0}
+  statManager: {fileID: 1148075035}
   monsterManager: {fileID: 2090794867}
   hPManager: {fileID: 1443275840}
   gameManager: {fileID: 227444620325401086}
@@ -101420,7 +101420,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!95 &8912564214739163642
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -101437,7 +101437,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &8912564214739163643
 Transform:
   m_ObjectHideFlags: 0
@@ -101690,7 +101690,7 @@ Rigidbody2D:
   m_Constraints: 0
 --- !u!95 &8912564215087094989
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -101707,7 +101707,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &8912564215087094990
 SpriteRenderer:
   m_ObjectHideFlags: 0
