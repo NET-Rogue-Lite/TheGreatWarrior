@@ -74,6 +74,8 @@ public class GolemController : MonoBehaviour
             Speed = Chase_speed;
             isPlayer_close = true;
             isAttack = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<PolygonCollider2D>().enabled = true;
             if (!IsAwake)
             {
                 anim.SetBool("IsPlayerClose", true);
@@ -88,6 +90,8 @@ public class GolemController : MonoBehaviour
             }
             Speed = Idle_speed;
             isPlayer_close = false;
+            GetComponent<BoxCollider2D>().enabled = true;
+            GetComponent<PolygonCollider2D>().enabled = false;
             isAttack = false;
         }
     }
@@ -102,11 +106,11 @@ public class GolemController : MonoBehaviour
         anim.SetBool("PlayerClosetoAttack", isAttack);
         if (isAttack)
         {
-            GetComponent<PolygonCollider2D>().enabled = true;
+            // GetComponent<PolygonCollider2D>().enabled = true;
         }
         else
         {
-            GetComponent<PolygonCollider2D>().enabled = false;
+            // GetComponent<PolygonCollider2D>().enabled = false;
         }
     }
 
@@ -183,10 +187,10 @@ public class GolemController : MonoBehaviour
         Hp -= damage;
         if (Hp <= 0)
         {
-            anim.SetBool("IsDied", true);
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<CapsuleCollider2D>().enabled = false;
             GetComponent<PolygonCollider2D>().enabled = false;
+            anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
         }
         nextMove = spriteRenderer.flipX == true ? -1 : 1;
@@ -204,6 +208,13 @@ public class GolemController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        if(other.gameObject.name == "WarriorSkill4(Clone)"){
+            if (Hp > 0)
+            {
+                statManager.Ad += 5 / 2f;
+                statManager.Stack += 1;
+            }
+        }
         Debug.Log(other.gameObject.tag);
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
@@ -214,6 +225,7 @@ public class GolemController : MonoBehaviour
             }
             Hit = true;
             OnDamaged(PlayerDamage(other.gameObject.tag) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
+            statManager.IsFighting = 5;
         }
     }
     float PlayerDamage(string tag)

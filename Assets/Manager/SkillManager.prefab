@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &203994516525889813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203994516525889815}
+  - component: {fileID: 203994516525889814}
+  m_Layer: 0
+  m_Name: SkillManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &203994516525889815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203994516525889813}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.046566, y: 23.8936, z: -0.71896166}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &203994516525889814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203994516525889813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77680f3f5a777c347ae54e2b05cddc2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statManager: {fileID: 0}
+  Player: {fileID: 0}
+  SkillBoard: []
+  SkillMaxCool: []
+  SkillCool: []
+  SkillList:
+  - {fileID: 8656320909151995142, guid: a70e78b0817a65e459922cb88c52429c, type: 3}
+  - {fileID: 7437690763695894035, guid: 25b37b6faa888e04d8be06de45ef1a70, type: 3}
+  - {fileID: 6780286196570696330, guid: f4d972fd937aeac4aab952f2a6176c34, type: 3}
+  - {fileID: 8859289137922938917, guid: db482e255b5faa84eb34b657a1efb957, type: 3}
+  SkillImg:
+  - {fileID: 21300000, guid: 6703ba28fa7c4314ea33e94fabb4aabc, type: 3}
+  - {fileID: 21300000, guid: 3a64170962f0df145a6caa9a824d535e, type: 3}
+  - {fileID: 21300000, guid: ec8afdbf04f506f449c45a65087763d2, type: 3}
+  - {fileID: 21300000, guid: 6c5eaea34d2a3d04c96ab13c05f881f5, type: 3}
+  SkillCoolList:
+  - 10
+  - 5
+  - 5
+  - 6
+  SkillUI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

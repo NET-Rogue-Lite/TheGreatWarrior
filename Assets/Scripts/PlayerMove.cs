@@ -104,20 +104,53 @@ public class PlayerMove : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.Q) && !anim.GetBool("IsClimb"))
+        if (Input.GetKeyDown(KeyCode.Q) && !anim.GetBool("IsClimb")&& !anim.GetBool("IsCasting"))
         {
             if(skillManager.SkillCast(0))
             {
+                GameObject BasicAttack = transform.Find(Class).gameObject.transform
+                .Find("BasicAttack").gameObject;
+                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",true);
                 anim.SetBool("IsCasting",true);
             }//Q1 / W2 / E3/ R4
-            // GameObject Attack = transform.Find(Class).gameObject.transform
-            // .Find("WarriorSkill5").gameObject;
-            // Attack.SetActive(true);
-            // gameObject.layer = LayerMask.NameToLayer("Imortal");
-            // CancelInvoke();
-            // Invoke("BeBack", 2.6f);
-            // Invoke("SkillCastingPause",2.5f);
         }
+        if (Input.GetKeyDown(KeyCode.W) && !anim.GetBool("IsClimb")&& !anim.GetBool("IsCasting"))
+        {
+            if(skillManager.SkillCast(1))
+            {
+                GameObject BasicAttack = transform.Find(Class).gameObject.transform
+                .Find("BasicAttack").gameObject;
+                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",true);
+                anim.SetBool("IsCasting",true);
+            }//Q1 / W2 / E3/ R4
+        }
+        if (Input.GetKeyDown(KeyCode.E) && !anim.GetBool("IsClimb")&& !anim.GetBool("IsCasting"))
+        {
+            if(skillManager.SkillCast(2))
+            {
+                GameObject BasicAttack = transform.Find(Class).gameObject.transform
+                .Find("BasicAttack").gameObject;
+                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",true);
+                anim.SetBool("IsCasting",true);
+            }//Q1 / W2 / E3/ R4
+        }
+        if (Input.GetKeyDown(KeyCode.R) && !anim.GetBool("IsClimb"))
+        {
+            if(skillManager.SkillCast(3))
+            {
+                GameObject BasicAttack = transform.Find(Class).gameObject.transform
+                .Find("BasicAttack").gameObject;
+                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",true);
+                anim.SetBool("IsCasting",true);
+            }//Q1 / W2 / E3/ R4
+        }
+        // GameObject Attack = transform.Find(Class).gameObject.transform
+        // .Find("WarriorSkill5").gameObject;
+        // Attack.SetActive(true);
+        // gameObject.layer = LayerMask.NameToLayer("Imortal");
+        // CancelInvoke();
+        // Invoke("BeBack", 2.6f);
+        // Invoke("SkillCastingPause",2.5f);
         // if (transform.Find(Class).gameObject.transform
         //         .Find("BasicAttack").gameObject.GetComponent<CircleCollider2D>().enabled == false)
         // {
@@ -192,6 +225,8 @@ public class PlayerMove : MonoBehaviour
     }
     void FixedUpdate()
     {
+        
+
         if (maxSpeedx > 4)
             maxSpeedx -= 0.5f;
         //move speed
@@ -263,6 +298,7 @@ public class PlayerMove : MonoBehaviour
                 CancelInvoke();
                 gameObject.layer = LayerMask.NameToLayer("Imortal");
                 Invoke("BeBack", 0.8f);
+                statManager.IsFighting = 5;
             }
         }
         if (Other.layer == LayerMask.NameToLayer("Skill"))
@@ -283,7 +319,7 @@ public class PlayerMove : MonoBehaviour
         }
         if (Layer == LayerMask.NameToLayer("Map"))
         {
-            if (gameObject.name == "Player")
+            if (gameObject.tag == "Player")
             {
                 boxcollider.isTrigger = true;
                 GetComponent<CapsuleCollider2D>().isTrigger = true;
@@ -308,6 +344,7 @@ public class PlayerMove : MonoBehaviour
                 CancelInvoke();
                 gameObject.layer = LayerMask.NameToLayer("Imortal");
                 Invoke("BeBack", 0.8f);
+                statManager.IsFighting = 5;
             }
         }
     }

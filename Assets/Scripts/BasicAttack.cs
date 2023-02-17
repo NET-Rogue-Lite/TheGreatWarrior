@@ -6,35 +6,120 @@ public class BasicAttack : MonoBehaviour
 {
     // Start is called before the first frame update
     Animator anim;
-    bool SkillCasting = false;
-    void Awake() {
+    public bool SkillCasting = false;
+    GameObject Player;
+    int Monsternum = 0;
+    void Awake()
+    {
         anim = GetComponent<Animator>();
+        Player = GameObject.FindGameObjectWithTag("Player");
+        if (gameObject.name == "WarriorSkill2(Clone)" && !SkillCasting){
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x + (Player.GetComponent<SpriteRenderer>().flipX == true ? -3 : 3) , gameObject.transform.position.y + 5);
+        }
+        if (gameObject.name == "WarriorSkill3(Clone)" && !SkillCasting){
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x + (Player.GetComponent<SpriteRenderer>().flipX == true ? -3 : 3) , gameObject.transform.position.y + 1);
+            gameObject.transform.rotation = Quaternion.Euler(0, (Player.GetComponent<SpriteRenderer>().flipX == true ? 180 : 0) , 0);
+        }
+        if (gameObject.name == "WarriorSkill4(Clone)" && !SkillCasting){
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x , gameObject.transform.position.y);
+        }
+        if (gameObject.name == "WarriorSkill5(Clone)" && !SkillCasting){
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x , gameObject.transform.position.y);
+        }
     }
     void Update()
     {
+        
+    }
+    void FixedUpdate()
+    {
         Debug.Log(gameObject.name);
-        if (gameObject.name == "WarriorSkill5(Clone)" && !SkillCasting){
+        if (gameObject.name == "WarriorBasicSkill(Clone)" && !SkillCasting){
+            SkillCasting = true;
+            Invoke("AfterSkill",2.5f);
+            Debug.Log("Skill0 beforerSkill");
+        }
+        else if (gameObject.name == "WarriorSkill1(Clone)" && !SkillCasting){
+            SkillCasting = true;
+            Invoke("AfterSkill",2.5f);
+            Debug.Log("Skill1 beforerSkill");
+        }
+        else if (gameObject.name == "WarriorSkill2(Clone)" && !SkillCasting){
+            SkillCasting = true;
+            Invoke("AfterSkill",1.0f);
+            Debug.Log("Skill2 beforerSkill");
+        }
+        else if (gameObject.name == "WarriorSkill3(Clone)" && !SkillCasting){
+            SkillCasting = true;
+            Invoke("AfterSkill",1.0f);
+            Debug.Log("Skill3 beforerSkill");
+        }
+        else if (gameObject.name == "WarriorSkill4(Clone)" && !SkillCasting){
+            SkillCasting = true;
+            Player.GetComponent<Animator>().SetBool("IsCasting",false);
+            Invoke("AfterSkill",20f);
+            Debug.Log("Skill4 beforerSkill");
+        }
+        else if (gameObject.name == "WarriorSkill5(Clone)" && !SkillCasting){
             SkillCasting = true;
             Invoke("AfterSkill",2.5f);
             Debug.Log("Skill5 beforerSkill");
         }
-        else if ( gameObject.GetComponent<CircleCollider2D>().enabled == true && !SkillCasting)
-            anim.SetBool("IsAttacking",true);
-            Invoke("DisAppear",0.3f);
-        
+        else if (gameObject.name == "BasicAttack" && gameObject.GetComponent<CircleCollider2D>().enabled == true && !anim.GetBool("IsAttacking")){
+            anim.SetBool("IsAttacking", true);
+            Invoke("DisAppear", 0.3f);
+        }
+
+
+        if (gameObject.name == "WarriorSkill2(Clone)" && SkillCasting){
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x , gameObject.transform.position.y - 0.1f);
+        }
+        if (gameObject.name == "WarriorSkill4(Clone)" && SkillCasting){
+            gameObject.GetComponent<SpriteRenderer>().flipX = Player.GetComponent<SpriteRenderer>().flipX;
+            gameObject.transform.position = Player.transform.position;
+        }
     }
     void DisAppear()
     {
-        // CancelInvoke();
-        anim.SetBool("IsAttacking",false);
+        Debug.Log("DisAppear");
+        anim.SetBool("IsAttacking", false);
         gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        // CancelInvoke();
     }
     void AfterSkill()
     {
-        GameObject Player = GameObject.FindGameObjectWithTag("Player");
-        Player.GetComponent<Animator>().SetBool("IsCasting",false);
+        Debug.Log("AfterSkill");
+        Player.GetComponent<Animator>().SetBool("IsCasting", false);
         SkillCasting = false;
-        Debug.Log("Skill5 AfterSkill");
         Destroy(gameObject);
+        if (gameObject.name == "WarriorSkill4(Clone)"){
+                // statManager.Ad -= 5 * Monsternum;
+                Monsternum = 0;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (gameObject.name == "WarriorSkill2(Clone)"){
+            
+            if (other.gameObject.tag == "Monster")
+            {
+                Debug.Log("데마시아 사라져라");
+                gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                Player.GetComponent<Animator>().SetBool("IsCasting", false);
+                Destroy(gameObject);
+            }
+        }
+        if (gameObject.name == "WarriorSkill4(Clone)"){
+            if(other.gameObject.tag == "Monster")
+            {
+                // statManager.Ad += 5;
+                Monsternum++;
+            }
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        
     }
 }

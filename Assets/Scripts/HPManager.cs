@@ -11,7 +11,6 @@ public class HPManager : MonoBehaviour
     public void OnDamaged(float Ad){
         HP -= Ad * (150 / Stat.Def) * gameManager.Diff; 
         IsDie();
-
     }
 
     void IsDie(){
