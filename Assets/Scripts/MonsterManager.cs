@@ -8,7 +8,7 @@ public class MonsterManager : MonoBehaviour
         { "Bat", 5 },
         { "Rat", 4 },
         { "Golem", 20 },
-        { "Bear", 3 }
+        { "Bear", 9 }
     };
     
     public float GetMonsterDamage(string monsterName){

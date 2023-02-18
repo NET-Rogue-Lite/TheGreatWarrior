@@ -16,6 +16,7 @@ public class SkillManager : MonoBehaviour
     Dictionary<string, float> SkillCoolDict;
     Dictionary<string, Sprite> SkillImgDict;
     public Image[] SkillUI;
+    
     void Start()
     {
         SkillDict = new Dictionary<string, GameObject>();

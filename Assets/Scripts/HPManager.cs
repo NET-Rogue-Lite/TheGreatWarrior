@@ -8,6 +8,7 @@ public class HPManager : MonoBehaviour
     public GameObject Player;
     public float HP;
     public StatManager Stat;
+    
     public void OnDamaged(float Ad){
         HP -= Ad * (150 / Stat.Def) * gameManager.Diff; 
         IsDie();

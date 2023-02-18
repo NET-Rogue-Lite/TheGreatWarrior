@@ -17,6 +17,7 @@ public class StatManager : MonoBehaviour
     {
         Type = 6;
     }
+    
 
     // Update is called once per frame
     void Update()

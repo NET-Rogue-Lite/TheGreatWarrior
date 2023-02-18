@@ -9,6 +9,7 @@ public class EquipManager : MonoBehaviour
     public string CurHat;
     public string CurGlove;
     public StatManager statManager;
+    
     Dictionary<string, float[]> RuneList= //무기는 공격력/속성
         new Dictionary<string, float[]>()
         {

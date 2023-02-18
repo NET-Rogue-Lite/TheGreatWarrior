@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public StatManager statManager;
     public EquipManager equipManager;
     // Start is called before the first frame update
+
     public void IsNext(bool isNext)
     {
         Next = isNext;

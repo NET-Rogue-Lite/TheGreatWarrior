@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8249433424478987908}
   m_Layer: 0
   m_Name: Rat
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 8002
   m_Sprite: {fileID: -3286189400204805870, guid: bacb39275657a5c41b462455d80cd045, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -203,5 +203,7 @@ MonoBehaviour:
   Chase_speed: 5
   Attack_range: 1.1
   Close_range: 5
+  statManager: {fileID: 0}
   nextMove: 0
   Hit: 0
+  CurType: 0
