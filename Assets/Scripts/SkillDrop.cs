@@ -9,7 +9,7 @@ public class SkillDrop : MonoBehaviour
     void Awake(){
         MonsterName = gameObject.name;
     }
-
+/*
     void Update() {
         if(MonsterName == "Boss1"){
             Instantiate(SkillQube[0],transform.position,Quaternion.identity);
@@ -27,5 +27,5 @@ public class SkillDrop : MonoBehaviour
             Instantiate(SkillQube[6],transform.position,Quaternion.identity);
             Instantiate(SkillQube[7],transform.position,Quaternion.identity);
         }
-    }    
+    }    */
 }

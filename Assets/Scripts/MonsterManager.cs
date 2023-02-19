@@ -7,8 +7,14 @@ public class MonsterManager : MonoBehaviour
     private Dictionary<string, float> Monsters = new Dictionary<string, float>(){
         { "Bat", 5 },
         { "Rat", 4 },
-        { "Golem", 20 },
-        { "Bear", 9 }
+        { "Golem", 15 },
+        { "Bear", 9 },
+        { "StageBoss2", 15 },
+        {"StageBoss2_fireball(Clone)", 20 },
+        {"StageBoss2_firefloor(Clone)", 20 },
+        {"Bear(Clone)", 9},
+        {"StageBoss1_slimespit(Clone)", 10},
+        {"StageBoss1", 15}
     };
     
     public float GetMonsterDamage(string monsterName){
