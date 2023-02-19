@@ -31,13 +31,10 @@ public class PlayerMove : MonoBehaviour
         maxSpeedy = maxSpeedx * 5;
     }
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
     public void SetClass()
     {
         Class = statManager.Class;
+        transform.Find(Class).gameObject.SetActive(true);
     }
     // Update is called once per frame
     void Update()
@@ -184,6 +181,7 @@ public class PlayerMove : MonoBehaviour
             if (gameManager.Next)
             {
                 gameManager.NextStage();
+                gameManager.Next=false;
             }
         }
         //밧줄에서 내려가는 코드

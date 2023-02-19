@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class SkillManager : MonoBehaviour
 {
     public StatManager statManager;
@@ -9,6 +10,8 @@ public class SkillManager : MonoBehaviour
     public GameObject[] SkillBoard;//Q,W,E,R
     public float[] SkillMaxCool;//Q,W,E,R
     public float[] SkillCool;
+    public GameObject[] WarriorSkillList;
+    public GameObject[] ArchorSkillList;
     public GameObject[] SkillList;
     public Sprite[] SkillImg;
     public float[] SkillCoolList;
@@ -16,22 +19,39 @@ public class SkillManager : MonoBehaviour
     Dictionary<string, float> SkillCoolDict;
     Dictionary<string, Sprite> SkillImgDict;
     public Image[] SkillUI;
-    
+    public TextMeshProUGUI[] SkillCoolTime;
+    public int[] SkillLevel;
     void Start()
     {
+        if (statManager.Class == "Warrior")
+        {
+            SkillList = WarriorSkillList;
+        }
+        else if (statManager.Class == "Archor")
+        {
+            SkillList = ArchorSkillList;
+        }
         SkillDict = new Dictionary<string, GameObject>();
         SkillCoolDict = new Dictionary<string, float>();
         SkillImgDict = new Dictionary<string, Sprite>();
         SkillMaxCool = new float[4];
         SkillCool = new float[4];
         SkillBoard = new GameObject[4];
-        Debug.Log(SkillList[0]);
+        SkillLevel = DiffControl.SkillLevel;
         for (int i = 0; i < SkillList.Length; i++)
         {
             SkillDict.Add(SkillList[i].name, SkillList[i]);
             SkillCoolDict.Add(SkillList[i].name, SkillCoolList[i]);
             SkillImgDict.Add(SkillList[i].name, SkillImg[i]);
         }
+    }
+    public int GetSkillLevel(string sname){
+        for (int i = 0 ; i < SkillList.Length; i++){
+            if(SkillList[i].name+"(Clone)" == sname){
+                return SkillLevel[i];
+            }
+        }
+        return 1;
     }
     public bool SkillEquip(string name)
     {
@@ -53,18 +73,25 @@ public class SkillManager : MonoBehaviour
     {
         if (SkillBoard[Button] != null)
         {
-            if(SkillCool[Button] <= 0.01f){
+            if (SkillCool[Button] <= 0.01f)
+            {
                 GameObject CastSkill = Instantiate(SkillBoard[Button], Player.transform.position, Quaternion.identity);
                 SkillCool[Button] = SkillMaxCool[Button];
-                if(CastSkill.name == "WarriorSkill4(Clone)"){
-                    Invoke("TurnOffBuff",20f);
+                if (CastSkill.name == "WarriorSkill4(Clone)")
+                {
+                    Invoke("TurnOffBuff", 20f);
+                }
+                else if (CastSkill.name == "WarriorSkill6(Clone)")
+                {
+                    Invoke("TurnOffBuff", 20f);
                 }
                 return true;
             }
         }
         return false;
     }
-    void TurnOffBuff(){
+    void TurnOffBuff()
+    {
         statManager.Ad -= statManager.Stack * 2.5f;
         statManager.Stack = 0;
     }
@@ -72,9 +99,20 @@ public class SkillManager : MonoBehaviour
     {
         //스킬 쿨타임 감소 1초당 1씩감소 - 1초에 50회 함수호출임.
         statManager.IsFighting -= 0.02f;
-        if(statManager.IsFighting > 0){
-            for (int i = 0; i<4; i++){
-                SkillCool[i] -= 0.02f;
+        if (statManager.IsFighting > -0.04f)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (SkillCool[i] > 0)
+                    SkillCool[i] -= 0.02f;
+            }
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            SkillCoolTime[i].text = Mathf.Ceil(SkillCool[i]).ToString();
+            if (SkillCoolTime[i].text == "0")
+            {
+                SkillCoolTime[i].text = "";
             }
         }
     }

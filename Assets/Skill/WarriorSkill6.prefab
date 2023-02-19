@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8656320909151995142
+--- !u!1 &1318546307239954758
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8656320909151995139}
-  - component: {fileID: 8656320909151995136}
-  - component: {fileID: 8656320909151995137}
-  - component: {fileID: 8656320909151995138}
+  - component: {fileID: 1318546307239954762}
+  - component: {fileID: 1318546307239954763}
+  - component: {fileID: 1318546307239954756}
+  - component: {fileID: 1318546307239954757}
+  - component: {fileID: 1318546307239954761}
   m_Layer: 6
-  m_Name: WarriorSkill2
-  m_TagString: 16
+  m_Name: WarriorSkill6
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8656320909151995139
+--- !u!4 &1318546307239954762
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8656320909151995142}
+  m_GameObject: {fileID: 1318546307239954758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.23, y: 1.11, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8656320909151995136
+--- !u!212 &1318546307239954763
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8656320909151995142}
+  m_GameObject: {fileID: 1318546307239954758}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,45 +76,88 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9000
-  m_Sprite: {fileID: 21300000, guid: 6703ba28fa7c4314ea33e94fabb4aabc, type: 3}
+  m_Sprite: {fileID: 1818628104, guid: 24a2b98977a612f4f860af26dda105af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 1.9375, y: 4.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8656320909151995137
+--- !u!95 &1318546307239954756
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318546307239954758}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e901e6d4671779a4a9414748f51073fd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1318546307239954757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8656320909151995142}
+  m_GameObject: {fileID: 1318546307239954758}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 729a27daaa769ec4c90e03fa09f481bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SkillCasting: 0
-  AttackDamage: 16
+  AttackDamage: 1
   SkillLevel: 1
---- !u!58 &8656320909151995138
-CircleCollider2D:
+--- !u!60 &1318546307239954761
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8656320909151995142}
+  m_GameObject: {fileID: 1318546307239954758}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.29937053, y: 0.62176967}
-  serializedVersion: 2
-  m_Radius: 3.07886
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.1}
+    oldSize: {x: 1.9375, y: 4.25}
+    newSize: {x: 1.9375, y: 4.25}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 3.8249998, y: 0.15625}
+      - {x: 3.7624998, y: 0.21875}
+      - {x: 3.6785169, y: 0.9439812}
+      - {x: 2.8035173, y: 2.824975}
+      - {x: -0.11791611, y: 4.1558537}
+      - {x: -0.4250002, y: 0.28125}
+      - {x: -0.4250002, y: -0.28125}
+      - {x: -0.3625002, y: -0.40625}
+      - {x: 0.75495434, y: -1.4590735}
+      - {x: 1.1224079, y: -1.8793511}
+      - {x: 1.2112353, y: -1.9320776}
+      - {x: 2.7679157, y: -2.7377067}
+      - {x: 3.7624998, y: -0.21875}
+      - {x: 3.8249998, y: -0.15625}

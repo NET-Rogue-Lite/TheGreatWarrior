@@ -9,8 +9,12 @@ public class BasicAttack : MonoBehaviour
     public bool SkillCasting = false;
     GameObject Player;
     int Monsternum = 0;
+    public float AttackDamage;
+    public int SkillLevel;
+    SkillManager skillManager;
     void Awake()
     {
+        skillManager = GameObject.Find("SkillManager").GetComponent<SkillManager>();
         anim = GetComponent<Animator>();
         Player = GameObject.FindGameObjectWithTag("Player");
         if (gameObject.name == "WarriorSkill2(Clone)" && !SkillCasting){
@@ -26,6 +30,15 @@ public class BasicAttack : MonoBehaviour
         if (gameObject.name == "WarriorSkill5(Clone)" && !SkillCasting){
             gameObject.transform.position = new Vector2(gameObject.transform.position.x , gameObject.transform.position.y);
         }
+        if (gameObject.name == "WarriorSkill6(Clone)" && !SkillCasting){
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x , gameObject.transform.position.y);
+            gameObject.transform.rotation = Quaternion.Euler(0, (Player.GetComponent<SpriteRenderer>().flipX == true ? 180 : 0) , 0);
+        }
+    }
+
+    public float GetSkillDamage() {
+        SkillLevel = skillManager.GetSkillLevel(gameObject.name);
+        return AttackDamage * Mathf.Sqrt(SkillLevel); 
     }
     void Update()
     {
@@ -64,6 +77,11 @@ public class BasicAttack : MonoBehaviour
             SkillCasting = true;
             Invoke("AfterSkill",2.5f);
             Debug.Log("Skill5 beforerSkill");
+        }
+        else if (gameObject.name == "WarriorSkill6(Clone)" && !SkillCasting){
+            SkillCasting = true;
+            Invoke("AfterSkill",0.5f);
+            Debug.Log("Skill6 beforerSkill");
         }
         else if (gameObject.name == "BasicAttack" && gameObject.GetComponent<CircleCollider2D>().enabled == true && !anim.GetBool("IsAttacking")){
             anim.SetBool("IsAttacking", true);

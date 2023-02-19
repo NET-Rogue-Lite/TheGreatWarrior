@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 113f43ca64727db469cbc7a3d6cbf9f8
+guid: 24a2b98977a612f4f860af26dda105af
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,7 +115,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: WarriorSkill6_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 127
+        width: 31
+        height: 68
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a569114a63ba5f47b8fb81897124722
+      internalID: 1818628104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkill6_1
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 132
+        width: 48
+        height: 49
+      alignment: 9
+      pivot: {x: 0.07, y: 0.07}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d4f7fa45856faa4e81293e278f37225
+      internalID: 1689376142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkill6_2
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 134
+        width: 68
+        height: 31
+      alignment: 9
+      pivot: {x: 0.1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8bf35723a0448347b4e20df399a49c8
+      internalID: -224208959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkill6_3
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 63
+        width: 49
+        height: 48
+      alignment: 9
+      pivot: {x: 0.07, y: 0.93}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfd65d0e2d030af4daff98e75fc00d43
+      internalID: -908132529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +210,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WarriorSkill6_0: 1818628104
+      WarriorSkill6_2: -224208959
+      WarriorSkill6_1: 1689376142
+      WarriorSkill6_3: -908132529
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

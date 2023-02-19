@@ -28,6 +28,10 @@ public class MonsterController : MonoBehaviour
     public int CurType;
     int StrongType;
     int WeakType;
+    public int CanFly;
+    public float probability;
+    public GameObject HPportion;
+    public bool Die = false;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
     void Awake()
     {
@@ -38,21 +42,29 @@ public class MonsterController : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         spriteRenderer.flipX = (nextMove == -1);
         Think();
-
+        probability = Random.Range(0, 100);
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
+        Hp = Hp * DiffControl.Diff;
         //Invoke("Think", 5);
     }
 
     void FixedUpdate()
     {
-        playerDistance = Vector3.Distance(transform.position, Player.transform.position);
-        CheckPlayerClose();
-        Attack();
-        Move();
-        if (Hit)
+        if (Die)
         {
-            rigid.velocity = Vector2.zero;
+
+        }
+        else
+        {
+            playerDistance = Vector3.Distance(transform.position, Player.transform.position);
+            CheckPlayerClose();
+            Attack();
+            Move();
+            if (Hit)
+            {
+                rigid.velocity = Vector2.zero;
+            }
         }
     }
 
@@ -109,7 +121,8 @@ public class MonsterController : MonoBehaviour
         }
         else if (!isAttack)
         {
-            rigid.velocity = (Player.transform.position - transform.position).normalized * Speed;
+            rigid.velocity = new Vector2((Player.transform.position - transform.position).normalized.x * Speed,
+            (Player.transform.position - transform.position).normalized.y * Speed * CanFly);
             nextMove = rigid.velocity.x / Mathf.Abs(rigid.velocity.x);
             spriteRenderer.flipX = (rigid.velocity.x < 0);
             MapCheck();
@@ -166,13 +179,19 @@ public class MonsterController : MonoBehaviour
     {
         Debug.Log("OnDamaged");
         Hp -= damage;
-        if (Hp <= 0)
+        if (Hp <= 0 && !Die)
         {
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<CapsuleCollider2D>().enabled = false;
             GetComponent<PolygonCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
+            if (probability <= 100)
+            {
+                Debug.Log("HP포션만듬");
+                Instantiate(HPportion, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject, 1);
+            Die = true;
         }
         nextMove = spriteRenderer.flipX == true ? -1 : 1;
         // rigid.AddForce(Vector2.left* nextMove*3+ Vector2.up * 3, ForceMode2D.Impulse);
@@ -207,13 +226,13 @@ public class MonsterController : MonoBehaviour
                 Debug.Log("HitFalse");
             }
             Hit = true;
-            OnDamaged(PlayerDamage(other.gameObject.tag) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
+            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage()) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
             statManager.IsFighting = 5;
         }
     }
-    float PlayerDamage(string tag)
+    float PlayerDamage(float Dmg)
     {
-        float Damage = float.Parse(tag) * statManager.Ad;
+        float Damage = Dmg * statManager.Ad;
 
         if (statManager.Type == WeakType) // 약점타입
             return Damage * 2;

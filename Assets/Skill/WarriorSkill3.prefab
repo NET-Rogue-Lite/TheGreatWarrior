@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillCasting: 0
-  statManager: {fileID: 7798202834094134588, guid: d1988b6c6c5458b48b8a3400c45d7944, type: 3}
+  AttackDamage: 4
+  SkillLevel: 1
 --- !u!60 &1366702807
 PolygonCollider2D:
   m_ObjectHideFlags: 0

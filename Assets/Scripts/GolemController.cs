@@ -42,6 +42,7 @@ public class GolemController : MonoBehaviour
 
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
+        Hp = Hp * DiffControl.Diff;
         //Invoke("Think", 5);
     }
 

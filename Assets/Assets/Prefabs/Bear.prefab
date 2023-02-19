@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2097780324509456311}
   - component: {fileID: 2097780324509456308}
   - component: {fileID: 2097780324509456304}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bear
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &2097780324509456305
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,7 +109,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &2097780324509456309
 Rigidbody2D:
   serializedVersion: 4
@@ -170,8 +170,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1.53}
-  m_Size: {x: 0.5, y: 0.5}
+  m_Offset: {x: 0.014394283, y: 0.039004564}
+  m_Size: {x: 3.4076967, y: 3.638009}
   m_Direction: 0
 --- !u!114 &2097780324509456308
 MonoBehaviour:
@@ -190,11 +190,15 @@ MonoBehaviour:
   Idle_speed: 4
   Chase_speed: 8
   Attack_range: 2.5
-  Close_range: 4
+  Close_range: 8
   statManager: {fileID: 0}
   nextMove: 0
   Hit: 0
   CurType: 0
+  CanFly: 0
+  probability: 0
+  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
+  Die: 0
 --- !u!60 &2097780324509456304
 PolygonCollider2D:
   m_ObjectHideFlags: 0
