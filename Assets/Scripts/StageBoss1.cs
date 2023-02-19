@@ -143,7 +143,7 @@ public class StageBoss1 : MonoBehaviour
         Hp -= damage;
         if (Hp <= 0)
         {
-            GetComponent<PolygonCollider2D>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
         }

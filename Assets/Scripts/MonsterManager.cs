@@ -14,7 +14,12 @@ public class MonsterManager : MonoBehaviour
         {"StageBoss2_firefloor(Clone)", 20 },
         {"Bear(Clone)", 9},
         {"StageBoss1_slimespit(Clone)", 10},
-        {"StageBoss1", 15}
+        {"StageBoss1", 15},
+        {"StageBoss4_BiteHit", 30},
+        {"StageBoss4_Breath", 35 },
+        {"StageBoss4_Tornado", 28},
+        {"StageBoss4_Thunder", 25},
+        {"StageBoss4_ThunderFloor", 25}
     };
     
     public float GetMonsterDamage(string monsterName){
