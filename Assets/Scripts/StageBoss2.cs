@@ -1,20 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StageBoss2 : MonoBehaviour
 {
     Animator anim;
     SpriteRenderer spriteRenderer;
-    CapsuleCollider2D capuslecollider;
     private GameObject Player;
     GameObject pushPlayer;
-    
+
+    [SerializeField]
+    public Slider hpBar;
+
     public StatManager statManager;
     public GameObject fireball;
     public GameObject firefloor;
     public GameObject fireBear;
 
+    public float maxHp;
     public float Hp;
     public float skillattack;
     public float attack;
@@ -28,7 +32,7 @@ public class StageBoss2 : MonoBehaviour
     float playerDistance;
     bool is_skilling = false;
     bool is_attacking = false;
-
+    EventDrop eventDrop;
     int StrongType;
     int WeakType;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
@@ -43,6 +47,10 @@ public class StageBoss2 : MonoBehaviour
         attack_cool = attack;
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
+        eventDrop = GetComponent<EventDrop>();
+
+        Hp = Hp * DiffControl.Diff;
+        maxHp = Hp;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -91,7 +99,7 @@ public class StageBoss2 : MonoBehaviour
     }
 
     void Skill1(){
-        for(int i = 0; i < 40*DiffControl.Diff; i++){
+        for(int i = 0; i < (DiffControl.Diff==4 ? 120 : DiffControl.Diff*40); i++){
             Destroy(Instantiate(fireball, new Vector3(Random.Range(transform.position.x-20f, transform.position.x+20f), Random.Range(transform.position.y + 15, transform.position.y + 30), 0), Quaternion.identity), 10);
         }
     }
@@ -101,7 +109,7 @@ public class StageBoss2 : MonoBehaviour
     }
 
     void Skill3(){
-        for (int i = 0; i < 1*DiffControl.Diff; i++){
+        for (int i = 0; i < 2; i++){
             Instantiate(fireBear, new Vector3(Random.Range(transform.position.x - 5, transform.position.x +5), transform.position.y-3f, 0), Quaternion.identity);
         }
     }
@@ -123,8 +131,10 @@ public class StageBoss2 : MonoBehaviour
     {
         Debug.Log("OnDamaged");
         Hp -= damage;
+        hpBar.value = Hp / maxHp;
         if (Hp <= 0)
         {
+            eventDrop.Drop();
             GetComponent<PolygonCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
@@ -146,13 +156,13 @@ public class StageBoss2 : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
             anim.SetTrigger("Hitted");
-            OnDamaged(PlayerDamage(other.gameObject.tag)); //콜라이더가 박스랑 캡슐 두개라서 나누기2
+            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage()) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
             statManager.IsFighting = 5;
         }
     }
-    float PlayerDamage(string tag)
+    float PlayerDamage(float Dmg)
     {
-        float Damage = float.Parse(tag) * statManager.Ad;
+        float Damage = Dmg * statManager.Ad;
 
         if (statManager.Type == WeakType) // 약점타입
             return Damage * 2;

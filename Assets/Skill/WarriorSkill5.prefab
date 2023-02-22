@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7437690763695894038}
   m_Layer: 6
   m_Name: WarriorSkill5
-  m_TagString: 30
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillCasting: 0
+  Monsternum: 0
   AttackDamage: 30
   SkillLevel: 1
 --- !u!58 &7437690763695894038

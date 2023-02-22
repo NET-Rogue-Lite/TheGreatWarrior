@@ -13,6 +13,7 @@ public class MonsterDrop : MonoBehaviour
     }
     private void FixedUpdate() {
         if (monsterController.Hp <= 0) {
+            Debug.Log(probability);
             if(probability<=5.0f){
                 Instantiate(HPportion, transform.position, Quaternion.identity);
             }

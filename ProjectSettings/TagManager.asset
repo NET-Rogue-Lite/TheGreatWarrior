@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Rope
+  - Rune
+  - Monster
+  - BossMonster
+  - Armor
+  - Hat
+  - Glove
   layers:
   - Default
   - TransparentFX
@@ -15,9 +21,9 @@ TagManager:
   - PlayerAttack
   - Imortal
   - Player
-  - 
-  - 
-  - 
+  - Item
+  - Skill
+  - Monster
   - 
   - 
   - 

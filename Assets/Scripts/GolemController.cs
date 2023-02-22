@@ -1,25 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GolemController : MonoBehaviour
 {
     Animator anim;
     public float Hp;
+    public float maxHp;
     public float Ad;
     private float Speed;
     public float Idle_speed;
     public float Chase_speed;
-
     public float Attack_range;
     public float Close_range;
 
     private bool isPlayer_close = false;
     private bool isAttack = false;
-
+    [SerializeField]
+    public Slider hpBar;
     private float playerDistance;
     private GameObject Player;
-    public StatManager statManager;
+    StatManager statManager;
     Rigidbody2D rigid;
     public float nextMove;
     SpriteRenderer spriteRenderer;
@@ -28,6 +30,7 @@ public class GolemController : MonoBehaviour
     public int CurType;
     int StrongType;
     int WeakType;
+    public bool Die = false;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6
     bool IsAwake = false;
     void Awake()
@@ -37,12 +40,14 @@ public class GolemController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         capuslecollider = GetComponent<CapsuleCollider2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
+        statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
         spriteRenderer.flipX = (nextMove == -1);
         Think();
 
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
         Hp = Hp * DiffControl.Diff;
+        maxHp = Hp;
         //Invoke("Think", 5);
     }
 
@@ -186,13 +191,16 @@ public class GolemController : MonoBehaviour
     {
         Debug.Log("OnDamaged");
         Hp -= damage;
-        if (Hp <= 0)
+        hpBar.value = Hp / maxHp;
+
+        if (Hp <= 0 && !Die)
         {
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<CapsuleCollider2D>().enabled = false;
             GetComponent<PolygonCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
+            Die = true;
         }
         nextMove = spriteRenderer.flipX == true ? -1 : 1;
         // rigid.AddForce(Vector2.left* nextMove*3+ Vector2.up * 3, ForceMode2D.Impulse);
@@ -209,14 +217,14 @@ public class GolemController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.name == "WarriorSkill4(Clone)"){
+        if (other.gameObject.name == "WarriorSkill4(Clone)")
+        {
             if (Hp > 0)
             {
                 statManager.Ad += 5 / 2f;
                 statManager.Stack += 1;
             }
         }
-        Debug.Log(other.gameObject.tag);
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
             if (!Hit)
@@ -225,19 +233,18 @@ public class GolemController : MonoBehaviour
                 Debug.Log("HitFalse");
             }
             Hit = true;
-            OnDamaged(PlayerDamage(other.gameObject.tag) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
+            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage()) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
             statManager.IsFighting = 5;
         }
     }
-    float PlayerDamage(string tag)
+    float PlayerDamage(float Dmg)
     {
-        float Damage = float.Parse(tag) * statManager.Ad;
+        float Damage = Dmg * statManager.Ad;
 
         if (statManager.Type == WeakType) // 약점타입
             return Damage * 2;
         else if (statManager.Type == StrongType) // 강점타입
             return Damage / 2;
         return Damage; // 일반타입
-
     }
 }

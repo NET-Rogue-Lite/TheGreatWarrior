@@ -11,8 +11,10 @@ public class SkillManager : MonoBehaviour
     public float[] SkillMaxCool;//Q,W,E,R
     public float[] SkillCool;
     public GameObject[] WarriorSkillList;
-    public GameObject[] ArchorSkillList;
+    public GameObject[] ArcherSkillList;
     public GameObject[] SkillList;
+    public Sprite[] WarriorSkillImg;
+    public Sprite[] ArcherSkillImg;
     public Sprite[] SkillImg;
     public float[] SkillCoolList;
     Dictionary<string, GameObject> SkillDict;
@@ -26,10 +28,12 @@ public class SkillManager : MonoBehaviour
         if (statManager.Class == "Warrior")
         {
             SkillList = WarriorSkillList;
+            SkillImg = WarriorSkillImg;
         }
-        else if (statManager.Class == "Archor")
+        else if (statManager.Class == "Archer")
         {
-            SkillList = ArchorSkillList;
+            SkillList = ArcherSkillList;
+            SkillImg = ArcherSkillImg;
         }
         SkillDict = new Dictionary<string, GameObject>();
         SkillCoolDict = new Dictionary<string, float>();
@@ -38,6 +42,7 @@ public class SkillManager : MonoBehaviour
         SkillCool = new float[4];
         SkillBoard = new GameObject[4];
         SkillLevel = DiffControl.SkillLevel;
+        // SkillEquip(DiffControl.Class + "Passive" + DiffControl.Passive.ToString());
         for (int i = 0; i < SkillList.Length; i++)
         {
             SkillDict.Add(SkillList[i].name, SkillList[i]);

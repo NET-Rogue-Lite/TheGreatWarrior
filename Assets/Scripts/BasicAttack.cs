@@ -8,12 +8,14 @@ public class BasicAttack : MonoBehaviour
     Animator anim;
     public bool SkillCasting = false;
     GameObject Player;
-    int Monsternum = 0;
+    public int Monsternum;
     public float AttackDamage;
     public int SkillLevel;
     SkillManager skillManager;
+
     void Awake()
     {
+        Monsternum = 0;
         skillManager = GameObject.Find("SkillManager").GetComponent<SkillManager>();
         anim = GetComponent<Animator>();
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -46,7 +48,6 @@ public class BasicAttack : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log(gameObject.name);
         if (gameObject.name == "WarriorBasicSkill(Clone)" && !SkillCasting){
             SkillCasting = true;
             Invoke("AfterSkill",2.5f);
@@ -120,8 +121,9 @@ public class BasicAttack : MonoBehaviour
     {
         if (gameObject.name == "WarriorSkill2(Clone)"){
             
-            if (other.gameObject.tag == "Monster")
+            if (other.gameObject.tag == "Monster" || other.gameObject.tag == "BossMonster" )
             {
+                Monsternum++;
                 Debug.Log("데마시아 사라져라");
                 gameObject.GetComponent<CircleCollider2D>().enabled = false;
                 Player.GetComponent<Animator>().SetBool("IsCasting", false);

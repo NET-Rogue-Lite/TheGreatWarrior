@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1318546307239954756}
   - component: {fileID: 1318546307239954757}
   - component: {fileID: 1318546307239954761}
+  - component: {fileID: 6030589811979571251}
   m_Layer: 6
   m_Name: WarriorSkill6
   m_TagString: Untagged
@@ -120,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillCasting: 0
+  Monsternum: 0
   AttackDamage: 1
   SkillLevel: 1
 --- !u!60 &1318546307239954761
@@ -161,3 +163,24 @@ PolygonCollider2D:
       - {x: 2.7679157, y: -2.7377067}
       - {x: 3.7624998, y: -0.21875}
       - {x: 3.8249998, y: -0.15625}
+--- !u!50 &6030589811979571251
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318546307239954758}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

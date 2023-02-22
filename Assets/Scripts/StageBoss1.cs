@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StageBoss1 : MonoBehaviour
 {
@@ -8,9 +9,13 @@ public class StageBoss1 : MonoBehaviour
     SpriteRenderer spriteRenderer;
     GameObject Player;
     Rigidbody2D rigid;
-    
+
+    [SerializeField]
+    public Slider hpBar;
+
     public StatManager statManager;
     public GameObject spit;
+    public float maxHp;
     public float Hp;
     public float skill0;
     public float skill1;
@@ -45,6 +50,9 @@ public class StageBoss1 : MonoBehaviour
         skill2_cool = skill2; 
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
+
+        Hp = Hp * DiffControl.Diff;
+        maxHp = Hp;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -115,7 +123,7 @@ public class StageBoss1 : MonoBehaviour
     }
 
     IEnumerator Skill1(int direc){
-        anim.SetTrigger("Spin");
+        yield return new WaitForSeconds(0.25f);
         int count = 0;
         float cur_x = transform.position.x;
         while (count < 20){
@@ -141,9 +149,10 @@ public class StageBoss1 : MonoBehaviour
     {
         Debug.Log("OnDamaged");
         Hp -= damage;
+        hpBar.value = Hp / maxHp;
         if (Hp <= 0)
         {
-            GetComponent<PolygonCollider2D>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
         }
@@ -164,13 +173,13 @@ public class StageBoss1 : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
             anim.SetTrigger("Hitted");
-            OnDamaged(PlayerDamage(other.gameObject.tag)); //콜라이더가 박스랑 캡슐 두개라서 나누기2
+            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage()) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
             statManager.IsFighting = 5;
         }
     }
-    float PlayerDamage(string tag)
+    float PlayerDamage(float Dmg)
     {
-        float Damage = float.Parse(tag) * statManager.Ad;
+        float Damage = Dmg * statManager.Ad;
 
         if (statManager.Type == WeakType) // 약점타입
             return Damage * 2;

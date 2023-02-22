@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class MonsterController : MonoBehaviour
 {
     Animator anim;
     public float Hp;
+    public float maxHp;
     public float Ad;
     private float Speed;
     public float Idle_speed;
@@ -17,9 +18,13 @@ public class MonsterController : MonoBehaviour
     private bool isPlayer_close = false;
     private bool isAttack = false;
 
+    [SerializeField]
+    public Slider hpBar;
+
     private float playerDistance;
     private GameObject Player;
-    public StatManager statManager;
+    StatManager statManager;
+
     Rigidbody2D rigid;
     public float nextMove;
     SpriteRenderer spriteRenderer;
@@ -29,7 +34,6 @@ public class MonsterController : MonoBehaviour
     int StrongType;
     int WeakType;
     public int CanFly;
-    public float probability;
     public GameObject HPportion;
     public bool Die = false;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
@@ -40,12 +44,13 @@ public class MonsterController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         capuslecollider = GetComponent<CapsuleCollider2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
+        statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
         spriteRenderer.flipX = (nextMove == -1);
         Think();
-        probability = Random.Range(0, 100);
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
         Hp = Hp * DiffControl.Diff;
+        maxHp = Hp;
         //Invoke("Think", 5);
     }
 
@@ -179,17 +184,13 @@ public class MonsterController : MonoBehaviour
     {
         Debug.Log("OnDamaged");
         Hp -= damage;
+        hpBar.value = Hp / maxHp;
         if (Hp <= 0 && !Die)
         {
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<CapsuleCollider2D>().enabled = false;
             GetComponent<PolygonCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
-            if (probability <= 100)
-            {
-                Debug.Log("HP포션만듬");
-                Instantiate(HPportion, transform.position, Quaternion.identity);
-            }
             Destroy(gameObject, 1);
             Die = true;
         }
@@ -208,8 +209,12 @@ public class MonsterController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-
-        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.name == "WarriorSkill2(Clone)")
+        {
+            if (other.gameObject.GetComponent<BasicAttack>().Monsternum > 1){
+                return;
+            }
+        }
         if (other.gameObject.name == "WarriorSkill4(Clone)")
         {
             if (Hp > 0)

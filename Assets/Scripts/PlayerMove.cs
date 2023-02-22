@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public MonsterManager monsterManager;
     public HPManager hPManager;
     public GameManager gameManager;
+    public ItemManager itemManager;
     Rigidbody2D rigid;
     public SpriteRenderer spriteRenderer;
     Animator anim;
@@ -21,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     public float DashCoolTime = 2;
     public bool CanClimb;
     float maxSpeedy;
+    bool IsPickUp;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -29,6 +31,7 @@ public class PlayerMove : MonoBehaviour
         boxcollider = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
         maxSpeedy = maxSpeedx * 5;
+        IsPickUp = false;
     }
     // Start is called before the first frame update
     public void SetClass()
@@ -141,6 +144,14 @@ public class PlayerMove : MonoBehaviour
                 anim.SetBool("IsCasting",true);
             }//Q1 / W2 / E3/ R4
         }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            IsPickUp = true;
+        }
+        if (Input.GetKeyUp(KeyCode.Z))
+        {
+            IsPickUp = false;
+        }
         // GameObject Attack = transform.Find(Class).gameObject.transform
         // .Find("WarriorSkill5").gameObject;
         // Attack.SetActive(true);
@@ -165,6 +176,10 @@ public class PlayerMove : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Imortal");
             CancelInvoke();
             Invoke("BeBack", 0.35f);
+            GameObject BasicAttack = transform.Find(Class).gameObject.transform
+            .Find("BasicAttack").gameObject;
+            BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",false);
+                
         }
         //밧줄 타는 코드
         float v = Input.GetAxisRaw("Vertical");
@@ -202,7 +217,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            rigid.gravityScale = 1;
+            rigid.gravityScale = 1.5f;
         }
         //쿨타임 줄이기 - 대쉬
         DashCoolTime -= Time.deltaTime;
@@ -225,7 +240,7 @@ public class PlayerMove : MonoBehaviour
     {
         
 
-        if (maxSpeedx > 4)
+        if (maxSpeedx > 6)
             maxSpeedx -= 0.5f;
         //move speed
         float h = Input.GetAxisRaw("Horizontal");
@@ -255,7 +270,7 @@ public class PlayerMove : MonoBehaviour
             (rigid.position, Vector3.down, 1, LayerMask.GetMask("Map"));
             if (rayHit.collider != null)
             {
-                Debug.Log(rayHit.collider.name);
+                // Debug.Log(rayHit.collider.name);
                 if (rayHit.distance < 1.0f)
                     anim.SetBool("IsJumping", false);
             }
@@ -304,6 +319,15 @@ public class PlayerMove : MonoBehaviour
             if (skillManager.SkillEquip(Other.name)) // 스킬장착 -> 성공 -> 파괴
                 Destroy(other.gameObject);
             //실패 -> 냄겨둠
+        }
+        if (Other.layer == LayerMask.NameToLayer("Item"))
+        {
+            Debug.Log(Other.name);
+            if(IsPickUp){
+                if (itemManager.GetItem(Other)) // 스킬장착 -> 성공 -> 파괴
+                    Destroy(other.gameObject);
+            //실패 -> 냄겨둠
+            }
         }
     }
     void OnTriggerEnter2D(Collider2D other)

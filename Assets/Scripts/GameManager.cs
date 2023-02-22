@@ -23,10 +23,12 @@ public class GameManager : MonoBehaviour
     public bool IsItemStagePortal;
     public bool IsSkillStagePortal;
     public bool IsEventStagePortal;
+    Vector2 StartPosition;
     // Start is called before the first frame update
 
     private void Awake()
     {
+        StartPosition = new Vector2(25,3);
         GameStart();
         statManager.MaxHp = hPManager.HP*2;
         RandomStage = Random.Range(0, 4);
@@ -47,8 +49,10 @@ public class GameManager : MonoBehaviour
         {
             SkillStage[i-1].SetActive(false);
             ItemStage[i-1].SetActive(false);
+            Stages[stageIndex].SetActive(true);
+            Player.transform.position = StartPosition;
         }
-        if (IsItemStagePortal)
+        else if (IsItemStagePortal)
         {
             ToItemStage();
         }
@@ -60,13 +64,13 @@ public class GameManager : MonoBehaviour
         {
             Stages[stageIndex++].SetActive(false);
             ChooseStage[i].SetActive(true);
-            Player.transform.position = new Vector2(20, 25);
+            Player.transform.position = StartPosition;
         }
         else if (stageIndex + 1 < Stages.Length)
         {
             Stages[stageIndex].SetActive(false);
             Stages[++stageIndex].SetActive(true);
-            Player.transform.position = new Vector2(20, 25);
+            Player.transform.position = StartPosition;
 
         }
         else
@@ -79,13 +83,13 @@ public class GameManager : MonoBehaviour
     {
         ItemStage[i].SetActive(true);
         ChooseStage[i++].SetActive(false);
-        Player.transform.position = new Vector2(20, 25);
+        Player.transform.position = StartPosition;
     }
     public void ToSkillStage()
     {
         SkillStage[i].SetActive(true);
         ChooseStage[i++].SetActive(false);
-        Player.transform.position = new Vector2(20, 25);
+        Player.transform.position = StartPosition;
     }
     // public void ReturnStage()
     // {
@@ -109,7 +113,7 @@ public class GameManager : MonoBehaviour
         PM.SetClass();
         stageIndex = 0;
         Stages[stageIndex].SetActive(true);
-        Player.transform.position = new Vector2(20, 5);
+        Player.transform.position = StartPosition;
         equipManager.EquipRune("BasicRune");
     }
     // }
