@@ -34,6 +34,7 @@ public class StageBoss1 : MonoBehaviour
 
     int StrongType;
     int WeakType;
+    public GameObject portal;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
 
     void Awake(){
@@ -154,6 +155,7 @@ public class StageBoss1 : MonoBehaviour
         {
             GetComponent<BoxCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
+            portal.SetActive(true);
             Destroy(gameObject, 1);
         }
     }
@@ -173,7 +175,7 @@ public class StageBoss1 : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
             anim.SetTrigger("Hitted");
-            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage()) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
+            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage())); //콜라이더가 박스랑 캡슐 두개라서 나누기2
             statManager.IsFighting = 5;
         }
     }

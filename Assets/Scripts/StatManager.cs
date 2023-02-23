@@ -11,8 +11,12 @@ public class StatManager : MonoBehaviour
     public string Class;
     public int Type;
     public int Stack = 0;
+    public float CirticalP;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 , 무속성은 0
     // Start is called before the first frame update
+    public void ShieldOn(float amount){
+        GameObject.Find("HPManager").GetComponent<HPManager>().ShieldOn(amount);
+    }
     void Awake()
     {
         Type = 6;

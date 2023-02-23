@@ -127,7 +127,7 @@ public class MonsterController : MonoBehaviour
         else if (!isAttack)
         {
             rigid.velocity = new Vector2((Player.transform.position - transform.position).normalized.x * Speed,
-            (Player.transform.position - transform.position).normalized.y * Speed * CanFly);
+            (Player.transform.position - transform.position).normalized.y * Speed * CanFly +  rigid.velocity.y);
             nextMove = rigid.velocity.x / Mathf.Abs(rigid.velocity.x);
             spriteRenderer.flipX = (rigid.velocity.x < 0);
             MapCheck();
@@ -155,19 +155,18 @@ public class MonsterController : MonoBehaviour
                     return;
                 }
             }
-            CancelInvoke();
+            // CancelInvoke();
             Invoke("Think", 1);
             nextMove = -nextMove;
 
             rigid.velocity = new Vector2(nextMove * Speed, rigid.velocity.y);
             spriteRenderer.flipX = (nextMove == -1);
-            Debug.Log("Warning");
+            
         }
     }
 
     void Think()
     {
-        Debug.Log("Thinking...");
         nextMove = Random.Range(-1, 2);
 
         //쳐다보는 방향에 대한 코드
@@ -182,7 +181,6 @@ public class MonsterController : MonoBehaviour
 
     public void OnDamaged(float damage)
     {
-        Debug.Log("OnDamaged");
         Hp -= damage;
         hpBar.value = Hp / maxHp;
         if (Hp <= 0 && !Die)
@@ -209,6 +207,7 @@ public class MonsterController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+       
         if (other.gameObject.name == "WarriorSkill2(Clone)")
         {
             if (other.gameObject.GetComponent<BasicAttack>().Monsternum > 1){
@@ -223,12 +222,20 @@ public class MonsterController : MonoBehaviour
                 statManager.Stack += 1;
             }
         }
+        if (other.gameObject.tag == "Arrow"){
+            if (other.gameObject.GetComponent<ArrowMove>().IsHit){
+                return;
+            }
+        }
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
+            if (other.gameObject.tag == "Arrow"){
+                other.gameObject.GetComponent<ArrowMove>().IsHit = true;
+            }
+        
             if (!Hit)
             {
                 Invoke("HitFalse", 1f);
-                Debug.Log("HitFalse");
             }
             Hit = true;
             OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage()) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
@@ -237,6 +244,7 @@ public class MonsterController : MonoBehaviour
     }
     float PlayerDamage(float Dmg)
     {
+        Debug.Log("데미지는 : " + Dmg);
         float Damage = Dmg * statManager.Ad;
 
         if (statManager.Type == WeakType) // 약점타입

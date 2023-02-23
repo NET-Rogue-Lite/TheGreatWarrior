@@ -10,7 +10,7 @@ public class ClassSkill : MonoBehaviour
     GameObject[] Skills;
     // Start is called before the first frame update
     private void Awake() {
-        Skills = new GameObject[5];
+        Skills = new GameObject[7];
         for (int i = 0; i < Skills.Length; i++){
             Skills[i] = transform.GetChild(i).gameObject;
         }    

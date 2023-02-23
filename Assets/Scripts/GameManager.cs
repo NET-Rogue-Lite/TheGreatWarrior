@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] ChooseStage;
     public GameObject[] SkillStage;
     public GameObject[] ItemStage;
+    public GameObject[] BossStage;
     public int i;
 
     public bool IsItemStagePortal;
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
         StartPosition = new Vector2(25,3);
         GameStart();
         statManager.MaxHp = hPManager.HP*2;
-        RandomStage = Random.Range(0, 4);
+        RandomStage = Random.Range(1, 2);
         i = 0;
         IsItemStagePortal = false;
         IsSkillStagePortal = false;
@@ -41,11 +42,18 @@ public class GameManager : MonoBehaviour
     {
         Next = isNext;
     }
-
+    // public void BossOutPortal(int n){
+    //     BossStage[n].SetActive(false);//1탄 깨면 4로 가니까 맞음
+    //     Stages[n*4].SetActive(true);
+    // }
     public void NextStage()
     {
-        
-        if (IsEventStagePortal)
+        BossStage[stageIndex/4].SetActive(false);
+        if(stageIndex%4 == 3){
+            BossStage[stageIndex/4].SetActive(true);
+            Stages[stageIndex].SetActive(false);//0,1,2,3 -> 보스 -> 4,5,6,7-> 보스 니까 맞음
+        }
+        else if (IsEventStagePortal)
         {
             SkillStage[i-1].SetActive(false);
             ItemStage[i-1].SetActive(false);
@@ -60,11 +68,12 @@ public class GameManager : MonoBehaviour
         {
             ToSkillStage();
         }
-        else if (stageIndex == RandomStage)
+        else if (stageIndex == i*4 + RandomStage)
         {
             Stages[stageIndex++].SetActive(false);
             ChooseStage[i].SetActive(true);
             Player.transform.position = StartPosition;
+            RandomStage = Random.Range(0, 2);
         }
         else if (stageIndex + 1 < Stages.Length)
         {

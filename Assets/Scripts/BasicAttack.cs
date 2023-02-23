@@ -12,10 +12,12 @@ public class BasicAttack : MonoBehaviour
     public float AttackDamage;
     public int SkillLevel;
     SkillManager skillManager;
+    StatManager statManager;
 
     void Awake()
     {
         Monsternum = 0;
+        statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
         skillManager = GameObject.Find("SkillManager").GetComponent<SkillManager>();
         anim = GetComponent<Animator>();
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -36,10 +38,22 @@ public class BasicAttack : MonoBehaviour
             gameObject.transform.position = new Vector2(gameObject.transform.position.x , gameObject.transform.position.y);
             gameObject.transform.rotation = Quaternion.Euler(0, (Player.GetComponent<SpriteRenderer>().flipX == true ? 180 : 0) , 0);
         }
+        if (gameObject.name == "ArcherSkill3(Clone)"){
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x + (Player.GetComponent<SpriteRenderer>().flipX == true ? -3 : 3) , gameObject.transform.position.y + 5);
+        }
+        if (gameObject.name == "ArcherSkill4(Clone)"){
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x + (Player.GetComponent<SpriteRenderer>().flipX == true ? -0.5f : 0.5f) , gameObject.transform.position.y);
+        }
     }
 
     public float GetSkillDamage() {
         SkillLevel = skillManager.GetSkillLevel(gameObject.name);
+        if(statManager.CirticalP>0){
+            if(Random.Range(0,1f)<statManager.CirticalP){ //크리티컬 적용
+                Debug.Log("크리티컬적용!");
+                return AttackDamage * Mathf.Sqrt(SkillLevel) * 2; 
+            }
+        }
         return AttackDamage * Mathf.Sqrt(SkillLevel); 
     }
     void Update()
@@ -48,15 +62,11 @@ public class BasicAttack : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (gameObject.name == "WarriorBasicSkill(Clone)" && !SkillCasting){
+        if (gameObject.name == "WarriorSkill0Parent(Clone)" && !SkillCasting){
             SkillCasting = true;
-            Invoke("AfterSkill",2.5f);
+            Invoke("AfterSkill",0.75f);
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(10 * (Player.GetComponent<SpriteRenderer>().flipX == true ? -1 : 1),0);
             Debug.Log("Skill0 beforerSkill");
-        }
-        else if (gameObject.name == "WarriorSkill1(Clone)" && !SkillCasting){
-            SkillCasting = true;
-            Invoke("AfterSkill",2.5f);
-            Debug.Log("Skill1 beforerSkill");
         }
         else if (gameObject.name == "WarriorSkill2(Clone)" && !SkillCasting){
             SkillCasting = true;
@@ -86,9 +96,8 @@ public class BasicAttack : MonoBehaviour
         }
         else if (gameObject.name == "BasicAttack" && gameObject.GetComponent<CircleCollider2D>().enabled == true && !anim.GetBool("IsAttacking")){
             anim.SetBool("IsAttacking", true);
-            Invoke("DisAppear", 0.3f);
+            Invoke("DisAppear", 0.5f);
         }
-
 
         if (gameObject.name == "WarriorSkill2(Clone)" && SkillCasting){
             gameObject.transform.position = new Vector2(gameObject.transform.position.x , gameObject.transform.position.y - 0.1f);
@@ -97,12 +106,58 @@ public class BasicAttack : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().flipX = Player.GetComponent<SpriteRenderer>().flipX;
             gameObject.transform.position = Player.transform.position;
         }
+
+        if (gameObject.name == "ArcherSkill0Parent(Clone)" ){
+            // SkillCasting = true;
+            Player.GetComponent<Animator>().SetBool("IsCasting", false);
+            Invoke("AfterSkill",0.5f);
+            // anim.SetBool("IsAttacking", true);
+        }
+        if (gameObject.name == "ArcherSkill1(Clone)" ){
+            // SkillCasting = true;
+        Player.GetComponent<Animator>().SetBool("IsCasting", false);
+            Invoke("AfterSkill",0.75f);
+            // anim.SetBool("IsAttacking", true);
+        }
+        if (gameObject.name == "ArcherSkill2(Clone)" ){
+            // SkillCasting = true;
+            Player.GetComponent<Animator>().SetBool("IsCasting", false);
+            // anim.SetBool("IsAttacking", true);
+        }
+        if (gameObject.name == "ArcherSkill3(Clone)" ){
+            // SkillCasting = true;
+            Player.GetComponent<Animator>().SetBool("IsCasting", false);
+            Invoke("AfterSkill",2.0f);
+            // anim.SetBool("IsAttacking", true);
+        }
+        if (gameObject.name == "ArcherSkill4(Clone)" ){
+            SkillCasting = true;
+            GameObject.Find("BasicAttack").GetComponent<Animator>().SetTrigger("KnockBack");
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(10 * (Player.GetComponent<SpriteRenderer>().flipX == true ? -1 : 1),0);
+            // Player.GetComponent<Animator>().SetBool("IsCasting", false);
+            Invoke("AfterSkill",0.35f);
+            // anim.SetBool("IsAttacking", true);
+        }
+        if (gameObject.name == "ArcherSkill5(Clone)" ){
+            gameObject.GetComponent<SpriteRenderer>().flipX = Player.GetComponent<SpriteRenderer>().flipX;
+            gameObject.transform.position = Player.transform.position + 0.5f* Vector3.down;
+            Player.GetComponent<Animator>().SetBool("IsCasting", false);
+            Invoke("AfterSkill",20f);
+        }
+        if (gameObject.name == "ArcherSkill6(Clone)"){
+            // SkillCasting = true;
+            Player.GetComponent<Animator>().SetBool("IsCasting", false);
+            Invoke("AfterSkill",0.1f);
+            // anim.SetBool("IsAttacking", true);
+        }
     }
     void DisAppear()
     {
         Debug.Log("DisAppear");
         anim.SetBool("IsAttacking", false);
-        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        if( gameObject.GetComponent<CircleCollider2D>() != null)
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        Player.gameObject.GetComponent<PlayerMove>().AttackingTurn();
         // CancelInvoke();
     }
     void AfterSkill()

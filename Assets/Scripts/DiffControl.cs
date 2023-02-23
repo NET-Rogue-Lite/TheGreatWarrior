@@ -17,7 +17,7 @@ public class DiffControl : MonoBehaviour
     public static int SkillPoint;
     void Awake(){
         Passive = 1;
-        SkillLevel = new int[5]{1,1,1,1,1};
+        SkillLevel = new int[7]{1,1,1,1,1,1,1};
         SkillPoint = 5;// <- 'SkillPoint를 업적에서 가져온다'의 코드로 변경요망
     }
     

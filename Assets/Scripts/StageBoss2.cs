@@ -134,8 +134,9 @@ public class StageBoss2 : MonoBehaviour
         hpBar.value = Hp / maxHp;
         if (Hp <= 0)
         {
-            eventDrop.Drop();
+            Hp = 1000;
             GetComponent<PolygonCollider2D>().enabled = false;
+            eventDrop.Drop();
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
         }
@@ -156,7 +157,7 @@ public class StageBoss2 : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
             anim.SetTrigger("Hitted");
-            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage()) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2
+            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage()) ); //콜라이더가 박스랑 캡슐 두개라서 나누기2
             statManager.IsFighting = 5;
         }
     }

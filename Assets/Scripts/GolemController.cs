@@ -165,13 +165,11 @@ public class GolemController : MonoBehaviour
 
             rigid.velocity = new Vector2(nextMove * Speed, rigid.velocity.y);
             spriteRenderer.flipX = (nextMove == -1);
-            Debug.Log("Warning");
         }
     }
 
     void Think()
     {
-        Debug.Log("Thinking...");
         if (IsAwake)
             nextMove = Random.Range(-1, 2);
         else
@@ -189,7 +187,6 @@ public class GolemController : MonoBehaviour
 
     public void OnDamaged(float damage)
     {
-        Debug.Log("OnDamaged");
         Hp -= damage;
         hpBar.value = Hp / maxHp;
 
@@ -230,7 +227,6 @@ public class GolemController : MonoBehaviour
             if (!Hit)
             {
                 Invoke("HitFalse", 1f);
-                Debug.Log("HitFalse");
             }
             Hit = true;
             OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage()) / 2); //콜라이더가 박스랑 캡슐 두개라서 나누기2

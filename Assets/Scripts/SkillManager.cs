@@ -16,7 +16,9 @@ public class SkillManager : MonoBehaviour
     public Sprite[] WarriorSkillImg;
     public Sprite[] ArcherSkillImg;
     public Sprite[] SkillImg;
-    public float[] SkillCoolList;
+    public float[] WarriorSkillCoolList;
+    public float[] ArcherSkillCoolList;
+    float[] SkillCoolList;
     Dictionary<string, GameObject> SkillDict;
     Dictionary<string, float> SkillCoolDict;
     Dictionary<string, Sprite> SkillImgDict;
@@ -29,11 +31,21 @@ public class SkillManager : MonoBehaviour
         {
             SkillList = WarriorSkillList;
             SkillImg = WarriorSkillImg;
+            SkillCoolList = WarriorSkillCoolList;
+            if (DiffControl.Passive==2) 
+                statManager.Ad+= 10;
+            else
+                statManager.Def += 50;
         }
         else if (statManager.Class == "Archer")
         {
             SkillList = ArcherSkillList;
             SkillImg = ArcherSkillImg;
+            SkillCoolList = ArcherSkillCoolList;
+            if (DiffControl.Passive==2) 
+                statManager.CirticalP+=0.3f;
+            else
+                GameObject.Find("BasicAttack").GetComponent<ArcherAttack>().ArcherBonusAttack = true;
         }
         SkillDict = new Dictionary<string, GameObject>();
         SkillCoolDict = new Dictionary<string, float>();
@@ -42,13 +54,13 @@ public class SkillManager : MonoBehaviour
         SkillCool = new float[4];
         SkillBoard = new GameObject[4];
         SkillLevel = DiffControl.SkillLevel;
-        // SkillEquip(DiffControl.Class + "Passive" + DiffControl.Passive.ToString());
         for (int i = 0; i < SkillList.Length; i++)
         {
             SkillDict.Add(SkillList[i].name, SkillList[i]);
             SkillCoolDict.Add(SkillList[i].name, SkillCoolList[i]);
             SkillImgDict.Add(SkillList[i].name, SkillImg[i]);
         }
+        SkillEquip(DiffControl.Class + "Skill0Parent");
     }
     public int GetSkillLevel(string sname){
         for (int i = 0 ; i < SkillList.Length; i++){
@@ -80,20 +92,36 @@ public class SkillManager : MonoBehaviour
         {
             if (SkillCool[Button] <= 0.01f)
             {
+                if(SkillBoard[Button].name == "ArcherSkill5"){
+                    statManager.Ad = statManager.Ad * 1.3f;
+                    statManager.CirticalP += 1;
+                    Invoke("TurnOffArcherBuff",20);
+                }
+                if (SkillBoard[Button].name == "WarriorSkill1")
+                {
+                    statManager.ShieldOn(0.5f);
+                    statManager.MaxHp+=1;
+                    return true;
+                }
                 GameObject CastSkill = Instantiate(SkillBoard[Button], Player.transform.position, Quaternion.identity);
                 SkillCool[Button] = SkillMaxCool[Button];
                 if (CastSkill.name == "WarriorSkill4(Clone)")
                 {
+                    statManager.ShieldOn(1);
                     Invoke("TurnOffBuff", 20f);
                 }
-                else if (CastSkill.name == "WarriorSkill6(Clone)")
+                else if (CastSkill.name == "WarriorSkill5(Clone)")
                 {
-                    Invoke("TurnOffBuff", 20f);
+                    statManager.ShieldOn(0.5f);
                 }
                 return true;
             }
         }
         return false;
+    }
+    void TurnOffArcherBuff(){
+        statManager.Ad = statManager.Ad * 10 / 13;
+        statManager.CirticalP -= 1;
     }
     void TurnOffBuff()
     {

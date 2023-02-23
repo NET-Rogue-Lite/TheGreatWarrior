@@ -45,8 +45,9 @@ public class PlayerMove : MonoBehaviour
         time += Time.deltaTime;
         float h = spriteRenderer.flipX == false ? 1 : -1;
         //스킬 시전중 정지
-        if(anim.GetBool("IsCasting")){
-            rigid.velocity = new Vector2(0,0);
+        if (anim.GetBool("IsCasting"))
+        {
+            rigid.velocity = new Vector2(0, 0);
         }
         //점프에 관한 코드
         if (Input.GetButtonDown("Jump") && !(anim.GetBool("IsJumping")))
@@ -84,64 +85,76 @@ public class PlayerMove : MonoBehaviour
         else
             anim.SetBool("IsWalking", true);
         //기본공격
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !anim.GetBool("IsClimb")&& !anim.GetBool("IsCasting"))
+        if (Input.GetKey(KeyCode.LeftControl) && !anim.GetBool("IsClimb") && !anim.GetBool("IsCasting"))
         {
-            if (anim.GetBool("IsAttacking") == false)
+            if (Class == "Warrior")
             {
+                if (anim.GetBool("IsAttacking") == false)
+                {
 
-                anim.SetBool("IsAttacking", true);
-                GameObject BasicAttack = transform.Find(Class).gameObject.transform
-                .Find("BasicAttack").gameObject;
-                BasicAttack.GetComponent<CircleCollider2D>().enabled = true;
-                //자신의 직업 자식의 기본공격을 ON시킴.
-                if (spriteRenderer.flipX == true)
-                {
-                    BasicAttack.transform.rotation = Quaternion.Euler(0, 180, 0);
+                    anim.SetBool("IsAttacking", true);
+                    GameObject BasicAttack = transform.Find(Class).gameObject.transform
+                    .Find("BasicAttack").gameObject;
+                    BasicAttack.GetComponent<CircleCollider2D>().enabled = true;
+                    //자신의 직업 자식의 기본공격을 ON시킴.
+                    if (spriteRenderer.flipX == true)
+                    {
+                        BasicAttack.transform.rotation = Quaternion.Euler(0, 180, 0);
+                    }
+                    else
+                    {
+                        BasicAttack.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    }
                 }
-                else
+            }
+            else if (Class == "Archer"){
+                if (anim.GetBool("IsAttacking") == false)
                 {
-                    BasicAttack.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    anim.SetBool("IsAttacking", true);
+                    GameObject BasicAttack = transform.Find(Class).gameObject.transform
+                    .Find("BasicAttack").gameObject;
+                    BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",true);
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.Q) && !anim.GetBool("IsClimb")&& !anim.GetBool("IsCasting"))
+        if (Input.GetKey(KeyCode.Q) && !anim.GetBool("IsClimb") && !anim.GetBool("IsCasting"))
         {
-            if(skillManager.SkillCast(0))
+            if (skillManager.SkillCast(0))
             {
                 GameObject BasicAttack = transform.Find(Class).gameObject.transform
                 .Find("BasicAttack").gameObject;
-                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",true);
-                anim.SetBool("IsCasting",true);
+                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking", true);
+                anim.SetBool("IsCasting", true);
             }//Q1 / W2 / E3/ R4
         }
-        if (Input.GetKeyDown(KeyCode.W) && !anim.GetBool("IsClimb")&& !anim.GetBool("IsCasting"))
+        if (Input.GetKey(KeyCode.W) && !anim.GetBool("IsClimb") && !anim.GetBool("IsCasting"))
         {
-            if(skillManager.SkillCast(1))
+            if (skillManager.SkillCast(1))
             {
                 GameObject BasicAttack = transform.Find(Class).gameObject.transform
                 .Find("BasicAttack").gameObject;
-                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",true);
-                anim.SetBool("IsCasting",true);
+                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking", true);
+                anim.SetBool("IsCasting", true);
             }//Q1 / W2 / E3/ R4
         }
-        if (Input.GetKeyDown(KeyCode.E) && !anim.GetBool("IsClimb")&& !anim.GetBool("IsCasting"))
+        if (Input.GetKey(KeyCode.E) && !anim.GetBool("IsClimb") && !anim.GetBool("IsCasting"))
         {
-            if(skillManager.SkillCast(2))
+            if (skillManager.SkillCast(2))
             {
                 GameObject BasicAttack = transform.Find(Class).gameObject.transform
                 .Find("BasicAttack").gameObject;
-                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",true);
-                anim.SetBool("IsCasting",true);
+                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking", true);
+                anim.SetBool("IsCasting", true);
             }//Q1 / W2 / E3/ R4
         }
-        if (Input.GetKeyDown(KeyCode.R) && !anim.GetBool("IsClimb"))
+        if (Input.GetKey(KeyCode.R) && !anim.GetBool("IsClimb"))
         {
-            if(skillManager.SkillCast(3))
+            if (skillManager.SkillCast(3))
             {
                 GameObject BasicAttack = transform.Find(Class).gameObject.transform
                 .Find("BasicAttack").gameObject;
-                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",true);
-                anim.SetBool("IsCasting",true);
+                BasicAttack.GetComponent<Animator>().SetBool("IsAttacking", true);
+                anim.SetBool("IsCasting", true);
             }//Q1 / W2 / E3/ R4
         }
         if (Input.GetKeyDown(KeyCode.Z))
@@ -155,7 +168,7 @@ public class PlayerMove : MonoBehaviour
         // GameObject Attack = transform.Find(Class).gameObject.transform
         // .Find("WarriorSkill5").gameObject;
         // Attack.SetActive(true);
-        // gameObject.layer = LayerMask.NameToLayer("Imortal");
+        // gameObject.layer = LayerMask.NameToLayer("Immortal");
         // CancelInvoke();
         // Invoke("BeBack", 2.6f);
         // Invoke("SkillCastingPause",2.5f);
@@ -167,19 +180,19 @@ public class PlayerMove : MonoBehaviour
         //대쉬
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            anim.SetBool("IsCasting",false);
+            anim.SetBool("IsCasting", false);
             if (DashCoolTime > 0) return;
             maxSpeedx = 12;
             DashCoolTime = 2;
             anim.SetBool("IsDashing", true);
             rigid.AddForce(Vector2.right * h * maxSpeedx * 5, ForceMode2D.Impulse);
-            gameObject.layer = LayerMask.NameToLayer("Imortal");
+            gameObject.layer = LayerMask.NameToLayer("Immortal");
             CancelInvoke();
             Invoke("BeBack", 0.35f);
             GameObject BasicAttack = transform.Find(Class).gameObject.transform
             .Find("BasicAttack").gameObject;
-            BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",false);
-                
+            BasicAttack.GetComponent<Animator>().SetBool("IsAttacking", false);
+
         }
         //밧줄 타는 코드
         float v = Input.GetAxisRaw("Vertical");
@@ -196,7 +209,7 @@ public class PlayerMove : MonoBehaviour
             if (gameManager.Next)
             {
                 gameManager.NextStage();
-                gameManager.Next=false;
+                gameManager.Next = false;
             }
         }
         //밧줄에서 내려가는 코드
@@ -224,21 +237,22 @@ public class PlayerMove : MonoBehaviour
 
 
     }
-    void SkillCastingPause(){
-        anim.SetBool("IsCasting",false);
+    void SkillCastingPause()
+    {
+        anim.SetBool("IsCasting", false);
     }
     void BeBack()
     {
         anim.SetBool("IsDashing", false);
-        gameObject.layer = LayerMask.NameToLayer("Default");
+        gameObject.layer = LayerMask.NameToLayer("Player");
     }
-    void AttckingTurn()
+    public void AttackingTurn()
     {
         anim.SetBool("IsAttacking", false);
     }
     void FixedUpdate()
     {
-        
+
 
         if (maxSpeedx > 6)
             maxSpeedx -= 0.5f;
@@ -300,7 +314,7 @@ public class PlayerMove : MonoBehaviour
         }
         if (Tag == "Monster")
         {
-            if (gameObject.layer != LayerMask.NameToLayer("Imortal"))
+            if (gameObject.layer != LayerMask.NameToLayer("Immortal"))
             {
                 hPManager.OnDamaged(monsterManager.GetMonsterDamage(Other.name));
                 //맞으면 플레이어가 밀려나기
@@ -309,7 +323,7 @@ public class PlayerMove : MonoBehaviour
                 rigid.velocity = new Vector2(dirc, 0.6f) * 5;
                 anim.SetBool("IsJumping", true);
                 CancelInvoke();
-                gameObject.layer = LayerMask.NameToLayer("Imortal");
+                gameObject.layer = LayerMask.NameToLayer("Immortal");
                 Invoke("BeBack", 0.8f);
                 statManager.IsFighting = 5;
             }
@@ -323,10 +337,11 @@ public class PlayerMove : MonoBehaviour
         if (Other.layer == LayerMask.NameToLayer("Item"))
         {
             Debug.Log(Other.name);
-            if(IsPickUp){
+            if (IsPickUp)
+            {
                 if (itemManager.GetItem(Other)) // 스킬장착 -> 성공 -> 파괴
                     Destroy(other.gameObject);
-            //실패 -> 냄겨둠
+                //실패 -> 냄겨둠
             }
         }
     }
@@ -347,6 +362,7 @@ public class PlayerMove : MonoBehaviour
                 GetComponent<CapsuleCollider2D>().isTrigger = true;
             }
         }
+        
 
     }
     void OnCollisionStay2D(Collision2D other)
@@ -356,7 +372,7 @@ public class PlayerMove : MonoBehaviour
         int Layer = other.gameObject.layer;
         if (Tag == "Monster")
         {
-            if (gameObject.layer != LayerMask.NameToLayer("Imortal"))
+            if (gameObject.layer != LayerMask.NameToLayer("Immortal"))
             {
                 hPManager.OnDamaged(monsterManager.GetMonsterDamage(Other.name));
                 //맞으면 플레이어가 밀려나기
@@ -364,7 +380,7 @@ public class PlayerMove : MonoBehaviour
                 rigid.velocity = new Vector2(dirc, 0.6f) * 5; //, ForceMode2D.Impulse);
                 anim.SetBool("IsJumping", true);
                 CancelInvoke();
-                gameObject.layer = LayerMask.NameToLayer("Imortal");
+                gameObject.layer = LayerMask.NameToLayer("Immortal");
                 Invoke("BeBack", 0.8f);
                 statManager.IsFighting = 5;
             }

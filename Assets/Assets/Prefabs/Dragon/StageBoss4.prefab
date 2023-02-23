@@ -281,7 +281,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.17585468, y: -1.283123}
@@ -3549,6 +3549,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-4925934431136932985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2247497315497815378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9022207a35e205e40b90fd6c48fc0810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WarriorSkillQube:
+  - {fileID: 3777997692935808631, guid: 007b594a4acf8d0469415fac897ee1e7, type: 3}
+  - {fileID: 6708848457940000049, guid: 10a53b6f063de6c4c8edfb50483053ab, type: 3}
+  - {fileID: 3474120315699849183, guid: 3328996fa63b2764087ca37d7d922309, type: 3}
+  - {fileID: 2016098743196956485, guid: 630dccabcded16d48aecdb81c08ababa, type: 3}
+  - {fileID: 3777997692935808631, guid: 52223113475f57a4ab4eab9824e7a9cb, type: 3}
+  ArcherSkillQube: []
+  TempItemQube: {fileID: 6433485365273927068, guid: 431560460a11a954d926ae3a264447bb, type: 3}
 --- !u!114 &-2117205082733401517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3611,36 +3631,6 @@ MonoBehaviour:
     showGizmo: 1
   - color: {r: 0, g: 1, b: 0, a: 1}
     showGizmo: 1
---- !u!114 &-4925934431136932985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2247497315497815378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9022207a35e205e40b90fd6c48fc0810, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WarriorSkillQube:
-  - {fileID: 3777997692935808631, guid: 007b594a4acf8d0469415fac897ee1e7, type: 3}
-  - {fileID: 6708848457940000049, guid: 10a53b6f063de6c4c8edfb50483053ab, type: 3}
-  - {fileID: 3474120315699849183, guid: 3328996fa63b2764087ca37d7d922309, type: 3}
-  - {fileID: 2016098743196956485, guid: 630dccabcded16d48aecdb81c08ababa, type: 3}
-  - {fileID: 3777997692935808631, guid: 52223113475f57a4ab4eab9824e7a9cb, type: 3}
-  ArcherSkillQube: []
-  TempItemQube: {fileID: 6433485365273927068, guid: 431560460a11a954d926ae3a264447bb, type: 3}
-  RuneItemImage:
-  - {fileID: 1296188890, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: 795311604, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: -1772150243, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: 611689054, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: -584263873, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: 1552991747, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  ArmorItemImage: []
-  HatItemImage: []
-  GloveItemImage: []
 --- !u!4 &2313186871663757567 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5227673223231415876, guid: 88925decd297d4eaaaeb4ec1b87fbc02, type: 3}
