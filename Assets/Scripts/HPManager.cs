@@ -9,18 +9,22 @@ public class HPManager : MonoBehaviour
     public GameManager gameManager;
     public GameObject Player;
     public StatManager Stat;
+
     public float maxHp;
     public float HP;
-    [SerializeField]
     public Text textHp;
-    [SerializeField]
     public Slider hpBar;
+
+    public Slider shieldBar;
     public float Shield;
+
     public void OnDamaged(float Ad){
         Ad = Ad * (150 / Stat.Def) * gameManager.Diff;
         if(Shield > 0){
+            float tmp;
+            tmp = Ad;
             Ad -= Shield;
-            Shield -= Ad; 
+            Shield -= tmp; 
         }
         if (Ad<=0)
             return;
@@ -32,6 +36,7 @@ public class HPManager : MonoBehaviour
     {
         maxHp = Stat.MaxHp;
         hpBar.value = HP / maxHp;
+        shieldBar.value = Shield / maxHp;
         
         if (Shield > 0)
         {
@@ -54,5 +59,6 @@ public class HPManager : MonoBehaviour
     public void Onslider()
     {
         textHp.GetComponent<Text>().text = HP.ToString();
+     
     }
 }

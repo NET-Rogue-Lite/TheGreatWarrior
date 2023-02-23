@@ -7,6 +7,7 @@ public class MonsterController : MonoBehaviour
     Animator anim;
     public float Hp;
     public float maxHp;
+
     public float Ad;
     private float Speed;
     public float Idle_speed;
@@ -185,6 +186,7 @@ public class MonsterController : MonoBehaviour
         Debug.Log("OnDamaged");
         Hp -= damage;
         hpBar.value = Hp / maxHp;
+     
         if (Hp <= 0 && !Die)
         {
             GetComponent<BoxCollider2D>().enabled = false;
