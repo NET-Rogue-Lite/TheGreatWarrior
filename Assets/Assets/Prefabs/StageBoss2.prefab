@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 6665968461557481532}
   statManager: {fileID: 0}
+  audioManager: {fileID: 0}
   fireball: {fileID: 5409417171724008207, guid: 1b08ce4f0b184a44c8c002a11885af7c, type: 3}
   firefloor: {fileID: 1517082310273361808, guid: b49a4c0d167729c4c98b83dbc3665c08, type: 3}
   fireBear: {fileID: 3047020890018648759, guid: e958a403a423b7f4485443a9cb095daa, type: 3}
@@ -218,16 +219,6 @@ MonoBehaviour:
   - {fileID: 3777997692935808631, guid: 52223113475f57a4ab4eab9824e7a9cb, type: 3}
   ArcherSkillQube: []
   TempItemQube: {fileID: 6433485365273927068, guid: 431560460a11a954d926ae3a264447bb, type: 3}
-  RuneItemImage:
-  - {fileID: 1296188890, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: 795311604, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: -1772150243, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: 611689054, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: -584263873, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: 1552991747, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  ArmorItemImage: []
-  HatItemImage: []
-  GloveItemImage: []
 --- !u!1 &5441221426149584762
 GameObject:
   m_ObjectHideFlags: 0

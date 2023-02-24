@@ -24,6 +24,7 @@ public class MonsterController : MonoBehaviour
     private float playerDistance;
     private GameObject Player;
     StatManager statManager;
+    AudioManager audioManager;
 
     Rigidbody2D rigid;
     public float nextMove;
@@ -45,6 +46,7 @@ public class MonsterController : MonoBehaviour
         capuslecollider = GetComponent<CapsuleCollider2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
         statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         spriteRenderer.flipX = (nextMove == -1);
         Think();
         StrongType = (CurType + 1) % 5;
@@ -183,6 +185,7 @@ public class MonsterController : MonoBehaviour
     {
         Hp -= damage;
         hpBar.value = Hp / maxHp;
+        
         if (Hp <= 0 && !Die)
         {
             GetComponent<BoxCollider2D>().enabled = false;
@@ -191,7 +194,21 @@ public class MonsterController : MonoBehaviour
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
             Die = true;
+
+            string name = gameObject.name;
+            if (name == "Bat")
+                audioManager.monsterSound("Bat");
+            else if (name == "Bear")
+                audioManager.monsterSound("Bear");
+            else if (name == "Bone")
+                audioManager.monsterSound("Bone");
+            else if (name == "Rat")
+                audioManager.monsterSound("Rat");
+            else if (name == "Slime")
+                audioManager.monsterSound("Slime");
+
         }
+        audioManager.monsterSound("Damaged");
         nextMove = spriteRenderer.flipX == true ? -1 : 1;
         // rigid.AddForce(Vector2.left* nextMove*3+ Vector2.up * 3, ForceMode2D.Impulse);
         // spriteRenderer.color = new Color(1, 1, 1, 0.4f);

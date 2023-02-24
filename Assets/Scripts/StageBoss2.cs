@@ -14,6 +14,7 @@ public class StageBoss2 : MonoBehaviour
     public Slider hpBar;
 
     public StatManager statManager;
+    public AudioManager audioManager;
     public GameObject fireball;
     public GameObject firefloor;
     public GameObject fireBear;
@@ -100,16 +101,19 @@ public class StageBoss2 : MonoBehaviour
 
     void Skill1(){
         for(int i = 0; i < (DiffControl.Diff==4 ? 120 : DiffControl.Diff*40); i++){
+            audioManager.boss2Sound("Fireball");
             Destroy(Instantiate(fireball, new Vector3(Random.Range(transform.position.x-20f, transform.position.x+20f), Random.Range(transform.position.y + 15, transform.position.y + 30), 0), Quaternion.identity), 10);
         }
     }
 
     void Skill2(){
+        audioManager.boss2Sound("Floor");
         Destroy(Instantiate(firefloor, new Vector3(transform.position.x + 0.5f, transform.position.y-6.1f, 0), Quaternion.identity), 0.5f);
     }
 
     void Skill3(){
         for (int i = 0; i < 2; i++){
+            audioManager.boss2Sound("Fireball");
             Instantiate(fireBear, new Vector3(Random.Range(transform.position.x - 5, transform.position.x +5), transform.position.y-3f, 0), Quaternion.identity);
         }
     }
@@ -132,8 +136,10 @@ public class StageBoss2 : MonoBehaviour
         Debug.Log("OnDamaged");
         Hp -= damage;
         hpBar.value = Hp / maxHp;
+        audioManager.boss2Sound("Damaged");
         if (Hp <= 0)
         {
+            audioManager.boss2Sound("Die");
             Hp = 1000;
             GetComponent<PolygonCollider2D>().enabled = false;
             eventDrop.Drop();

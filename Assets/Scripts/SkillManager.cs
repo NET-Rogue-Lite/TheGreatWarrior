@@ -6,6 +6,7 @@ using TMPro;
 public class SkillManager : MonoBehaviour
 {
     public StatManager statManager;
+    public AudioManager audioManager;
     public GameObject Player;
     public GameObject[] SkillBoard;//Q,W,E,R
     public float[] SkillMaxCool;//Q,W,E,R
@@ -92,6 +93,7 @@ public class SkillManager : MonoBehaviour
         {
             if (SkillCool[Button] <= 0.01f)
             {
+                audioManager.skillSound(SkillBoard[Button].name);
                 if(SkillBoard[Button].name == "ArcherSkill5"){
                     statManager.Ad = statManager.Ad * 1.3f;
                     statManager.CirticalP += 1;

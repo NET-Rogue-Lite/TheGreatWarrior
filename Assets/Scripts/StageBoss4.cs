@@ -7,6 +7,7 @@ public class StageBoss4 : MonoBehaviour
     Animator anim; 
     CapsuleCollider2D capuslecollider;
     private GameObject Player;
+    public AudioManager audioManager;
     GameObject Bite;
     GameObject Breath;
     GameObject Tornado;
@@ -114,26 +115,32 @@ public class StageBoss4 : MonoBehaviour
         }
     }
     IEnumerator Skill0(){
+        audioManager.boss4Sound("Bite");
         yield return new WaitForSeconds(0.4f);
         Bite.SetActive(true);
         yield return new WaitForSeconds(0.15f);
         Bite.SetActive(false);
     }
     IEnumerator Skill1(){
+        
         yield return new WaitForSeconds(1.5f);
         anim.SetTrigger("Breath"); 
         yield return new WaitForSeconds(0.8f);
         Breath.SetActive(true);
+        audioManager.boss4Sound("Fire");
         yield return new WaitForSeconds(1.5f);
         Breath.SetActive(false);
+        
     }
 
     IEnumerator Skill2(){
+        
         yield return new WaitForSeconds(1.8f);
         Tornado.SetActive(true);
         int count = 0;
         float cur_x = Tornado.transform.position.x;
         while (count < 20){
+            audioManager.boss4Sound("Wing");
             Tornado.transform.position = new Vector2(Mathf.Lerp(Tornado.transform.position.x, cur_x-20, 0.15f), Tornado.transform.position.y);
             count++;
             yield return new WaitForSeconds(0.1f);
@@ -143,6 +150,7 @@ public class StageBoss4 : MonoBehaviour
     }
 
     IEnumerator Skill3(){
+        audioManager.boss4Sound("Thunder");
         yield return new WaitForSeconds(0.8f);
         thunder_floor.SetActive(true);
         for (int i = 0; i < 10*DiffControl.Diff; i++){
@@ -165,10 +173,12 @@ public class StageBoss4 : MonoBehaviour
 
     public void OnDamaged(float damage)
     {
+        audioManager.boss4Sound("Damaged");
         Debug.Log("OnDamaged");
         Hp -= damage;
         if (Hp <= 0)
         {
+            audioManager.boss4Sound("Die");
             GetComponent<BoxCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);

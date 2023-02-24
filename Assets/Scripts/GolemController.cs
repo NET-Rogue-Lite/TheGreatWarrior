@@ -22,6 +22,7 @@ public class GolemController : MonoBehaviour
     private float playerDistance;
     private GameObject Player;
     StatManager statManager;
+    AudioManager audioManager;
     Rigidbody2D rigid;
     public float nextMove;
     SpriteRenderer spriteRenderer;
@@ -41,6 +42,8 @@ public class GolemController : MonoBehaviour
         capuslecollider = GetComponent<CapsuleCollider2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
         statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
         spriteRenderer.flipX = (nextMove == -1);
         Think();
 
@@ -50,7 +53,7 @@ public class GolemController : MonoBehaviour
         maxHp = Hp;
         //Invoke("Think", 5);
     }
-
+    
     void FixedUpdate()
     {
         playerDistance = Vector3.Distance(transform.position, Player.transform.position);
@@ -189,7 +192,7 @@ public class GolemController : MonoBehaviour
     {
         Hp -= damage;
         hpBar.value = Hp / maxHp;
-
+        audioManager.monsterSound("Damaged");
         if (Hp <= 0 && !Die)
         {
             GetComponent<BoxCollider2D>().enabled = false;
@@ -198,6 +201,7 @@ public class GolemController : MonoBehaviour
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
             Die = true;
+            audioManager.monsterSound("Golem");
         }
         nextMove = spriteRenderer.flipX == true ? -1 : 1;
         // rigid.AddForce(Vector2.left* nextMove*3+ Vector2.up * 3, ForceMode2D.Impulse);

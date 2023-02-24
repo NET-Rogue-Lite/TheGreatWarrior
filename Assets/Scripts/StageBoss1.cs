@@ -14,6 +14,7 @@ public class StageBoss1 : MonoBehaviour
     public Slider hpBar;
 
     public StatManager statManager;
+    public AudioManager audioManager;
     public GameObject spit;
     public float maxHp;
     public float Hp;
@@ -112,6 +113,7 @@ public class StageBoss1 : MonoBehaviour
 
     IEnumerator Skill0(){
         for(int i = 0; i < 4*DiffControl.Diff; i++){
+            audioManager.boss1Sound("Ball");
             GameObject spits = Instantiate(spit, transform.position, Quaternion.identity);
             spits.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
             if (spriteRenderer.flipX)
@@ -119,11 +121,12 @@ public class StageBoss1 : MonoBehaviour
             else
                 spits.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(7f, 20f), Random.Range(-1f, 1f));
             Destroy(spits, 8);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.2f);   
         }
     }
 
     IEnumerator Skill1(int direc){
+        audioManager.boss1Sound("Tornado");
         yield return new WaitForSeconds(0.25f);
         int count = 0;
         float cur_x = transform.position.x;
@@ -135,6 +138,7 @@ public class StageBoss1 : MonoBehaviour
             count++;
             rigid.velocity = Vector2.zero;
             yield return new WaitForSeconds(0.1f);
+            
         }  
     }
 
@@ -151,12 +155,14 @@ public class StageBoss1 : MonoBehaviour
         Debug.Log("OnDamaged");
         Hp -= damage;
         hpBar.value = Hp / maxHp;
+        audioManager.boss1Sound("Damaged");
         if (Hp <= 0)
         {
             GetComponent<BoxCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
             portal.SetActive(true);
             Destroy(gameObject, 1);
+            audioManager.boss1Sound("Die");
         }
     }
     void OnTriggerEnter2D(Collider2D other)

@@ -10,12 +10,12 @@ public class PlayerMove : MonoBehaviour
     public HPManager hPManager;
     public GameManager gameManager;
     public ItemManager itemManager;
+    public AudioManager audioManager;
     Rigidbody2D rigid;
     public SpriteRenderer spriteRenderer;
     Animator anim;
     public float jumpPower;
     BoxCollider2D boxcollider;
-    AudioSource audioSource;
     public float maxSpeedx;
     public string Class;
     float time = 0;
@@ -29,7 +29,6 @@ public class PlayerMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         boxcollider = GetComponent<BoxCollider2D>();
-        audioSource = GetComponent<AudioSource>();
         maxSpeedy = maxSpeedx * 5;
         IsPickUp = false;
     }
@@ -60,7 +59,7 @@ public class PlayerMove : MonoBehaviour
             else
                 rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetBool("IsJumping", true);
-            // PlaySound("JUMP");
+            audioManager.playerSound("Jump");
         }
         //키를 떼면 잘 멈추게 하는 코드
         if (Input.GetButtonUp("Horizontal"))
@@ -105,6 +104,7 @@ public class PlayerMove : MonoBehaviour
                     {
                         BasicAttack.transform.rotation = Quaternion.Euler(0, 0, 0);
                     }
+                    audioManager.playerSound("Attack");
                 }
             }
             else if (Class == "Archer"){
@@ -114,6 +114,7 @@ public class PlayerMove : MonoBehaviour
                     GameObject BasicAttack = transform.Find(Class).gameObject.transform
                     .Find("BasicAttack").gameObject;
                     BasicAttack.GetComponent<Animator>().SetBool("IsAttacking",true);
+                    audioManager.playerSound("Attack");
                 }
             }
         }
@@ -125,6 +126,7 @@ public class PlayerMove : MonoBehaviour
                 .Find("BasicAttack").gameObject;
                 BasicAttack.GetComponent<Animator>().SetBool("IsAttacking", true);
                 anim.SetBool("IsCasting", true);
+                
             }//Q1 / W2 / E3/ R4
         }
         if (Input.GetKey(KeyCode.W) && !anim.GetBool("IsClimb") && !anim.GetBool("IsCasting"))
@@ -192,6 +194,7 @@ public class PlayerMove : MonoBehaviour
             GameObject BasicAttack = transform.Find(Class).gameObject.transform
             .Find("BasicAttack").gameObject;
             BasicAttack.GetComponent<Animator>().SetBool("IsAttacking", false);
+            audioManager.playerSound("Dash");
 
         }
         //밧줄 타는 코드
