@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4564849280006208422}
   - component: {fileID: 4564849280006208423}
   - component: {fileID: 4564849280006208416}
+  - component: {fileID: -3686789316679909069}
   - component: {fileID: 4564849280006208411}
   - component: {fileID: 4564849280006208410}
   - component: {fileID: 6042366725930651358}
@@ -93,7 +94,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &4564849280006208423
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -110,7 +111,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &4564849280006208416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,22 +124,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1dfebbfa0bbda4eb6df611efb9d1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 100
-  maxHp: 0
+  Hp: 80
+  maxHp: 100
   Ad: 5
   Idle_speed: 2
   Chase_speed: 5
   Attack_range: 1.1
   Close_range: 8
   hpBar: {fileID: 6042366724571031342}
-  statManager: {fileID: 0}
   nextMove: 0
   Hit: 0
-  CurType: 0
-  CanFly: 0
-  probability: 0
-  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
+  CurType: 5
+  CanFly: 1
   Die: 0
+--- !u!114 &-3686789316679909069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4564849280006208417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c550614c355dd34486ca6e813bff901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
+  probability: 0
 --- !u!50 &4564849280006208411
 Rigidbody2D:
   serializedVersion: 4

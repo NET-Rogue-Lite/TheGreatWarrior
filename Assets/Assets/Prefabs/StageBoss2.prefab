@@ -93,7 +93,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &5441221425647892993
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -110,7 +110,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!60 &5441221425647893022
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -168,12 +168,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 6665968461557481532}
-  statManager: {fileID: 0}
+  statManager: {fileID: 7798202834094134588, guid: d1988b6c6c5458b48b8a3400c45d7944, type: 3}
   fireball: {fileID: 5409417171724008207, guid: 1b08ce4f0b184a44c8c002a11885af7c, type: 3}
   firefloor: {fileID: 1517082310273361808, guid: b49a4c0d167729c4c98b83dbc3665c08, type: 3}
   fireBear: {fileID: 3047020890018648759, guid: e958a403a423b7f4485443a9cb095daa, type: 3}
-  maxHp: 0
-  Hp: 20
+  maxHp: 2000
+  Hp: 2000
   skillattack: 10
   attack: 5
   CurType: 2
@@ -218,16 +218,6 @@ MonoBehaviour:
   - {fileID: 3777997692935808631, guid: 52223113475f57a4ab4eab9824e7a9cb, type: 3}
   ArcherSkillQube: []
   TempItemQube: {fileID: 6433485365273927068, guid: 431560460a11a954d926ae3a264447bb, type: 3}
-  RuneItemImage:
-  - {fileID: 1296188890, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: 795311604, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: -1772150243, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: 611689054, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: -584263873, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  - {fileID: 1552991747, guid: fd9c079dfd25c7143a5e51d8e320b1a2, type: 3}
-  ArmorItemImage: []
-  HatItemImage: []
-  GloveItemImage: []
 --- !u!1 &5441221426149584762
 GameObject:
   m_ObjectHideFlags: 0

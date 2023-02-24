@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9152848672142618831}
   - component: {fileID: 6511881591796269788}
   - component: {fileID: 4514607135114683734}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: StageBoss1_slimespit
   m_TagString: Monster
   m_Icon: {fileID: 0}

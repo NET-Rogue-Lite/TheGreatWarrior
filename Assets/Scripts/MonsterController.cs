@@ -34,7 +34,7 @@ public class MonsterController : MonoBehaviour
     int StrongType;
     int WeakType;
     public int CanFly;
-    public GameObject HPportion;
+
     public bool Die = false;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
     void Awake()
@@ -88,7 +88,6 @@ public class MonsterController : MonoBehaviour
             isPlayer_close = true;
             isAttack = false;
             GetComponent<BoxCollider2D>().enabled = false;
-            GetComponent<PolygonCollider2D>().enabled = true;
         }
         else
         {
@@ -99,7 +98,6 @@ public class MonsterController : MonoBehaviour
             Speed = Idle_speed;
             isPlayer_close = false;
             GetComponent<BoxCollider2D>().enabled = true;
-            GetComponent<PolygonCollider2D>().enabled = false;
             isAttack = false;
         }
     }
@@ -109,11 +107,12 @@ public class MonsterController : MonoBehaviour
         anim.SetBool("PlayerClosetoAttack", isAttack);
         if (isAttack)
         {
-            // GetComponent<PolygonCollider2D>().enabled = true;
+            GetComponent<PolygonCollider2D>().enabled = true;
+            isAttack = false;
         }
         else
         {
-            // GetComponent<PolygonCollider2D>().enabled = false;
+            GetComponent<PolygonCollider2D>().enabled = false;
         }
     }
 

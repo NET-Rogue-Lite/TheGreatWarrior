@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1517082310273361811}
   - component: {fileID: 1517082310273361813}
   - component: {fileID: 1517082310273361812}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: StageBoss2_firefloor
   m_TagString: Monster
   m_Icon: {fileID: 0}
