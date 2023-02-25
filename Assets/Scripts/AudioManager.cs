@@ -5,7 +5,8 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public AudioSource[] audioSources;
-    public AudioSource[] BGMSources;
+    public AudioSource BGMSources;
+
     public AudioClip[] monsterAudios;
     public AudioClip[] boss1Audios;
     public AudioClip[] boss2Audios;
@@ -13,10 +14,13 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] boss4Audios;
     public AudioClip[] playerAudios;
     public AudioClip[] skillAudios;
+
+    public AudioClip[] BGMAudios;
+
     int i;
 
     void Start()
-    { 
+    {
         i = 0;
     }
 
@@ -35,8 +39,7 @@ public class AudioManager : MonoBehaviour
                 break;
         }
         audioSources[i].Play();
-        i = (i+1) % 5;
-
+        i = (i + 1) % 10;
     }
 
     public void monsterSound(string action)
@@ -67,7 +70,7 @@ public class AudioManager : MonoBehaviour
 
         }
         audioSources[i].Play();
-        i = (i + 1) % 5;
+        i = (i + 1) % 10;
     }
 
     public void skillSound(string action)
@@ -121,7 +124,7 @@ public class AudioManager : MonoBehaviour
 
         }
         audioSources[i].Play();
-        i = (i + 1) % 5;
+        i = (i + 1) % 10;
     }
 
     public void boss1Sound(string action)
@@ -142,7 +145,7 @@ public class AudioManager : MonoBehaviour
                 break;
         }
         audioSources[i].Play();
-        i = (i + 1) % 5;
+        i = (i + 1) % 10;
     }
     public void boss2Sound(string action)
     {
@@ -162,7 +165,7 @@ public class AudioManager : MonoBehaviour
                 break;
         }
         audioSources[i].Play();
-        i = (i + 1) % 5;
+        i = (i + 1) % 10;
     }
     public void boss3Sound(string action)
     {
@@ -185,8 +188,7 @@ public class AudioManager : MonoBehaviour
                 break;
         }
         audioSources[i].Play();
-        i = (i + 1) % 5;
-
+        i = (i + 1) % 10;
     }
     public void boss4Sound(string action)
     {
@@ -212,6 +214,32 @@ public class AudioManager : MonoBehaviour
                 break;
         }
         audioSources[i].Play();
-        i = (i + 1) % 5;
+        i = (i + 1) % 10;
+    }
+
+    public void BGMSound(string action)
+    {
+        switch (action)
+        {
+            case "Stage1":
+                BGMSources.clip = BGMAudios[0];
+                break;
+            case "Stage2":
+                BGMSources.clip = BGMAudios[1];
+                break;
+            case "Stage3":
+                BGMSources.clip = BGMAudios[2];
+                break;
+            case "Stage4":
+                BGMSources.clip = BGMAudios[3];
+                break;
+            case "Boss":
+                BGMSources.clip = BGMAudios[4];
+                break;
+            case "StageBoss":
+                BGMSources.clip = BGMAudios[5];
+                break;
+        }
+        BGMSources.Play();
     }
 }
