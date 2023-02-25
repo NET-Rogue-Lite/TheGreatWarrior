@@ -48,19 +48,10 @@ public class GameManager : MonoBehaviour
     // }
     public void NextStage()
     {
-        BossStage[stageIndex/4].SetActive(false);
-        if(stageIndex%4 == 3){
-            BossStage[stageIndex/4].SetActive(true);
-            Stages[stageIndex].SetActive(false);//0,1,2,3 -> 보스 -> 4,5,6,7-> 보스 니까 맞음
-        }
-        else if (IsEventStagePortal)
-        {
-            SkillStage[i-1].SetActive(false);
-            ItemStage[i-1].SetActive(false);
-            Stages[stageIndex].SetActive(true);
-            Player.transform.position = StartPosition;
-        }
-        else if (IsItemStagePortal)
+        int CurStage = stageIndex;
+        int NextStage = stageIndex+1;
+        BossStage[i==0?0:i-1].SetActive(false);
+        if (IsItemStagePortal)
         {
             ToItemStage();
         }
@@ -68,25 +59,38 @@ public class GameManager : MonoBehaviour
         {
             ToSkillStage();
         }
-        else if (stageIndex == i*4 + RandomStage)
+        else if (IsEventStagePortal)
         {
-            Stages[stageIndex++].SetActive(false);
+            SkillStage[i-1].SetActive(false);
+            ItemStage[i-1].SetActive(false);
+            Stages[CurStage].SetActive(true);
+            return;
+        }
+        else if (CurStage == i*4 + RandomStage)
+        {
+            Stages[CurStage].SetActive(false);
             ChooseStage[i].SetActive(true);
-            Player.transform.position = StartPosition;
             RandomStage = Random.Range(0, 2);
         }
-        else if (stageIndex + 1 < Stages.Length)
-        {
-            Stages[stageIndex].SetActive(false);
-            Stages[++stageIndex].SetActive(true);
+        else if(NextStage%4 == 0){
+            BossStage[CurStage/4].SetActive(true);
+            Stages[CurStage].SetActive(false);//0,1,2,3 -> 보스 -> 4,5,6,7-> 보스 니까 맞음
+            stageIndex++;
             Player.transform.position = StartPosition;
-
+            return;
+        }
+        else if (NextStage < Stages.Length)
+        {
+            Stages[CurStage].SetActive(false);
+            Stages[NextStage].SetActive(true);
         }
         else
         {
             Time.timeScale = 0;
             Debug.Log("게임클리어!");
         }
+        stageIndex++;
+        Player.transform.position = StartPosition;
     }
     public void ToItemStage()
     {

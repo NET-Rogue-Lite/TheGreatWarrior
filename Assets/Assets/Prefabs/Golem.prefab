@@ -580,18 +580,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d42835774ca95418746b3660004b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 10
-  maxHp: 0
+  Hp: 300
+  maxHp: 300
   Ad: 20
   Idle_speed: 1
   Chase_speed: 4
   Attack_range: 1.2
   Close_range: 7
   hpBar: {fileID: 524614986}
-  statManager: {fileID: 0}
   nextMove: 0
   Hit: 0
   CurType: 4
+  Die: 0
 --- !u!50 &1251270993776802966
 Rigidbody2D:
   serializedVersion: 4

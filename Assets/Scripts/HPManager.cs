@@ -63,6 +63,6 @@ public class HPManager : MonoBehaviour
     }
     
     public void ShieldOn(float amount){
-        Shield = maxHp * amount;
+        Shield += maxHp * amount;
     }
 }

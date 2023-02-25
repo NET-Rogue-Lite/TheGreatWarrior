@@ -4,42 +4,35 @@ using UnityEngine;
 
 public class StageBoss4 : MonoBehaviour
 {
-    Animator anim; 
+    Animator anim;
     CapsuleCollider2D capuslecollider;
     private GameObject Player;
+    public AudioManager audioManager;
     GameObject Bite;
     GameObject Breath;
     GameObject Tornado;
     GameObject thunder_floor;
     public GameObject thunder;
-
     Queue<int> skillQueue;
-    
     public StatManager statManager;
-
     public float Hp;
     public float skill0;
     public float skill1;
     public float skill2;
     public float skill3;
-
     public int CurType;
-
     float skill0_cool;
     float skill1_cool;
     float skill2_cool;
     float skill3_cool;
-    
-
-
     float playerDistance;
     bool is_skilling = false;
-
     int StrongType;
     int WeakType;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
 
-    void Awake(){
+    void Awake()
+    {
         anim = GetComponent<Animator>();
         Player = GameObject.FindGameObjectWithTag("Player");
         skillQueue = new Queue<int>();
@@ -47,10 +40,10 @@ public class StageBoss4 : MonoBehaviour
         Breath = transform.Find("StageBoss4_Breath").gameObject;
         Tornado = transform.Find("StageBoss4_Tornado").gameObject;
         thunder_floor = transform.Find("StageBoss4_ThunderFloor").gameObject;
-        skill0_cool = skill0+ Random.Range(-0.2f,0.2f);
-        skill1_cool = skill1+ Random.Range(-0.5f,0.5f);
-        skill2_cool = skill2+ Random.Range(-0.5f,0.5f);
-        skill3_cool = skill3+ Random.Range(-0.5f,0.5f);
+        skill0_cool = skill0 + Random.Range(-0.2f, 0.2f);
+        skill1_cool = skill1 + Random.Range(-0.5f, 0.5f);
+        skill2_cool = skill2 + Random.Range(-0.5f, 0.5f);
+        skill3_cool = skill3 + Random.Range(-0.5f, 0.5f);
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
     }
@@ -58,31 +51,37 @@ public class StageBoss4 : MonoBehaviour
     void FixedUpdate()
     {
         playerDistance = Player.transform.position.x - transform.position.x;
-        skill0_cool -= 0.2f + Random.Range(-0.02f,0.02f);
-        skill1_cool -= 0.2f + Random.Range(-0.02f,0.02f);
-        skill2_cool -= 0.2f + Random.Range(-0.02f,0.02f);
-        skill3_cool -= 0.2f + Random.Range(-0.02f,0.02f);
-        if (skill0_cool <= 0){
+        skill0_cool -= 0.2f + Random.Range(-0.02f, 0.02f);
+        skill1_cool -= 0.2f + Random.Range(-0.02f, 0.02f);
+        skill2_cool -= 0.2f + Random.Range(-0.02f, 0.02f);
+        skill3_cool -= 0.2f + Random.Range(-0.02f, 0.02f);
+        if (skill0_cool <= 0)
+        {
             skillQueue.Enqueue(0);
             skill0_cool = skill0;
         }
-        if (skill1_cool <= 0){
+        if (skill1_cool <= 0)
+        {
             skillQueue.Enqueue(1);
             skill1_cool = skill1;
         }
-        if (skill2_cool <= 0){
+        if (skill2_cool <= 0)
+        {
             skillQueue.Enqueue(2);
             skill2_cool = skill2;
         }
-        if (skill3_cool <= 0){
+        if (skill3_cool <= 0)
+        {
             skillQueue.Enqueue(3);
             skill3_cool = skill3;
         }
         Attack();
-    } 
+    }
 
-    void Attack(){
-        if (skillQueue.Count > 0 && !is_skilling){
+    void Attack()
+    {
+        if (skillQueue.Count > 0 && !is_skilling)
+        {
             is_skilling = true;
             int skill_num = skillQueue.Dequeue();
             switch (skill_num)
@@ -93,7 +92,7 @@ public class StageBoss4 : MonoBehaviour
                     Invoke("skillCancel", 3);
                     break;
                 case 1:
-                //노란색으로 먼저 물드는 애니메이션
+                    //노란색으로 먼저 물드는 애니메이션
                     // anim.SetTrigger("Breath"); 이거는 아래로 내려
                     anim.SetTrigger("Fear");
                     StartCoroutine(Skill1());
@@ -109,32 +108,39 @@ public class StageBoss4 : MonoBehaviour
                     StartCoroutine(Skill3());
                     Invoke("skillCancel", 3);
                     break;
-            } 
+            }
             // Invoke("skillCancel", 3);
         }
     }
-    IEnumerator Skill0(){
+    IEnumerator Skill0()
+    {
+        audioManager.boss4Sound("Bite");
         yield return new WaitForSeconds(0.4f);
         Bite.SetActive(true);
         yield return new WaitForSeconds(0.15f);
         Bite.SetActive(false);
     }
-    IEnumerator Skill1(){
+    IEnumerator Skill1()
+    {
         yield return new WaitForSeconds(1.5f);
-        anim.SetTrigger("Breath"); 
+        anim.SetTrigger("Breath");
         yield return new WaitForSeconds(0.8f);
         Breath.SetActive(true);
+        audioManager.boss4Sound("Fire");
         yield return new WaitForSeconds(1.5f);
         Breath.SetActive(false);
     }
 
-    IEnumerator Skill2(){
+    IEnumerator Skill2()
+    {
         yield return new WaitForSeconds(1.8f);
         Tornado.SetActive(true);
         int count = 0;
         float cur_x = Tornado.transform.position.x;
-        while (count < 20){
-            Tornado.transform.position = new Vector2(Mathf.Lerp(Tornado.transform.position.x, cur_x-20, 0.15f), Tornado.transform.position.y);
+        while (count < 20)
+        {
+            audioManager.boss4Sound("Wing");
+            Tornado.transform.position = new Vector2(Mathf.Lerp(Tornado.transform.position.x, cur_x - 20, 0.15f), Tornado.transform.position.y);
             count++;
             yield return new WaitForSeconds(0.1f);
         }
@@ -142,11 +148,14 @@ public class StageBoss4 : MonoBehaviour
         Tornado.transform.position = new Vector2(cur_x, Tornado.transform.position.y);
     }
 
-    IEnumerator Skill3(){
+    IEnumerator Skill3()
+    {
+        audioManager.boss4Sound("Thunder");
         yield return new WaitForSeconds(0.8f);
         thunder_floor.SetActive(true);
-        for (int i = 0; i < 10*DiffControl.Diff; i++){
-            Instantiate(thunder, new Vector3(Random.Range(transform.position.x-5f, transform.position.x-30f), Random.Range(transform.position.y+10, transform.position.y +20), 0), Quaternion.identity);
+        for (int i = 0; i < 10 * DiffControl.Diff; i++)
+        {
+            Instantiate(thunder, new Vector3(Random.Range(transform.position.x - 5f, transform.position.x - 30f), Random.Range(transform.position.y + 10, transform.position.y + 20), 0), Quaternion.identity);
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(2.5f);
@@ -154,7 +163,8 @@ public class StageBoss4 : MonoBehaviour
     }
 
 
-    void skillCancel(){
+    void skillCancel()
+    {
         is_skilling = false;
     }
 
@@ -165,10 +175,12 @@ public class StageBoss4 : MonoBehaviour
 
     public void OnDamaged(float damage)
     {
+        audioManager.boss4Sound("Damaged");
         Debug.Log("OnDamaged");
         Hp -= damage;
         if (Hp <= 0)
         {
+            audioManager.boss4Sound("Die");
             GetComponent<BoxCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);

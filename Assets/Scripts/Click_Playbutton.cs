@@ -9,12 +9,15 @@ public class Click_Playbutton : MonoBehaviour
     public GameObject StartUI;
     public GameObject SkillSelectUI;
     public GameObject PassiveSkill;
+    public GameObject Window;
+    public GameObject WindowUpper;
     // public DiffControl Diff;
     public void ClassSelect()
     {
         StartUI.gameObject.SetActive(false);
         SkillSelectUI.gameObject.SetActive(true);
-
+        Window.gameObject.SetActive(true);
+        WindowUpper.gameObject.SetActive(true);
         // SceneManager.LoadScene("SampleScene");
         // DontDestroyOnLoad(Diff); 이제 static이라 괜찮음
     }

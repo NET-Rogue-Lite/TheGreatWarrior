@@ -21,6 +21,9 @@ public class BasicAttack : MonoBehaviour
         skillManager = GameObject.Find("SkillManager").GetComponent<SkillManager>();
         anim = GetComponent<Animator>();
         Player = GameObject.FindGameObjectWithTag("Player");
+        if (gameObject.name == "WarriorSkill0Parent(Clone)"){
+            gameObject.GetComponent<SpriteRenderer>().flipX = Player.GetComponent<SpriteRenderer>().flipX;
+        }
         if (gameObject.name == "WarriorSkill2(Clone)" && !SkillCasting){
             gameObject.transform.position = new Vector2(gameObject.transform.position.x + (Player.GetComponent<SpriteRenderer>().flipX == true ? -3 : 3) , gameObject.transform.position.y + 5);
         }
@@ -67,6 +70,15 @@ public class BasicAttack : MonoBehaviour
             Invoke("AfterSkill",0.75f);
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(10 * (Player.GetComponent<SpriteRenderer>().flipX == true ? -1 : 1),0);
             Debug.Log("Skill0 beforerSkill");
+        }
+        else if (gameObject.name == "WarriorSkill1(Clone)" && !SkillCasting){
+            Player.GetComponent<Animator>().SetBool("IsCasting", false);
+            gameObject.transform.position = 
+            new Vector2(Player.transform.position.x + (Player.GetComponent<SpriteRenderer>().flipX == true ? -0.1f : 0.1f) 
+            , Player.transform.position.y);
+        
+            Invoke("AfterSkill",15.0f);
+            Debug.Log("Skill1 beforerSkill");
         }
         else if (gameObject.name == "WarriorSkill2(Clone)" && !SkillCasting){
             SkillCasting = true;

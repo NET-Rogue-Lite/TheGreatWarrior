@@ -377,8 +377,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1dfebbfa0bbda4eb6df611efb9d1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 81
-  maxHp: 0
+  Hp: 150
+  maxHp: 150
   Ad: 9
   Idle_speed: 4
   Chase_speed: 8
@@ -389,7 +389,7 @@ MonoBehaviour:
   Hit: 0
   CurType: 2
   CanFly: 0
-  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
+  HPportion: {fileID: 0}
   Die: 0
 --- !u!60 &3047020890018648763
 PolygonCollider2D:

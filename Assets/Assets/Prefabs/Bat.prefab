@@ -123,21 +123,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1dfebbfa0bbda4eb6df611efb9d1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 100
-  maxHp: 0
+  Hp: 80
+  maxHp: 100
   Ad: 5
   Idle_speed: 2
   Chase_speed: 5
   Attack_range: 1.1
   Close_range: 8
   hpBar: {fileID: 6042366724571031342}
-  statManager: {fileID: 0}
   nextMove: 0
   Hit: 0
-  CurType: 0
-  CanFly: 0
-  probability: 0
-  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
+  CurType: 5
+  CanFly: 1
+  HPportion: {fileID: 0}
   Die: 0
 --- !u!50 &4564849280006208411
 Rigidbody2D:

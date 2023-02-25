@@ -37,10 +37,9 @@ public class EquipManager : MonoBehaviour
         new Dictionary<string, float>()
         {
             {"BasicHat",0},{"Hat0",10},{"Hat1",11},{"Hat2",12},
-            {"Hat3",13},{"Hat4",10},{"Hat5",15},
-            {"Hat6",16},{"Hat7",17},{"Hat8",18},{"Hat9",19},
-            {"Dragon's Hat", 40},{"Silver Helmat",20},
-            {"Metal Helmat",30},{"CursedKing's Helmat", 250}
+            {"Hat3",13},{"Hat4",10},{"Hat5",15},{"Hat6",16},
+            {"Hat7",17},{"Hat8",18},{"Hat9",19},{"Dragon's Hat", 40}
+            ,{"Silver Helmat",20},{"Metal Helmat",30},{"CursedKing's Helmat", 250}
         };
     public Dictionary<string, float[]> GloveList = //글러브는 공격력,방어력
         new Dictionary<string, float[]>()

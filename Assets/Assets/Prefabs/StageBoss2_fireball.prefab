@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5409417171724008203}
   - component: {fileID: 5409417171724008202}
+  - component: {fileID: -1507021505269446455}
   - component: {fileID: 5409417171724008201}
   - component: {fileID: 5409417171724008200}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: StageBoss2_fireball
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -86,6 +87,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1507021505269446455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5409417171724008207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c480a84fba6fb9746ab07297b00dc1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &5409417171724008201
 Rigidbody2D:
   serializedVersion: 4

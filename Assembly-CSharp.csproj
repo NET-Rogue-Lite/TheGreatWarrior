@@ -49,11 +49,13 @@
      <Compile Include="Assets\Scripts\MosterDrop.cs" />
      <Compile Include="Assets\Scripts\MonsterManager.cs" />
      <Compile Include="Assets\Scripts\StageBoss2.cs" />
+     <Compile Include="Assets\Scripts\SkillUnpack.cs" />
      <Compile Include="Assets\Scripts\ArcherSkill2.cs" />
      <Compile Include="Assets\Scripts\HPManager.cs" />
      <Compile Include="Assets\Assets\Enemy Galore 1 - Pixel Art\Script\EnemyTest.cs" />
      <Compile Include="Assets\Scripts\PlayerMove.cs" />
      <Compile Include="Assets\Assets\Scripts\EnemyMove.cs" />
+     <Compile Include="Assets\Scripts\ItemUI.cs" />
      <Compile Include="Assets\Scripts\EquipManager.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Thunder.cs" />
@@ -66,6 +68,11 @@
      <Compile Include="Assets\Scripts\StatManager.cs" />
      <Compile Include="Assets\Scripts\StageBoss1.cs" />
      <Compile Include="Assets\Assets\Scripts\MonsterController.cs" />
+     <Compile Include="Assets\Scripts\AudioManager.cs" />
+     <Compile Include="Assets\Scripts\IceCage.cs" />
+     <Compile Include="Assets\Scripts\IceFloor.cs" />
+     <Compile Include="Assets\Scripts\IceBall.cs" />
+     <Compile Include="Assets\Scripts\StageBoss3.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

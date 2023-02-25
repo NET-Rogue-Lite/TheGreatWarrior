@@ -14,6 +14,7 @@ public class StageBoss1 : MonoBehaviour
     public Slider hpBar;
 
     public StatManager statManager;
+    public AudioManager audioManager;
     public GameObject spit;
     public float maxHp;
     public float Hp;
@@ -37,9 +38,9 @@ public class StageBoss1 : MonoBehaviour
     public GameObject portal;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
 
-    void Awake(){
+    void Awake()
+    {
         Debug.Log(Mathf.Round(-0.5f));
-        anim = GetComponent<Animator>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -48,7 +49,7 @@ public class StageBoss1 : MonoBehaviour
 
         skill0_cool = skill0;
         skill1_cool = skill1;
-        skill2_cool = skill2; 
+        skill2_cool = skill2;
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
 
@@ -63,24 +64,29 @@ public class StageBoss1 : MonoBehaviour
         skill0_cool -= 0.2f;
         skill1_cool -= 0.2f;
         skill2_cool -= 0.2f;
-        if (skill0_cool <= 0){
+        if (skill0_cool <= 0)
+        {
             skillQueue.Enqueue(0);
             skill0_cool = skill0;
         }
-        if (skill1_cool <= 0){
+        if (skill1_cool <= 0)
+        {
             skillQueue.Enqueue(1);
             skill1_cool = skill1;
         }
-        if (skill2_cool <= 0){
+        if (skill2_cool <= 0)
+        {
             skillQueue.Enqueue(2);
             skill2_cool = skill2;
         }
         Attack();
-        
-    } 
 
-    void Attack(){
-        if (skillQueue.Count > 0 && !is_skilling){
+    }
+
+    void Attack()
+    {
+        if (skillQueue.Count > 0 && !is_skilling)
+        {
             is_skilling = true;
             int skill_num = skillQueue.Dequeue();
             switch (skill_num)
@@ -101,17 +107,21 @@ public class StageBoss1 : MonoBehaviour
                     anim.SetTrigger("Jump");
                     Skill2();
                     break;
-            } 
+            }
             Invoke("skillCancel", 3);
         }
     }
 
-    void skillCancel(){
+    void skillCancel()
+    {
         is_skilling = false;
     }
 
-    IEnumerator Skill0(){
-        for(int i = 0; i < 4*DiffControl.Diff; i++){
+    IEnumerator Skill0()
+    {
+        for (int i = 0; i < 4 * DiffControl.Diff; i++)
+        {
+            audioManager.boss1Sound("Ball");
             GameObject spits = Instantiate(spit, transform.position, Quaternion.identity);
             spits.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
             if (spriteRenderer.flipX)
@@ -123,26 +133,31 @@ public class StageBoss1 : MonoBehaviour
         }
     }
 
-    IEnumerator Skill1(int direc){
+    IEnumerator Skill1(int direc)
+    {
+        audioManager.boss1Sound("Tornado");
         yield return new WaitForSeconds(0.25f);
         int count = 0;
         float cur_x = transform.position.x;
-        while (count < 20){
+        while (count < 20)
+        {
             if (direc == 1)
-                transform.position = new Vector2(Mathf.Lerp(transform.position.x, cur_x-10, 0.15f), transform.position.y);
+                transform.position = new Vector2(Mathf.Lerp(transform.position.x, cur_x - 10, 0.15f), transform.position.y);
             else
-                transform.position = new Vector2(Mathf.Lerp(transform.position.x, cur_x+10, 0.15f), transform.position.y);
+                transform.position = new Vector2(Mathf.Lerp(transform.position.x, cur_x + 10, 0.15f), transform.position.y);
             count++;
             rigid.velocity = Vector2.zero;
             yield return new WaitForSeconds(0.1f);
-        }  
+        }
     }
 
-    void CancelSpin(){
+    void CancelSpin()
+    {
         transform.position = new Vector2(Mathf.Round(transform.position.x), transform.position.y);
     }
 
-    void Skill2(){
+    void Skill2()
+    {
         transform.position = new Vector2(Player.transform.position.x, 5);
     }
 
@@ -151,12 +166,14 @@ public class StageBoss1 : MonoBehaviour
         Debug.Log("OnDamaged");
         Hp -= damage;
         hpBar.value = Hp / maxHp;
+        audioManager.boss1Sound("Damaged");
         if (Hp <= 0)
         {
             GetComponent<BoxCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
             portal.SetActive(true);
             Destroy(gameObject, 1);
+            audioManager.boss1Sound("Die");
         }
     }
     void OnTriggerEnter2D(Collider2D other)

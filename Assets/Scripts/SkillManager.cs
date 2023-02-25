@@ -6,6 +6,7 @@ using TMPro;
 public class SkillManager : MonoBehaviour
 {
     public StatManager statManager;
+    public AudioManager audioManager;
     public GameObject Player;
     public GameObject[] SkillBoard;//Q,W,E,R
     public float[] SkillMaxCool;//Q,W,E,R
@@ -72,7 +73,6 @@ public class SkillManager : MonoBehaviour
     }
     public bool SkillEquip(string name)
     {
-        Debug.Log(name);
         for (int i = 0; i < SkillBoard.Length; i++)
         {
             if (SkillBoard[i] == null)
@@ -86,12 +86,19 @@ public class SkillManager : MonoBehaviour
         }
         return false;
     }
+    public void SkillUnpack(int Button)
+    {
+        SkillBoard[Button] = null;
+        SkillUI[Button].sprite = null;
+        SkillCool[Button] = 0;
+    }
     public bool SkillCast(int Button)
     {
         if (SkillBoard[Button] != null)
         {
             if (SkillCool[Button] <= 0.01f)
             {
+                audioManager.skillSound(SkillBoard[Button].name);
                 if(SkillBoard[Button].name == "ArcherSkill5"){
                     statManager.Ad = statManager.Ad * 1.3f;
                     statManager.CirticalP += 1;
@@ -101,7 +108,6 @@ public class SkillManager : MonoBehaviour
                 {
                     statManager.ShieldOn(0.5f);
                     statManager.MaxHp+=1;
-                    return true;
                 }
                 GameObject CastSkill = Instantiate(SkillBoard[Button], Player.transform.position, Quaternion.identity);
                 SkillCool[Button] = SkillMaxCool[Button];
