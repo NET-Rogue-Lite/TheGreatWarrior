@@ -24,8 +24,11 @@ public class PlayerMove : MonoBehaviour
     public bool CanClimb;
     float maxSpeedy;
     bool IsPickUp;
+    public GameObject MiniMap;
+    bool OpenMiniMap;
     void Awake()
     {
+        OpenMiniMap = false;
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -44,6 +47,17 @@ public class PlayerMove : MonoBehaviour
     {
         time += Time.deltaTime;
         float h = spriteRenderer.flipX == false ? 1 : -1;
+        //미니맵 열기
+        if (Input.GetKeyDown(KeyCode.Tab)){
+            if(OpenMiniMap){
+                MiniMap.SetActive(false);
+                OpenMiniMap = false;
+            }
+            else{
+                MiniMap.SetActive(true);
+                OpenMiniMap = true;
+            }
+        }
         //스킬 시전중 정지
         if (anim.GetBool("IsCasting"))
         {
@@ -237,7 +251,15 @@ public class PlayerMove : MonoBehaviour
         }
         //쿨타임 줄이기 - 대쉬
         DashCoolTime -= Time.deltaTime;
-
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if(transform.Find("StatUI").gameObject.activeSelf){
+                transform.Find("StatUI").gameObject.SetActive(false);
+            }
+            else{
+                transform.Find("StatUI").gameObject.SetActive(true);
+            }
+        }
 
     }
     void SkillCastingPause()
@@ -248,6 +270,10 @@ public class PlayerMove : MonoBehaviour
     {
         anim.SetBool("IsDashing", false);
         gameObject.layer = LayerMask.NameToLayer("Player");
+        tempInvoke();
+    }
+    public void tempInvoke(){
+        Invoke("AttackingTurn",0.2f);
     }
     public void AttackingTurn()
     {

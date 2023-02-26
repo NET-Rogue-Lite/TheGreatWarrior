@@ -11,7 +11,8 @@ public class EquipManager : MonoBehaviour
     public StatManager statManager;
     public float Constant;
     
-    public Dictionary<string, float[]> RuneList= //무기는 공격력/속성 // 물 > 불 > 나무 > 흙 > 번개 > 물 / 무속성은 0
+    public Dictionary<string, float[]> RuneList= //무기는 공격력/속성 
+    // 물 > 불 > 나무 > 흙 > 번개 > 물 / 무속성은 0
     //어둠속성은 4444는 무조건 모두에게 약점속성. 단, 1.5배임.
         new Dictionary<string, float[]>()
         {

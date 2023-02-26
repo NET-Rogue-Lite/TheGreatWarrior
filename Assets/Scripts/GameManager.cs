@@ -13,12 +13,14 @@ public class GameManager : MonoBehaviour
     public StatManager statManager;
     public EquipManager equipManager;
     public HPManager hPManager;
+    public AudioManager audioManager;
 
     public int RandomStage;
     public GameObject[] ChooseStage;
     public GameObject[] SkillStage;
     public GameObject[] ItemStage;
     public GameObject[] BossStage;
+    public GameObject Stage;
     public int i;
 
     public bool IsItemStagePortal;
@@ -29,14 +31,41 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        StartPosition = new Vector2(25,3);
+        StartPosition = new Vector2(25, 3);
         GameStart();
-        statManager.MaxHp = hPManager.HP*2;
+        statManager.MaxHp = hPManager.HP * 2;
         RandomStage = Random.Range(1, 2);
         i = 0;
         IsItemStagePortal = false;
         IsSkillStagePortal = false;
         IsEventStagePortal = false;
+
+        for(int i = 0 ; i < 5 ; i ++ ) {
+            GameObject CurrnetStage = Stage.transform.GetChild(i).gameObject;
+            if( i == 4){
+                for ( int j = 0 ; j < 4 ; j ++ ){
+                    GameObject TempStage = CurrnetStage.transform.GetChild(j).gameObject;
+                    BossStage[j] = TempStage;
+                }
+            }
+            else {
+                for ( int j = 0 ; j < 7; j++ ) {
+                    GameObject TempStage = CurrnetStage.transform.GetChild(j).gameObject;
+                    if ( j == 0 ){
+                        ItemStage[i] = TempStage;
+                    }
+                    else if ( j == 1) {
+                        SkillStage[i] = TempStage;
+                    } else if ( j == 2){
+                        ChooseStage[i] = TempStage;
+                    }  else {
+                        Stages[i*4 + j-3] = TempStage;
+                    }
+                }
+            }
+        }
+        Stages[stageIndex].SetActive(true);
+        audioManager.BGMSound("Stage1");
     }
     public void IsNext(bool isNext)
     {
@@ -49,8 +78,8 @@ public class GameManager : MonoBehaviour
     public void NextStage()
     {
         int CurStage = stageIndex;
-        int NextStage = stageIndex+1;
-        BossStage[i==0?0:i-1].SetActive(false);
+        int NextStage = stageIndex + 1;
+        BossStage[i == 0 ? 0 : i - 1].SetActive(false);
         if (IsItemStagePortal)
         {
             ToItemStage();
@@ -61,22 +90,24 @@ public class GameManager : MonoBehaviour
         }
         else if (IsEventStagePortal)
         {
-            SkillStage[i-1].SetActive(false);
-            ItemStage[i-1].SetActive(false);
+            SkillStage[i - 1].SetActive(false);
+            ItemStage[i - 1].SetActive(false);
             Stages[CurStage].SetActive(true);
             return;
         }
-        else if (CurStage == i*4 + RandomStage)
+        else if (CurStage == i * 4 + RandomStage)
         {
             Stages[CurStage].SetActive(false);
             ChooseStage[i].SetActive(true);
             RandomStage = Random.Range(0, 2);
         }
-        else if(NextStage%4 == 0){
-            BossStage[CurStage/4].SetActive(true);
+        else if (NextStage % 4 == 0)
+        {
+            BossStage[CurStage / 4].SetActive(true);
             Stages[CurStage].SetActive(false);//0,1,2,3 -> 보스 -> 4,5,6,7-> 보스 니까 맞음
             stageIndex++;
             Player.transform.position = StartPosition;
+            audioManager.BGMSound("StageBoss");
             return;
         }
         else if (NextStage < Stages.Length)
@@ -91,6 +122,14 @@ public class GameManager : MonoBehaviour
         }
         stageIndex++;
         Player.transform.position = StartPosition;
+
+        if (stageIndex >= 4 && stageIndex <= 7)
+            audioManager.BGMSound("Stage2");
+        else if (stageIndex >= 8 && stageIndex <= 11)
+            audioManager.BGMSound("Stage3");
+        else if (stageIndex >= 12 && stageIndex <= 15)
+            audioManager.BGMSound("Stage4");
+
     }
     public void ToItemStage()
     {
@@ -125,7 +164,6 @@ public class GameManager : MonoBehaviour
         ClassSelect(DiffControl.Class);
         PM.SetClass();
         stageIndex = 0;
-        Stages[stageIndex].SetActive(true);
         Player.transform.position = StartPosition;
         equipManager.EquipRune("BasicRune");
     }

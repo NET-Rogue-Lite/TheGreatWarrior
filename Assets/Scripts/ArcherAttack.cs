@@ -66,7 +66,7 @@ public class ArcherAttack : MonoBehaviour
         anim.SetBool("IsAttacking", false);
         // gameObject.GetComponent<CircleCollider2D>().enabled = false;
         // CancelInvoke();
-        Player.gameObject.GetComponent<PlayerMove>().AttackingTurn();
+        // Player.gameObject.GetComponent<PlayerMove>().AttackingTurn();
         SkillCasting = false;
     }
     void AfterSkill()

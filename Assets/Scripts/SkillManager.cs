@@ -26,6 +26,7 @@ public class SkillManager : MonoBehaviour
     public Image[] SkillUI;
     public TextMeshProUGUI[] SkillCoolTime;
     public int[] SkillLevel;
+    public string Passive;
     void Start()
     {
         if (statManager.Class == "Warrior")
@@ -33,20 +34,24 @@ public class SkillManager : MonoBehaviour
             SkillList = WarriorSkillList;
             SkillImg = WarriorSkillImg;
             SkillCoolList = WarriorSkillCoolList;
-            if (DiffControl.Passive==2) 
+            if (DiffControl.Passive==2) {
                 statManager.Ad+= 10;
-            else
+                Passive = "예리한 검날";}
+            else{
                 statManager.Def += 50;
+                Passive = "탄탄한 신체";}
         }
         else if (statManager.Class == "Archer")
         {
             SkillList = ArcherSkillList;
             SkillImg = ArcherSkillImg;
             SkillCoolList = ArcherSkillCoolList;
-            if (DiffControl.Passive==2) 
+            if (DiffControl.Passive==2) {
                 statManager.CirticalP+=0.3f;
-            else
+                Passive = "예리한 사수";}
+            else{
                 GameObject.Find("BasicAttack").GetComponent<ArcherAttack>().ArcherBonusAttack = true;
+                Passive = "한번에 두발";}
         }
         SkillDict = new Dictionary<string, GameObject>();
         SkillCoolDict = new Dictionary<string, float>();

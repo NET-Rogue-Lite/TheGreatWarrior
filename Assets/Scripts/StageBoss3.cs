@@ -34,7 +34,7 @@ public class StageBoss3 : MonoBehaviour
     bool is_attacking = false;
     bool skill1 = false;
 
-    EventDrop eventDrop;
+    public EventDrop eventDrop;
     int StrongType;
     int WeakType;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
@@ -49,7 +49,6 @@ public class StageBoss3 : MonoBehaviour
         attack_cool = attack;
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
-        eventDrop = GetComponent<EventDrop>();
         icefloor = transform.Find("IceFloor").gameObject;
         Hp = Hp * DiffControl.Diff;
         maxHp = Hp;
@@ -144,7 +143,7 @@ public class StageBoss3 : MonoBehaviour
         {
             Hp = 1000;
             GetComponent<PolygonCollider2D>().enabled = false;
-            eventDrop.Drop();
+            eventDrop.Drop(gameObject.name);
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
         }

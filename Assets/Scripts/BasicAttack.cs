@@ -21,6 +21,8 @@ public class BasicAttack : MonoBehaviour
         skillManager = GameObject.Find("SkillManager").GetComponent<SkillManager>();
         anim = GetComponent<Animator>();
         Player = GameObject.FindGameObjectWithTag("Player");
+
+        
         if (gameObject.name == "WarriorSkill0Parent(Clone)"){
             gameObject.GetComponent<SpriteRenderer>().flipX = Player.GetComponent<SpriteRenderer>().flipX;
         }
@@ -106,11 +108,12 @@ public class BasicAttack : MonoBehaviour
             Invoke("AfterSkill",0.5f);
             Debug.Log("Skill6 beforerSkill");
         }
-        else if (gameObject.name == "BasicAttack" && gameObject.GetComponent<CircleCollider2D>().enabled == true && !anim.GetBool("IsAttacking")){
+        else if (gameObject.name == "BasicAttack" 
+         && !anim.GetBool("IsAttacking") && gameObject.GetComponent<CircleCollider2D>().enabled == true){
+            
             anim.SetBool("IsAttacking", true);
-            Invoke("DisAppear", 0.5f);
+            // Invoke("DisAppear", 0.5f);
         }
-
         if (gameObject.name == "WarriorSkill2(Clone)" && SkillCasting){
             gameObject.transform.position = new Vector2(gameObject.transform.position.x , gameObject.transform.position.y - 0.1f);
         }
@@ -167,9 +170,9 @@ public class BasicAttack : MonoBehaviour
     {
         Debug.Log("DisAppear");
         anim.SetBool("IsAttacking", false);
+        // Player.gameObject.GetComponent<PlayerMove>().AttackingTurn();
         if( gameObject.GetComponent<CircleCollider2D>() != null)
             gameObject.GetComponent<CircleCollider2D>().enabled = false;
-        Player.gameObject.GetComponent<PlayerMove>().AttackingTurn();
         // CancelInvoke();
     }
     void AfterSkill()

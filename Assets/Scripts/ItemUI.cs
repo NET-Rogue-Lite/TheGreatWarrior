@@ -8,11 +8,13 @@ public class ItemUI : MonoBehaviour
     EquipManager equipManager;
     void Awake(){
         equipManager = GameObject.Find("EquipManager").GetComponent<EquipManager>();
+    }
+    void FixedUpdate(){
         if(gameObject.tag == "Rune"){
             transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text 
             = gameObject.name
             +"\n공격력 : "+equipManager.RuneList[gameObject.name][0].ToString()
-            +"\n속성 : "+equipManager.RuneList[gameObject.name][1].ToString();
+            +"\n속성 : "+ ShowType(equipManager.RuneList[gameObject.name][1]);
         } else if( gameObject.tag == "Armor"){
             transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text 
             = gameObject.name
@@ -26,6 +28,26 @@ public class ItemUI : MonoBehaviour
             = "이름 : "+gameObject.name
             +"\n공격력 : "+equipManager.GloveList[gameObject.name][0].ToString()
             +"\n방어력 : "+equipManager.GloveList[gameObject.name][1].ToString();
+        }
+    }
+    string ShowType(float type) {
+        switch (type){
+            case 1:
+                return "물";
+            case 2:
+                return "불";
+            case 3:
+                return "나무";
+            case 4:
+                return "흙";
+            case 5:
+                return "번개";
+            case 0:
+                return "일반";
+            case 4444:
+                return "어둠";
+            default:
+                return "일반";    
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {

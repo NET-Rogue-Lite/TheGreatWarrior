@@ -398,11 +398,13 @@
 "Assets/Scripts/IceBall.cs"
 "Assets/Scripts/IceCage.cs"
 "Assets/Scripts/IceFloor.cs"
+"Assets/Scripts/ItemBox.cs"
 "Assets/Scripts/ItemManager.cs"
 "Assets/Scripts/ItemUI.cs"
 "Assets/Scripts/MonsterController.cs"
 "Assets/Scripts/MonsterManager.cs"
 "Assets/Scripts/MosterDrop.cs"
+"Assets/Scripts/OpenForKey.cs"
 "Assets/Scripts/PlayerMove.cs"
 "Assets/Scripts/Portal.cs"
 "Assets/Scripts/SkillManager.cs"
@@ -413,6 +415,7 @@
 "Assets/Scripts/StageBoss3.cs"
 "Assets/Scripts/StageBoss4.cs"
 "Assets/Scripts/StatManager.cs"
+"Assets/Scripts/StatUI.cs"
 "Assets/Scripts/Thunder.cs"
 -langversion:9.0
 

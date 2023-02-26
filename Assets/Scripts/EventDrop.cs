@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EventDrop : MonoBehaviour
 {
-    string MonsterName;
     public GameObject[] WarriorSkillQube;
     public GameObject[] ArcherSkillQube;
     float probability;
@@ -26,7 +25,6 @@ public class EventDrop : MonoBehaviour
         GloveItemImage = itemManager.GloveItemImage;
         
         equipManager = GameObject.Find("EquipManager").GetComponent<EquipManager>();
-        MonsterName = gameObject.name;
         switch (DiffControl.Class)
         {
             case "Warrior":
@@ -37,7 +35,7 @@ public class EventDrop : MonoBehaviour
                 break;
         }
     }
-    public void Drop()
+    public void Drop(string MonsterName)
     {   //0,1은 패시브스킬, 2,3은 짧쿨, 4,5는 긴쿨, 6,7은 궁극스킬
         if (MonsterName == "Boss1")
         {
@@ -80,6 +78,11 @@ public class EventDrop : MonoBehaviour
             SetProbability(5, 2);//2개에서 4개사이 드랍
             ItemBoxDrop(RandomNumber);
         }
+        if (MonsterName == "HiddenItemBox")
+        {
+            //1개 드랍
+            ItemBoxDrop(1);
+        }
     }
     float SetProbability(int num = 0, int min = 0)
     {
@@ -89,6 +92,7 @@ public class EventDrop : MonoBehaviour
     GameObject ItemInstantiate(int num, int WhatItem)
     {
         int i = 0;
+        WhatItem = 1;
         switch (WhatItem)
         {
             case 1:
@@ -97,7 +101,7 @@ public class EventDrop : MonoBehaviour
                     if (i == RandomNumber)
                     {
                         GameObject temp = Instantiate(TempItemQube,
-                        transform.position, Quaternion.identity);
+                        transform.position + Vector3.up * 2, Quaternion.identity);
                         temp.tag = "Rune";
                         temp.GetComponent<SpriteRenderer>().sprite = RuneItemImage[i];
                         // temp.layer = LayerMask.NameToLayer("Item");
@@ -113,7 +117,7 @@ public class EventDrop : MonoBehaviour
                     if (i == RandomNumber)
                     {
                         GameObject temp = Instantiate(TempItemQube,
-                        transform.position, Quaternion.identity);
+                        transform.position + Vector3.up * 2, Quaternion.identity);
                         temp.tag = "Armor";
                         temp.GetComponent<SpriteRenderer>().sprite = ArmorItemImage[i];
                         // temp.layer = LayerMask.NameToLayer("Item");
@@ -129,7 +133,7 @@ public class EventDrop : MonoBehaviour
                     if (i == RandomNumber)
                     {
                         GameObject temp = Instantiate(TempItemQube,
-                        transform.position, Quaternion.identity);
+                        transform.position + Vector3.up * 2, Quaternion.identity);
                         temp.tag = "Hat";
                         temp.GetComponent<SpriteRenderer>().sprite = HatItemImage[i];
                         // temp.layer = LayerMask.NameToLayer("Item");
@@ -145,7 +149,7 @@ public class EventDrop : MonoBehaviour
                     if (i == RandomNumber)
                     {
                         GameObject temp = Instantiate(TempItemQube,
-                        transform.position, Quaternion.identity);
+                        transform.position + Vector3.up * 2, Quaternion.identity);
                         temp.tag = "Glove";
                         temp.GetComponent<SpriteRenderer>().sprite = GloveItemImage[i];
                         // temp.layer = LayerMask.NameToLayer("Item");
@@ -190,14 +194,15 @@ public class EventDrop : MonoBehaviour
     {
         float temp = SetProbability(SkillQube.Length);
         Debug.Log("Drop : " + temp.ToString());
-        /*50퍼확률로 랜덤스킬 1개 드랍*/
-        if (temp <= 50f)
+        /*10퍼확률로 랜덤스킬 1개 드랍*/
+        if (temp <= 10f)
         {
             GameObject tempskill = Instantiate(SkillQube[RandomNumber], transform.position, Quaternion.identity);
             int index = tempskill.name.IndexOf("(Clone)");
             if (index > 0) 
                 tempskill.name = tempskill.name.Substring(0, index);
         }
+        //stage만큼 장비드랍
         ItemBoxDrop(Stage);
     }
 }
