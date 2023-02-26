@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ItemManager : MonoBehaviour
 {
     public EquipManager equipManager;
+    public AudioManager audioManager;
     public Sprite[] RuneItemImage;
     public Sprite[] ArmorItemImage;
     public Sprite[] HatItemImage;
@@ -12,7 +13,8 @@ public class ItemManager : MonoBehaviour
     private void Awake() {
     }
     public bool GetItem(GameObject Item){
-        if(Item.tag == "Rune"){
+        audioManager.itemSound();
+        if (Item.tag == "Rune"){
             equipManager.EquipRune(Item.name);
             return true;
         }

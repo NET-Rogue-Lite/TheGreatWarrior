@@ -31,6 +31,7 @@ public class GolemController : MonoBehaviour
     int StrongType;
     int WeakType;
     public bool Die = false;
+    AudioManager audioManager;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6
     bool IsAwake = false;
     void Awake()
@@ -41,6 +42,7 @@ public class GolemController : MonoBehaviour
         capuslecollider = GetComponent<CapsuleCollider2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
         statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         spriteRenderer.flipX = (nextMove == -1);
         Think();
 
@@ -198,6 +200,8 @@ public class GolemController : MonoBehaviour
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
             Die = true;
+
+            audioManager.monsterSound("Golem");
         }
         nextMove = spriteRenderer.flipX == true ? -1 : 1;
         // rigid.AddForce(Vector2.left* nextMove*3+ Vector2.up * 3, ForceMode2D.Impulse);

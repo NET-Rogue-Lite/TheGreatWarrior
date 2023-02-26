@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] boss4Audios;
     public AudioClip[] playerAudios;
     public AudioClip[] skillAudios;
+    public AudioClip itemAudio;
 
     public AudioClip[] BGMAudios;
 
@@ -55,7 +56,7 @@ public class AudioManager : MonoBehaviour
             case "Bear":
                 audioSources[i].clip = monsterAudios[2];
                 break;
-            case "Bone":
+            case "Skull":
                 audioSources[i].clip = monsterAudios[3];
                 break;
             case "Golem":
@@ -67,6 +68,16 @@ public class AudioManager : MonoBehaviour
             case "Slime":
                 audioSources[i].clip = monsterAudios[6];
                 break;
+            case "GreenPig":
+                audioSources[i].clip = monsterAudios[7];
+                break;
+            case "Boss1":
+                audioSources[i].clip = monsterAudios[8];
+                break;
+            case "Boss1_attack":
+                audioSources[i].clip = monsterAudios[9];
+                break;
+
 
         }
         audioSources[i].Play();
@@ -217,6 +228,13 @@ public class AudioManager : MonoBehaviour
         i = (i + 1) % 10;
     }
 
+    public void itemSound()
+    {
+        audioSources[i].clip = itemAudio;
+        audioSources[i].Play();
+        i = (i + 1) % 10;
+    }
+
     public void BGMSound(string action)
     {
         switch (action)
@@ -242,4 +260,6 @@ public class AudioManager : MonoBehaviour
         }
         BGMSources.Play();
     }
+
+    
 }

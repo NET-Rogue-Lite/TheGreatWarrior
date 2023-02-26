@@ -99,8 +99,8 @@ public class StageBoss2 : MonoBehaviour
     }
 
     void Skill1(){
-        for(int i = 0; i < (DiffControl.Diff==4 ? 120 : DiffControl.Diff*40); i++){
-            audioManager.boss2Sound("Fireball");
+        audioManager.boss2Sound("Fireball");
+        for (int i = 0; i < (DiffControl.Diff==4 ? 120 : DiffControl.Diff*40); i++){          
             Destroy(Instantiate(fireball, new Vector3(Random.Range(transform.position.x-20f, transform.position.x+20f), Random.Range(transform.position.y + 15, transform.position.y + 30), 0), Quaternion.identity), 10);
         }
     }
@@ -111,8 +111,8 @@ public class StageBoss2 : MonoBehaviour
     }
 
     void Skill3(){
+        audioManager.boss2Sound("Fireball");
         for (int i = 0; i < 2; i++){
-            audioManager.boss2Sound("Fireball");
             Instantiate(fireBear, new Vector3(Random.Range(transform.position.x - 5, transform.position.x +5), transform.position.y-3f, 0), Quaternion.identity);
         }
     }

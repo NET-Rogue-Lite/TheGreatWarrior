@@ -9,6 +9,11 @@ public class Portal : MonoBehaviour
     public bool IsItemStagePortal = false;
     public bool IsSkillStagePortal = false;
     public bool IsEventStagePortal = false;
+
+    void Awake()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")

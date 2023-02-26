@@ -92,7 +92,6 @@ public class EventDrop : MonoBehaviour
     GameObject ItemInstantiate(int num, int WhatItem)
     {
         int i = 0;
-        WhatItem = 1;
         switch (WhatItem)
         {
             case 1:

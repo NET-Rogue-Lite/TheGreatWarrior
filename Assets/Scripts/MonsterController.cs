@@ -89,8 +89,8 @@ public class MonsterController : MonoBehaviour
             Speed = Chase_speed;
             isPlayer_close = true;
             isAttack = false;
-            GetComponent<BoxCollider2D>().enabled = false;
-            GetComponent<PolygonCollider2D>().enabled = true;
+            //GetComponent<BoxCollider2D>().enabled = false;
+            //GetComponent<PolygonCollider2D>().enabled = true;
         }
         else
         {
@@ -100,8 +100,8 @@ public class MonsterController : MonoBehaviour
             }
             Speed = Idle_speed;
             isPlayer_close = false;
-            GetComponent<BoxCollider2D>().enabled = true;
-            GetComponent<PolygonCollider2D>().enabled = false;
+            //GetComponent<BoxCollider2D>().enabled = true;
+            //GetComponent<PolygonCollider2D>().enabled = false;
             isAttack = false;
         }
     }
@@ -111,13 +111,19 @@ public class MonsterController : MonoBehaviour
         anim.SetBool("PlayerClosetoAttack", isAttack);
         if (isAttack)
         {
-            // GetComponent<PolygonCollider2D>().enabled = true;
+            GetComponent<PolygonCollider2D>().enabled = true;
         }
         else
         {
-            // GetComponent<PolygonCollider2D>().enabled = false;
+            GetComponent<PolygonCollider2D>().enabled = false;
         }
     }
+
+    public void Sound()
+    {
+        audioManager.monsterSound("Boss1_attack");
+    }
+
 
     private void Move()
     {
@@ -195,18 +201,8 @@ public class MonsterController : MonoBehaviour
             Destroy(gameObject, 1);
             Die = true;
 
-            string name = gameObject.name;
-            if (name == "Bat")
-                audioManager.monsterSound("Bat");
-            else if (name == "Bear")
-                audioManager.monsterSound("Bear");
-            else if (name == "Bone")
-                audioManager.monsterSound("Bone");
-            else if (name == "Rat")
-                audioManager.monsterSound("Rat");
-            else if (name == "Slime")
-                audioManager.monsterSound("Slime");
-
+            audioManager.monsterSound(gameObject.name);
+     
         }
         audioManager.monsterSound("Damaged");
         nextMove = spriteRenderer.flipX == true ? -1 : 1;
