@@ -23,7 +23,7 @@ public class Click_Playbutton : MonoBehaviour
     }
     public void GameStart()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Game_Scene");
         // DontDestroyOnLoad(Diff); 이제 static이라 괜찮음
     }
     public void ToNormal()
@@ -61,7 +61,7 @@ public class Click_Playbutton : MonoBehaviour
     public void Passive()
     {
         if (DiffControl.Passive == 1)
-        {
+        { 
             DiffControl.Passive = 2;
             PassiveSkill.transform.GetChild(0).GetComponent<Text>().text = "Passive1 선택됨";
         }
@@ -70,6 +70,10 @@ public class Click_Playbutton : MonoBehaviour
             DiffControl.Passive = 1;
             PassiveSkill.transform.GetChild(0).GetComponent<Text>().text = "Passive2 선택됨";
         }
+
+    }
+    public void ShowInformation()
+    {
 
     }
 }

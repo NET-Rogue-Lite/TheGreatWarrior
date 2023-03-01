@@ -334,11 +334,11 @@ MonoBehaviour:
   Attack_range: 1.1
   Close_range: 8
   hpBar: {fileID: 572588724021530535}
+  IsLookLeft: 1
   nextMove: 0
   Hit: 0
   CurType: 5
   CanFly: 0
-  HPportion: {fileID: 0}
   Die: 0
 --- !u!61 &1123499177973848681
 BoxCollider2D:

@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 3131769321097825545}
   - component: {fileID: 3131769321097825544}
   - component: {fileID: 3131769321097825551}
-  - component: {fileID: 3131769321097825547}
+  - component: {fileID: -7882568085909177836}
   - component: {fileID: 3131769321097825550}
   - component: {fileID: 3131769321097825549}
   - component: {fileID: 3131769321097825548}
@@ -386,7 +386,7 @@ SpriteRenderer:
   m_SortingOrder: 8015
   m_Sprite: {fileID: -4256795320221200915, guid: 43f6bb244a62313438cda197a8e07007, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 5.25, y: 2.375}
@@ -415,7 +415,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3131769321097825547
+--- !u!114 &-7882568085909177836
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3131769321097825539}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c1dfebbfa0bbda4eb6df611efb9d1cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ed7c63463819b542917deadd7025539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 500
@@ -435,11 +435,11 @@ MonoBehaviour:
   Attack_range: 5
   Close_range: 10
   hpBar: {fileID: 3131769320183007807}
+  IsLookLeft: 1
   nextMove: 0
   Hit: 0
   CurType: 3
   CanFly: 0
-  HPportion: {fileID: 0}
   Die: 0
 --- !u!70 &3131769321097825550
 CapsuleCollider2D:
@@ -490,10 +490,10 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3131769321097825539}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -1.53, y: 0.46}

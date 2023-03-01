@@ -40,26 +40,37 @@ public class GameManager : MonoBehaviour
         IsSkillStagePortal = false;
         IsEventStagePortal = false;
 
-        for(int i = 0 ; i < 5 ; i ++ ) {
+        for (int i = 0; i < 5; i++)
+        {
             GameObject CurrnetStage = Stage.transform.GetChild(i).gameObject;
-            if( i == 4){
-                for ( int j = 0 ; j < 4 ; j ++ ){
+            if (i == 4)
+            {
+                for (int j = 0; j < 4; j++)
+                {
                     GameObject TempStage = CurrnetStage.transform.GetChild(j).gameObject;
                     BossStage[j] = TempStage;
                 }
             }
-            else {
-                for ( int j = 0 ; j < 7; j++ ) {
+            else
+            {
+                for (int j = 0; j < 7; j++)
+                {
                     GameObject TempStage = CurrnetStage.transform.GetChild(j).gameObject;
-                    if ( j == 0 ){
+                    if (j == 0)
+                    {
                         ItemStage[i] = TempStage;
                     }
-                    else if ( j == 1) {
+                    else if (j == 1)
+                    {
                         SkillStage[i] = TempStage;
-                    } else if ( j == 2){
+                    }
+                    else if (j == 2)
+                    {
                         ChooseStage[i] = TempStage;
-                    }  else {
-                        Stages[i*4 + j-3] = TempStage;
+                    }
+                    else
+                    {
+                        Stages[i * 4 + j - 3] = TempStage;
                     }
                 }
             }

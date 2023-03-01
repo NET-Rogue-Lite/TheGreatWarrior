@@ -23,7 +23,7 @@ public class ItemBox : MonoBehaviour
         if (other.gameObject.tag == "Player"){
             if(CanOpen){
                 eventDrop.gameObject.transform.position = gameObject.transform.position;
-                eventDrop.Drop(gameObject.name);
+                eventDrop.Drop(gameObject.name,gameObject.transform.position);
                 Destroy(gameObject);
             }
         }

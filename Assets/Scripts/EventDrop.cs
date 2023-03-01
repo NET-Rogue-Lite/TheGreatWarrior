@@ -35,26 +35,31 @@ public class EventDrop : MonoBehaviour
                 break;
         }
     }
-    public void Drop(string MonsterName)
+    public void Drop(string MonsterName , Vector2 Position)
     {   //0,1은 패시브스킬, 2,3은 짧쿨, 4,5는 긴쿨, 6,7은 궁극스킬
+        transform.position = Position;
         if (MonsterName == "Boss1")
         {
             Instantiate(SkillQube[0], transform.position, Quaternion.identity);
+            transform.position = new Vector2(transform.position.x + 1 , transform.position.y);
             Instantiate(SkillQube[2], transform.position, Quaternion.identity);
         }
         if (MonsterName == "Boss2")
         {
             Instantiate(SkillQube[1], transform.position, Quaternion.identity);
+            transform.position = new Vector2(transform.position.x + 1 , transform.position.y);
             Instantiate(SkillQube[3], transform.position, Quaternion.identity);
         }
         if (MonsterName == "Boss3")
         {
             Instantiate(SkillQube[4], transform.position, Quaternion.identity);
+            transform.position = new Vector2(transform.position.x + 1 , transform.position.y);
             Instantiate(SkillQube[6], transform.position, Quaternion.identity);
         }
         if (MonsterName == "Boss4")
         {
             Instantiate(SkillQube[5], transform.position, Quaternion.identity);
+            transform.position = new Vector2(transform.position.x + 1 , transform.position.y);
             Instantiate(SkillQube[7], transform.position, Quaternion.identity);
         }
         if (MonsterName == "StageBoss1")
@@ -92,7 +97,6 @@ public class EventDrop : MonoBehaviour
     GameObject ItemInstantiate(int num, int WhatItem)
     {
         int i = 0;
-        WhatItem = 1;
         switch (WhatItem)
         {
             case 1:
@@ -166,6 +170,7 @@ public class EventDrop : MonoBehaviour
     {
         for (int i = 0; i < Stage; i++) //스테이지 만큼 드랍 여러번 해줌
         {
+            transform.position = new Vector2(transform.position.x + 1 , transform.position.y);
             /*랜덤 장비아이템 1개 드랍*/
             probability = SetProbability();
             if (probability <= 25)

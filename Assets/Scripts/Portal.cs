@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    public GameManager gameManager;
-
+    GameManager gameManager;
+    void Awake()
+    {
+        gameManager = GameObject.Find("GameManager").gameObject.GetComponent<GameManager>();
+    }
     public bool IsItemStagePortal = false;
     public bool IsSkillStagePortal = false;
     public bool IsEventStagePortal = false;

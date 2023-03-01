@@ -82,6 +82,7 @@ public class SkillManager : MonoBehaviour
         {
             if (SkillBoard[i] == null)
             {
+                Debug.Log(SkillDict);
                 SkillBoard[i] = SkillDict[name];
                 SkillMaxCool[i] = SkillCoolDict[name];
                 SkillCool[i] = 0;

@@ -18,14 +18,14 @@ public class ItemUI : MonoBehaviour
         } else if( gameObject.tag == "Armor"){
             transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text 
             = gameObject.name
-            +"방어력 : "+equipManager.ArmorList[gameObject.name].ToString();
+            +"\n방어력 : "+equipManager.ArmorList[gameObject.name].ToString();
         } else if (gameObject.tag == "Hat"){
             transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text 
             = gameObject.name
-            +"방어력 : "+equipManager.HatList[gameObject.name].ToString();
+            +"\n방어력 : "+equipManager.HatList[gameObject.name].ToString();
         } else if (gameObject.tag == "Glove"){
             transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text 
-            = "이름 : "+gameObject.name
+            = gameObject.name
             +"\n공격력 : "+equipManager.GloveList[gameObject.name][0].ToString()
             +"\n방어력 : "+equipManager.GloveList[gameObject.name][1].ToString();
         }

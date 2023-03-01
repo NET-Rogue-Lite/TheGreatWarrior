@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5441221425647893022}
   - component: {fileID: 5441221425647892994}
   - component: {fileID: -5888988289198542206}
-  - component: {fileID: 4680125051809554088}
   m_Layer: 11
   m_Name: StageBoss2
   m_TagString: BossMonster
@@ -93,7 +92,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &5441221425647892993
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -110,7 +109,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!60 &5441221425647893022
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -169,9 +168,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 6665968461557481532}
   statManager: {fileID: 7798202834094134588, guid: d1988b6c6c5458b48b8a3400c45d7944, type: 3}
+  audioManager: {fileID: 0}
   fireball: {fileID: 5409417171724008207, guid: 1b08ce4f0b184a44c8c002a11885af7c, type: 3}
   firefloor: {fileID: 1517082310273361808, guid: b49a4c0d167729c4c98b83dbc3665c08, type: 3}
   fireBear: {fileID: 3047020890018648759, guid: e958a403a423b7f4485443a9cb095daa, type: 3}
+  eventDrop: {fileID: 0}
+  portal: {fileID: 0}
   maxHp: 2000
   Hp: 2000
   skillattack: 10
@@ -198,26 +200,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4680125051809554088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5441221425647893023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9022207a35e205e40b90fd6c48fc0810, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WarriorSkillQube:
-  - {fileID: 3777997692935808631, guid: 007b594a4acf8d0469415fac897ee1e7, type: 3}
-  - {fileID: 6708848457940000049, guid: 10a53b6f063de6c4c8edfb50483053ab, type: 3}
-  - {fileID: 3474120315699849183, guid: 3328996fa63b2764087ca37d7d922309, type: 3}
-  - {fileID: 2016098743196956485, guid: 630dccabcded16d48aecdb81c08ababa, type: 3}
-  - {fileID: 3777997692935808631, guid: 52223113475f57a4ab4eab9824e7a9cb, type: 3}
-  ArcherSkillQube: []
-  TempItemQube: {fileID: 6433485365273927068, guid: 431560460a11a954d926ae3a264447bb, type: 3}
 --- !u!1 &5441221426149584762
 GameObject:
   m_ObjectHideFlags: 0

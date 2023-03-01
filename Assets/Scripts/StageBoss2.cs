@@ -9,36 +9,31 @@ public class StageBoss2 : MonoBehaviour
     SpriteRenderer spriteRenderer;
     private GameObject Player;
     GameObject pushPlayer;
-
     [SerializeField]
     public Slider hpBar;
-
     public StatManager statManager;
     public AudioManager audioManager;
     public GameObject fireball;
     public GameObject firefloor;
     public GameObject fireBear;
-
+    public EventDrop eventDrop;
+    public GameObject portal;
     public float maxHp;
     public float Hp;
     public float skillattack;
     public float attack;
     public int CurType;
-
     float skillattack_cool;
     float attack_cool;
-    
-
-
     float playerDistance;
     bool is_skilling = false;
     bool is_attacking = false;
-    public EventDrop eventDrop;
     int StrongType;
     int WeakType;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
 
-    void Awake(){
+    void Awake()
+    {
         anim = GetComponent<Animator>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -58,14 +53,16 @@ public class StageBoss2 : MonoBehaviour
         playerDistance = Player.transform.position.x - transform.position.x;
         spriteRenderer.flipX = (playerDistance < 0);
         Attack();
-        
-    } 
 
-    void Attack(){
+    }
+
+    void Attack()
+    {
         skillattack_cool -= 0.02f;
         if (attack_cool <= 0)
             attack_cool = 0;
-        if (skillattack_cool < 0 && !is_attacking ){
+        if (skillattack_cool < 0 && !is_attacking)
+        {
             anim.SetTrigger("SkillAttack");
             is_skilling = true;
             int skill_num = Random.Range(0, 3);
@@ -80,40 +77,49 @@ public class StageBoss2 : MonoBehaviour
                 case 2:
                     Skill3();
                     break;
-            } 
+            }
             skill_recool();
         }
-        if (Mathf.Abs(playerDistance) < 4){
-                attack_cool -= 0.02f;
-                if (attack_cool <= 0 && !is_skilling){
-                    anim.SetTrigger("Attack");
-                    pushPlayer.SetActive(true);
-                    is_attacking = true;
-                    Invoke("attack_recool", 1);
-                }
+        if (Mathf.Abs(playerDistance) < 4)
+        {
+            attack_cool -= 0.02f;
+            if (attack_cool <= 0 && !is_skilling)
+            {
+                audioManager.boss2Sound("Floor");
+                anim.SetTrigger("Attack");
+                pushPlayer.SetActive(true);
+                is_attacking = true;
+                Invoke("attack_recool", 1);
             }
-        else{
+        }
+        else
+        {
             is_attacking = false;
             attack_cool = attack;
         }
     }
 
-    void Skill1(){
-        for(int i = 0; i < (DiffControl.Diff==4 ? 120 : DiffControl.Diff*40); i++){
-            audioManager.boss2Sound("Fireball");
-            Destroy(Instantiate(fireball, new Vector3(Random.Range(transform.position.x-20f, transform.position.x+20f), Random.Range(transform.position.y + 15, transform.position.y + 30), 0), Quaternion.identity), 10);
+    void Skill1()
+    {
+        audioManager.boss2Sound("Fireball");
+        for (int i = 0; i < (DiffControl.Diff == 4 ? 120 : DiffControl.Diff * 40); i++)
+        {
+            Destroy(Instantiate(fireball, new Vector3(Random.Range(transform.position.x - 20f, transform.position.x + 20f), Random.Range(transform.position.y + 15, transform.position.y + 30), 0), Quaternion.identity), 10);
         }
     }
 
-    void Skill2(){
+    void Skill2()
+    {
         audioManager.boss2Sound("Floor");
-        Destroy(Instantiate(firefloor, new Vector3(transform.position.x + 0.5f, transform.position.y-6.1f, 0), Quaternion.identity), 0.5f);
+        Destroy(Instantiate(firefloor, new Vector3(transform.position.x + 0.5f, transform.position.y - 6.1f, 0), Quaternion.identity), 0.5f);
     }
 
-    void Skill3(){
-        for (int i = 0; i < 2; i++){
-            audioManager.boss2Sound("Fireball");
-            Instantiate(fireBear, new Vector3(Random.Range(transform.position.x - 5, transform.position.x +5), transform.position.y-3f, 0), Quaternion.identity);
+    void Skill3()
+    {
+        audioManager.boss2Sound("Fireball");
+        for (int i = 0; i < 2; i++)
+        {
+            Instantiate(fireBear, new Vector3(Random.Range(transform.position.x - 5, transform.position.x + 5), transform.position.y - 3f, 0), Quaternion.identity);
         }
     }
 
@@ -130,7 +136,7 @@ public class StageBoss2 : MonoBehaviour
         pushPlayer.SetActive(false);
     }
 
-        public void OnDamaged(float damage)
+    public void OnDamaged(float damage)
     {
         Debug.Log("OnDamaged");
         Hp -= damage;
@@ -141,9 +147,10 @@ public class StageBoss2 : MonoBehaviour
             audioManager.boss2Sound("Die");
             Hp = 1000;
             GetComponent<PolygonCollider2D>().enabled = false;
-            eventDrop.Drop(gameObject.name);
+            eventDrop.Drop(gameObject.name, gameObject.transform.position);
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
+            portal.SetActive(true);
         }
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -162,7 +169,7 @@ public class StageBoss2 : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
             anim.SetTrigger("Hitted");
-            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage()) ); //콜라이더가 박스랑 캡슐 두개라서 나누기2
+            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage())); //콜라이더가 박스랑 캡슐 두개라서 나누기2
             statManager.IsFighting = 5;
         }
     }

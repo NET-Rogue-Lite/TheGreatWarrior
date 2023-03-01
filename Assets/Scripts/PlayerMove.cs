@@ -277,6 +277,7 @@ public class PlayerMove : MonoBehaviour
     }
     public void AttackingTurn()
     {
+        Debug.Log("#######");
         anim.SetBool("IsAttacking", false);
     }
     void FixedUpdate()
@@ -351,7 +352,7 @@ public class PlayerMove : MonoBehaviour
                 // rigid.AddForce(new Vector2(dirc, 0.2f) * 5, ForceMode2D.Impulse);
                 rigid.velocity = new Vector2(dirc, 0.6f) * 5;
                 anim.SetBool("IsJumping", true);
-                CancelInvoke();
+                // CancelInvoke();
                 gameObject.layer = LayerMask.NameToLayer("Immortal");
                 Invoke("BeBack", 0.8f);
                 statManager.IsFighting = 5;
@@ -408,7 +409,7 @@ public class PlayerMove : MonoBehaviour
                 int dirc = transform.position.x - other.transform.position.x > 0 ? 1 : -1;
                 rigid.velocity = new Vector2(dirc, 0.6f) * 5; //, ForceMode2D.Impulse);
                 anim.SetBool("IsJumping", true);
-                CancelInvoke();
+                // CancelInvoke();
                 gameObject.layer = LayerMask.NameToLayer("Immortal");
                 Invoke("BeBack", 0.8f);
                 statManager.IsFighting = 5;

@@ -16,26 +16,23 @@ public class StageBoss1 : MonoBehaviour
     public StatManager statManager;
     public AudioManager audioManager;
     public GameObject spit;
+    public EventDrop eventDrop;
+    public GameObject portal;
+
     public float maxHp;
     public float Hp;
     public float skill0;
     public float skill1;
     public float skill2;
     public int CurType;
-
     Queue<int> skillQueue;
-
-
     float skill0_cool;
     float skill1_cool;
     float skill2_cool;
     bool is_skilling = false;
-
     float playerDistance;
-
     int StrongType;
     int WeakType;
-    public GameObject portal;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
 
     void Awake()
@@ -172,6 +169,7 @@ public class StageBoss1 : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
             portal.SetActive(true);
+            eventDrop.Drop(gameObject.name,gameObject.transform.position);
             Destroy(gameObject, 1);
             audioManager.boss1Sound("Die");
         }
@@ -182,7 +180,6 @@ public class StageBoss1 : MonoBehaviour
         Debug.Log(other.gameObject.tag);
         if (other.gameObject.name == "WarriorSkill4(Clone)")
         {
-            anim.SetTrigger("Hitted");
             if (Hp > 0)
             {
                 statManager.Ad += 5 / 2f;
@@ -191,7 +188,6 @@ public class StageBoss1 : MonoBehaviour
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
-            anim.SetTrigger("Hitted");
             OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage())); //콜라이더가 박스랑 캡슐 두개라서 나누기2
             statManager.IsFighting = 5;
         }

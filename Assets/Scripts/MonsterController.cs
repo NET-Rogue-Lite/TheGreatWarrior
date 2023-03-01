@@ -11,10 +11,8 @@ public class MonsterController : MonoBehaviour
     private float Speed;
     public float Idle_speed;
     public float Chase_speed;
-
     public float Attack_range;
     public float Close_range;
-
     private bool isPlayer_close = false;
     private bool isAttack = false;
 
@@ -25,7 +23,7 @@ public class MonsterController : MonoBehaviour
     private GameObject Player;
     StatManager statManager;
     AudioManager audioManager;
-
+    public bool IsLookLeft;
     Rigidbody2D rigid;
     public float nextMove;
     SpriteRenderer spriteRenderer;
@@ -35,8 +33,8 @@ public class MonsterController : MonoBehaviour
     int StrongType;
     int WeakType;
     public int CanFly;
-    public GameObject HPportion;
     public bool Die = false;
+    EventDrop eventDrop;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
     void Awake()
     {
@@ -47,12 +45,13 @@ public class MonsterController : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        spriteRenderer.flipX = (nextMove == -1);
+        spriteRenderer.flipX = (nextMove == -1)? !IsLookLeft : IsLookLeft;
         Think();
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
         Hp = Hp * DiffControl.Diff;
         maxHp = Hp;
+        eventDrop = GameObject.Find("EventDrop").GetComponent<EventDrop>();
         //Invoke("Think", 5);
     }
 
@@ -89,8 +88,8 @@ public class MonsterController : MonoBehaviour
             Speed = Chase_speed;
             isPlayer_close = true;
             isAttack = false;
-            GetComponent<BoxCollider2D>().enabled = false;
-            GetComponent<PolygonCollider2D>().enabled = true;
+            // GetComponent<BoxCollider2D>().enabled = false;
+            // GetComponent<PolygonCollider2D>().enabled = true;
         }
         else
         {
@@ -100,22 +99,23 @@ public class MonsterController : MonoBehaviour
             }
             Speed = Idle_speed;
             isPlayer_close = false;
-            GetComponent<BoxCollider2D>().enabled = true;
-            GetComponent<PolygonCollider2D>().enabled = false;
+            // GetComponent<BoxCollider2D>().enabled = true;
+            // GetComponent<PolygonCollider2D>().enabled = false;
             isAttack = false;
         }
     }
 
     private void Attack()
     {
+        
         anim.SetBool("PlayerClosetoAttack", isAttack);
         if (isAttack)
         {
-            // GetComponent<PolygonCollider2D>().enabled = true;
+            GetComponent<PolygonCollider2D>().enabled = true;
         }
         else
         {
-            // GetComponent<PolygonCollider2D>().enabled = false;
+            GetComponent<PolygonCollider2D>().enabled = false;
         }
     }
 
@@ -131,7 +131,8 @@ public class MonsterController : MonoBehaviour
             rigid.velocity = new Vector2((Player.transform.position - transform.position).normalized.x * Speed,
             (Player.transform.position - transform.position).normalized.y * Speed * CanFly +  rigid.velocity.y);
             nextMove = rigid.velocity.x / Mathf.Abs(rigid.velocity.x);
-            spriteRenderer.flipX = (rigid.velocity.x < 0);
+            spriteRenderer.flipX = (rigid.velocity.x < 0)? !IsLookLeft : IsLookLeft;
+        
             MapCheck();
         }
         else
@@ -140,7 +141,6 @@ public class MonsterController : MonoBehaviour
             // CancelInvoke();
         }
     }
-
     private void MapCheck()
     {
         Debug.DrawRay(rigid.position + Vector2.right * (nextMove) * 0.5f + Vector2.down, Vector3.down * 2, new Color(0, 1, 0));
@@ -162,8 +162,8 @@ public class MonsterController : MonoBehaviour
             nextMove = -nextMove;
 
             rigid.velocity = new Vector2(nextMove * Speed, rigid.velocity.y);
-            spriteRenderer.flipX = (nextMove == -1);
-            
+            spriteRenderer.flipX = (nextMove == -1)? !IsLookLeft : IsLookLeft;
+        
         }
     }
 
@@ -174,7 +174,7 @@ public class MonsterController : MonoBehaviour
         //쳐다보는 방향에 대한 코드
         if (!isPlayer_close)
         {
-            spriteRenderer.flipX = (nextMove == -1);
+            spriteRenderer.flipX = (nextMove == -1)? !IsLookLeft : IsLookLeft;
         }
 
         float nextThinkTime = Random.Range(0.5f, 2f);
@@ -194,22 +194,11 @@ public class MonsterController : MonoBehaviour
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
             Die = true;
-
-            string name = gameObject.name;
-            if (name == "Bat")
-                audioManager.monsterSound("Bat");
-            else if (name == "Bear")
-                audioManager.monsterSound("Bear");
-            else if (name == "Bone")
-                audioManager.monsterSound("Bone");
-            else if (name == "Rat")
-                audioManager.monsterSound("Rat");
-            else if (name == "Slime")
-                audioManager.monsterSound("Slime");
-
+            eventDrop.Drop(gameObject.name , gameObject.transform.position);
+            audioManager.monsterSound(gameObject.name);
         }
         audioManager.monsterSound("Damaged");
-        nextMove = spriteRenderer.flipX == true ? -1 : 1;
+        nextMove = (spriteRenderer.flipX == true)&&(!IsLookLeft) ? -1 : 1;
         // rigid.AddForce(Vector2.left* nextMove*3+ Vector2.up * 3, ForceMode2D.Impulse);
         // spriteRenderer.color = new Color(1, 1, 1, 0.4f);
 
@@ -224,7 +213,6 @@ public class MonsterController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-       
         if (other.gameObject.name == "WarriorSkill2(Clone)")
         {
             if (other.gameObject.GetComponent<BasicAttack>().Monsternum > 1){
@@ -261,7 +249,6 @@ public class MonsterController : MonoBehaviour
     }
     float PlayerDamage(float Dmg)
     {
-        Debug.Log("데미지는 : " + Dmg);
         float Damage = Dmg * statManager.Ad;
 
         if (statManager.Type == WeakType) // 약점타입

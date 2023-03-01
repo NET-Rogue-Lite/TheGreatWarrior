@@ -14,7 +14,6 @@ public class GolemController : MonoBehaviour
     public float Chase_speed;
     public float Attack_range;
     public float Close_range;
-
     private bool isPlayer_close = false;
     private bool isAttack = false;
     [SerializeField]
@@ -22,6 +21,7 @@ public class GolemController : MonoBehaviour
     private float playerDistance;
     private GameObject Player;
     StatManager statManager;
+    AudioManager audioManager;
     Rigidbody2D rigid;
     public float nextMove;
     SpriteRenderer spriteRenderer;
@@ -43,7 +43,6 @@ public class GolemController : MonoBehaviour
         statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
         spriteRenderer.flipX = (nextMove == -1);
         Think();
-
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
         Hp = Hp * DiffControl.Diff;
@@ -159,7 +158,7 @@ public class GolemController : MonoBehaviour
                     return;
                 }
             }
-            CancelInvoke();
+            // CancelInvoke();
             Invoke("Think", 1);
             nextMove = -nextMove;
 
@@ -198,6 +197,7 @@ public class GolemController : MonoBehaviour
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
             Die = true;
+            audioManager.monsterSound(gameObject.name);
         }
         nextMove = spriteRenderer.flipX == true ? -1 : 1;
         // rigid.AddForce(Vector2.left* nextMove*3+ Vector2.up * 3, ForceMode2D.Impulse);
@@ -214,6 +214,12 @@ public class GolemController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+         if (other.gameObject.name == "WarriorSkill2(Clone)")
+        {
+            if (other.gameObject.GetComponent<BasicAttack>().Monsternum > 1){
+                return;
+            }
+        }
         if (other.gameObject.name == "WarriorSkill4(Clone)")
         {
             if (Hp > 0)
@@ -222,8 +228,17 @@ public class GolemController : MonoBehaviour
                 statManager.Stack += 1;
             }
         }
+        if (other.gameObject.tag == "Arrow"){
+            if (other.gameObject.GetComponent<ArrowMove>().IsHit){
+                return;
+            }
+        }
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
+            if (other.gameObject.tag == "Arrow"){
+                other.gameObject.GetComponent<ArrowMove>().IsHit = true;
+            }
+        
             if (!Hit)
             {
                 Invoke("HitFalse", 1f);

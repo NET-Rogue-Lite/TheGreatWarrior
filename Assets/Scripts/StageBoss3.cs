@@ -17,24 +17,20 @@ public class StageBoss3 : MonoBehaviour
     public GameObject iceball;
     GameObject icefloor;
     public GameObject icecage;
+    public EventDrop eventDrop;
+    public GameObject portal;
 
     public float maxHp;
     public float Hp;
     public float skillattack;
     public float attack;
     public int CurType;
-
     float skillattack_cool;
     float attack_cool;
-    
-
-
     float playerDistance;
     bool is_skilling = false;
     bool is_attacking = false;
     bool skill1 = false;
-
-    public EventDrop eventDrop;
     int StrongType;
     int WeakType;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
@@ -143,7 +139,7 @@ public class StageBoss3 : MonoBehaviour
         {
             Hp = 1000;
             GetComponent<PolygonCollider2D>().enabled = false;
-            eventDrop.Drop(gameObject.name);
+            eventDrop.Drop(gameObject.name,gameObject.transform.position);
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
         }

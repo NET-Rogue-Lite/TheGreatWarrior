@@ -25,7 +25,7 @@ public class StatUI : MonoBehaviour
         MaxHp.text = statManager.MaxHp.ToString();
         Shield.text = hPManager.Shield.ToString();
         Def.text = statManager.Def.ToString();
-        PassiveSkill.text = skillManager.Passive.ToString();
+        PassiveSkill.text = "발동 중인 패시브 스킬 : "  + skillManager.Passive.ToString();
         SkillLevel.text = "-스킬 레벨-\n"+
         "기본스킬 : Lv" + skillManager.SkillLevel[0].ToString()+
         "\n스킬 1 : Lv" + skillManager.SkillLevel[1].ToString()+

@@ -15,6 +15,8 @@ public class StageBoss4 : MonoBehaviour
     public GameObject thunder;
     Queue<int> skillQueue;
     public StatManager statManager;
+    public EventDrop eventDrop;
+    public GameObject portal;
     public float Hp;
     public float skill0;
     public float skill1;
@@ -183,6 +185,7 @@ public class StageBoss4 : MonoBehaviour
             audioManager.boss4Sound("Die");
             GetComponent<BoxCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
+            eventDrop.Drop(gameObject.name,gameObject.transform.position);
             Destroy(gameObject, 1);
         }
     }
