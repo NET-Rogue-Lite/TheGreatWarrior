@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 6665968461557481532}
-  statManager: {fileID: 7798202834094134588, guid: d1988b6c6c5458b48b8a3400c45d7944, type: 3}
+  statManager: {fileID: 0}
   audioManager: {fileID: 0}
   fireball: {fileID: 5409417171724008207, guid: 1b08ce4f0b184a44c8c002a11885af7c, type: 3}
   firefloor: {fileID: 1517082310273361808, guid: b49a4c0d167729c4c98b83dbc3665c08, type: 3}

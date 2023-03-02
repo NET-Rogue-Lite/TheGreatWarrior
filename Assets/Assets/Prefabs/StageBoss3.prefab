@@ -173,7 +173,6 @@ GameObject:
   - component: {fileID: 2754674017657651172}
   - component: {fileID: 4899801188429821816}
   - component: {fileID: 6111064176047588315}
-  - component: {fileID: 3263613923395640146}
   m_Layer: 11
   m_Name: StageBoss3
   m_TagString: BossMonster
@@ -349,33 +348,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 0}
   statManager: {fileID: 0}
-  iceball: {fileID: 0}
-  icecage: {fileID: 0}
+  iceball: {fileID: 7057729485413335232, guid: eb2547021f606354b94b802b2677a8f1, type: 3}
+  icecage: {fileID: 3111028279781319772, guid: 80cc049b7d73cc343aa7ec80160bb1da, type: 3}
+  eventDrop: {fileID: 0}
+  portal: {fileID: 0}
   maxHp: 0
   Hp: 0
   skillattack: 0
   attack: 0
   CurType: 0
---- !u!114 &3263613923395640146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2754674017657651173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9022207a35e205e40b90fd6c48fc0810, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WarriorSkillQube:
-  - {fileID: 3777997692935808631, guid: 007b594a4acf8d0469415fac897ee1e7, type: 3}
-  - {fileID: 6708848457940000049, guid: 10a53b6f063de6c4c8edfb50483053ab, type: 3}
-  - {fileID: 3474120315699849183, guid: 3328996fa63b2764087ca37d7d922309, type: 3}
-  - {fileID: 2016098743196956485, guid: 630dccabcded16d48aecdb81c08ababa, type: 3}
-  - {fileID: 3777997692935808631, guid: 52223113475f57a4ab4eab9824e7a9cb, type: 3}
-  ArcherSkillQube: []
-  TempItemQube: {fileID: 6433485365273927068, guid: 431560460a11a954d926ae3a264447bb, type: 3}
 --- !u!1 &3547655206324962752
 GameObject:
   m_ObjectHideFlags: 0
