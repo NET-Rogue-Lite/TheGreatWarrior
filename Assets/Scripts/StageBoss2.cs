@@ -145,7 +145,6 @@ public class StageBoss2 : MonoBehaviour
         if (Hp <= 0)
         {
             audioManager.boss2Sound("Die");
-            Hp = 1000;
             GetComponent<PolygonCollider2D>().enabled = false;
             eventDrop.Drop(gameObject.name, gameObject.transform.position);
             anim.SetBool("IsDied", true);

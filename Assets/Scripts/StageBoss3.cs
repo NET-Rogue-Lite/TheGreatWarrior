@@ -12,8 +12,8 @@ public class StageBoss3 : MonoBehaviour
 
     [SerializeField]
     public Slider hpBar;
-
     public StatManager statManager;
+    public AudioManager audioManager;
     public GameObject iceball;
     GameObject icefloor;
     public GameObject icecage;
@@ -94,17 +94,20 @@ public class StageBoss3 : MonoBehaviour
     }
 
     IEnumerator Skill1(){
+        Debug.Log("Skill1");
         skill1 = true;
         yield return new WaitForSeconds(1.3f);
-        for(int i = 0; i < (DiffControl.Diff==4 ? 36 : DiffControl.Diff*12); i++){
+        for(int i = 0; i < 12; i++){
             var ice = Instantiate(iceball, new Vector3(transform.position.x + (spriteRenderer.flipX ? -1 : 1), transform.position.y, 0), Quaternion.identity);
             ice.GetComponent<Rigidbody2D>().velocity = (Player.transform.position - ice.transform.position)*1.4f;
+            Destroy(ice,10);
             yield return new WaitForSeconds(0.6f);
         }
         skill1 = false;
     }
 
     IEnumerator Skill2(){
+        Debug.Log("Skill2");
         yield return new WaitForSeconds(0.8f);
         icefloor.SetActive(true);
         yield return new WaitForSeconds(1.3f);
@@ -112,7 +115,9 @@ public class StageBoss3 : MonoBehaviour
     }
 
     void Skill3(){
+        Debug.Log("Skill3");
         for (int i = 0; i < 2*DiffControl.Diff; i++){
+            Debug.Log("IceCage Instantiate");
             Destroy(Instantiate(icecage, new Vector3(Random.Range(Player.transform.position.x-12f, Player.transform.position.x+12f), Random.Range(Player.transform.position.y+ 8, Player.transform.position.y + 10), 0), Quaternion.identity), 20);
         }
     }
@@ -137,10 +142,11 @@ public class StageBoss3 : MonoBehaviour
         hpBar.value = Hp / maxHp;
         if (Hp <= 0)
         {
-            Hp = 1000;
+            audioManager.boss3Sound("Die");
             GetComponent<PolygonCollider2D>().enabled = false;
-            eventDrop.Drop(gameObject.name,gameObject.transform.position);
+            eventDrop.Drop(gameObject.name, gameObject.transform.position);
             anim.SetBool("IsDied", true);
+            portal.SetActive(true);
             Destroy(gameObject, 1);
         }
     }

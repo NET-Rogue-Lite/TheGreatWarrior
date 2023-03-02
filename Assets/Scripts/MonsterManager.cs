@@ -16,6 +16,7 @@ public class MonsterManager : MonoBehaviour
         {"Bear(Clone)", 9},
         {"StageBoss1_slimespit(Clone)", 10},
         {"StageBoss1", 15},
+        {"StageBoss3_Iceball(Clone)", 30},
         {"StageBoss4_BiteHit", 30},
         {"StageBoss4_Breath", 35 },
         {"StageBoss4_Tornado", 28},

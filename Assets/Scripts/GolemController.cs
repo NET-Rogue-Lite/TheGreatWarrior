@@ -41,6 +41,7 @@ public class GolemController : MonoBehaviour
         capuslecollider = GetComponent<CapsuleCollider2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
         statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         spriteRenderer.flipX = (nextMove == -1);
         Think();
         StrongType = (CurType + 1) % 5;
@@ -195,9 +196,9 @@ public class GolemController : MonoBehaviour
             GetComponent<CapsuleCollider2D>().enabled = false;
             GetComponent<PolygonCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
+            audioManager.monsterSound(gameObject.name);
             Destroy(gameObject, 1);
             Die = true;
-            audioManager.monsterSound(gameObject.name);
         }
         nextMove = spriteRenderer.flipX == true ? -1 : 1;
         // rigid.AddForce(Vector2.left* nextMove*3+ Vector2.up * 3, ForceMode2D.Impulse);

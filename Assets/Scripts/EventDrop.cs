@@ -40,27 +40,67 @@ public class EventDrop : MonoBehaviour
         transform.position = Position;
         if (MonsterName == "Boss1")
         {
-            Instantiate(SkillQube[0], transform.position, Quaternion.identity);
+            GameObject tempskill = Instantiate(SkillQube[0], transform.position, Quaternion.identity);
+            
+            int index = tempskill.name.IndexOf("(Clone)");
+            if (index > 0) 
+                tempskill.name = tempskill.name.Substring(0, index);
+
             transform.position = new Vector2(transform.position.x + 1 , transform.position.y);
-            Instantiate(SkillQube[2], transform.position, Quaternion.identity);
+            
+            tempskill = Instantiate(SkillQube[2], transform.position, Quaternion.identity);
+            
+            index = tempskill.name.IndexOf("(Clone)");
+            if (index > 0) 
+                tempskill.name = tempskill.name.Substring(0, index);
         }
         if (MonsterName == "Boss2")
         {
-            Instantiate(SkillQube[1], transform.position, Quaternion.identity);
+             GameObject tempskill = Instantiate(SkillQube[1], transform.position, Quaternion.identity);
+            
+            int index = tempskill.name.IndexOf("(Clone)");
+            if (index > 0) 
+                tempskill.name = tempskill.name.Substring(0, index);
+
             transform.position = new Vector2(transform.position.x + 1 , transform.position.y);
-            Instantiate(SkillQube[3], transform.position, Quaternion.identity);
+            
+            tempskill = Instantiate(SkillQube[3], transform.position, Quaternion.identity);
+            
+            index = tempskill.name.IndexOf("(Clone)");
+            if (index > 0) 
+                tempskill.name = tempskill.name.Substring(0, index);
         }
         if (MonsterName == "Boss3")
         {
-            Instantiate(SkillQube[4], transform.position, Quaternion.identity);
+             GameObject tempskill = Instantiate(SkillQube[4], transform.position, Quaternion.identity);
+            
+            int index = tempskill.name.IndexOf("(Clone)");
+            if (index > 0) 
+                tempskill.name = tempskill.name.Substring(0, index);
+
             transform.position = new Vector2(transform.position.x + 1 , transform.position.y);
-            Instantiate(SkillQube[6], transform.position, Quaternion.identity);
+            
+            tempskill = Instantiate(SkillQube[6], transform.position, Quaternion.identity);
+            
+            index = tempskill.name.IndexOf("(Clone)");
+            if (index > 0) 
+                tempskill.name = tempskill.name.Substring(0, index);
         }
         if (MonsterName == "Boss4")
         {
-            Instantiate(SkillQube[5], transform.position, Quaternion.identity);
+             GameObject tempskill = Instantiate(SkillQube[5], transform.position, Quaternion.identity);
+            
+            int index = tempskill.name.IndexOf("(Clone)");
+            if (index > 0) 
+                tempskill.name = tempskill.name.Substring(0, index);
+
             transform.position = new Vector2(transform.position.x + 1 , transform.position.y);
-            Instantiate(SkillQube[7], transform.position, Quaternion.identity);
+            
+            tempskill = Instantiate(SkillQube[7], transform.position, Quaternion.identity);
+            
+            index = tempskill.name.IndexOf("(Clone)");
+            if (index > 0) 
+                tempskill.name = tempskill.name.Substring(0, index);
         }
         if (MonsterName == "StageBoss1")
         {

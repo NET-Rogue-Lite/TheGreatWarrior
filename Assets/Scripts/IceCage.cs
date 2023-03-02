@@ -6,10 +6,11 @@ public class IceCage : MonoBehaviour
 {
     public float Hp;
     bool Hit;
-    public StatManager statManager;
+    StatManager statManager;
     
     void Start()
     {
+        statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
         Hit = false;
         Hp *= DiffControl.Diff;
     }

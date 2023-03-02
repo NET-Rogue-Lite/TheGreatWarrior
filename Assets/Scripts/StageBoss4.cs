@@ -48,6 +48,7 @@ public class StageBoss4 : MonoBehaviour
         skill3_cool = skill3 + Random.Range(-0.5f, 0.5f);
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
+        Hp *= DiffControl.Diff;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -155,9 +156,10 @@ public class StageBoss4 : MonoBehaviour
         audioManager.boss4Sound("Thunder");
         yield return new WaitForSeconds(0.8f);
         thunder_floor.SetActive(true);
-        for (int i = 0; i < 10 * DiffControl.Diff; i++)
+        for (int i = 0; i < 15; i++)
         {
-            Instantiate(thunder, new Vector3(Random.Range(transform.position.x - 5f, transform.position.x - 30f), Random.Range(transform.position.y + 10, transform.position.y + 20), 0), Quaternion.identity);
+            Debug.Log("Thunder");
+            Instantiate(thunder, new Vector3(Random.Range(transform.position.x - 3f, transform.position.x - 7f), Random.Range(transform.position.y + 10, transform.position.y + 20), 0), Quaternion.identity);
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(2.5f);

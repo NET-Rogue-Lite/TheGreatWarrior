@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public bool IsItemStagePortal;
     public bool IsSkillStagePortal;
     public bool IsEventStagePortal;
+    public bool IsBossClearPortal;
     Vector2 StartPosition;
     // Start is called before the first frame update
 
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
         IsItemStagePortal = false;
         IsSkillStagePortal = false;
         IsEventStagePortal = false;
-
+        IsBossClearPortal = false;
         for (int i = 0; i < 5; i++)
         {
             GameObject CurrnetStage = Stage.transform.GetChild(i).gameObject;
@@ -91,6 +92,10 @@ public class GameManager : MonoBehaviour
         int CurStage = stageIndex;
         int NextStage = stageIndex + 1;
         BossStage[i == 0 ? 0 : i - 1].SetActive(false);
+        if(IsBossClearPortal){
+            Stages[CurStage].SetActive(true);
+            return;
+        }
         if (IsItemStagePortal)
         {
             ToItemStage();
@@ -104,6 +109,7 @@ public class GameManager : MonoBehaviour
             SkillStage[i - 1].SetActive(false);
             ItemStage[i - 1].SetActive(false);
             Stages[CurStage].SetActive(true);
+            Player.transform.position = StartPosition;
             return;
         }
         else if (CurStage == i * 4 + RandomStage)
@@ -111,6 +117,8 @@ public class GameManager : MonoBehaviour
             Stages[CurStage].SetActive(false);
             ChooseStage[i].SetActive(true);
             RandomStage = Random.Range(0, 2);
+            Player.transform.position = StartPosition;
+            return;
         }
         else if (NextStage % 4 == 0)
         {

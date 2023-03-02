@@ -12,6 +12,7 @@ public class Portal : MonoBehaviour
     public bool IsItemStagePortal = false;
     public bool IsSkillStagePortal = false;
     public bool IsEventStagePortal = false;
+    public bool IsBossClearPortal = false;
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -19,6 +20,7 @@ public class Portal : MonoBehaviour
             gameManager.IsItemStagePortal = false;
             gameManager.IsSkillStagePortal = false;
             gameManager.IsEventStagePortal = false;
+            gameManager.IsBossClearPortal = false;
             gameManager.IsNext(false);
         }
     }
@@ -31,6 +33,7 @@ public class Portal : MonoBehaviour
             gameManager.IsItemStagePortal = IsItemStagePortal;
             gameManager.IsSkillStagePortal = IsSkillStagePortal;
             gameManager.IsEventStagePortal = IsEventStagePortal;
+            gameManager.IsBossClearPortal = IsBossClearPortal;
         }
     }
 }
