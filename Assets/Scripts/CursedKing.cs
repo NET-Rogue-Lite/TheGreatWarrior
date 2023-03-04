@@ -8,13 +8,12 @@ public class CursedKing : MonoBehaviour
     Animator anim;
     SpriteRenderer spriteRenderer;
     private GameObject Player;
-    GameObject pushPlayer;
     Rigidbody2D rigid;
     public Slider hpBar;
     public StatManager statManager;
     public AudioManager audioManager;
     public EventDrop eventDrop;
-
+    BoxCollider2D boxCollider2D;
     public float maxHp;
     public float Hp;
     public float skillattack;
@@ -24,6 +23,7 @@ public class CursedKing : MonoBehaviour
     bool is_skilling = false;
     bool is_Walking = false;
     bool isGround = false;
+    float warpcool;
 
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
 
@@ -32,11 +32,12 @@ public class CursedKing : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         Player = GameObject.FindGameObjectWithTag("Player");
-        pushPlayer = transform.GetChild(0).gameObject;
+        boxCollider2D = GetComponent<BoxCollider2D>();
         skillattack_cool = skillattack;
         rigid = GetComponent<Rigidbody2D>();
         Hp = Hp * DiffControl.Diff;
         maxHp = Hp;
+        warpcool = Random.Range(10f, 20f);
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -57,16 +58,25 @@ public class CursedKing : MonoBehaviour
     }
     
     void Move(){
-        if(playerDistance > 6){
+        warpcool -= 0.2f;
+        if (!is_skilling && warpcool <= 0){
+            anim.SetTrigger("Warp");
+        }
+        if(playerDistance > 6 && !is_skilling){
             is_Walking = true;
             anim.SetBool("IsWalk", true);
             rigid.velocity = new Vector2((Player.transform.position - transform.position).normalized.x * 3, 0);
         }
         else{
-            anim.SetBool("IsWalk", true);
+            anim.SetBool("IsWalk", false);
             is_Walking = false;
             rigid.velocity = Vector2.zero;
         }
+    }
+
+    void warp(){
+        transform.position = new Vector2(Player.transform.position.x + Random.Range(-5, 5), 0);
+        warpcool = Random.Range(10f, 20f);
     }
 
     void Attack()
@@ -76,6 +86,7 @@ public class CursedKing : MonoBehaviour
         {
             is_skilling = true;
             int skill_num = Random.Range(0, 3);
+            boxCollider2D.enabled = false;
             switch (skill_num)
             {
                 case 0:
@@ -122,6 +133,7 @@ public class CursedKing : MonoBehaviour
     {
         is_skilling = false;
         skillattack_cool = skillattack;
+        boxCollider2D.enabled = true;
     }
 
     public void OnDamaged(float damage)
