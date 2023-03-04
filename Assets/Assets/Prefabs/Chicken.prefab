@@ -132,11 +132,11 @@ MonoBehaviour:
   Attack_range: 1.1
   Close_range: 3
   hpBar: {fileID: 6042343787746547222}
+  IsLookLeft: 0
   nextMove: 0
   Hit: 0
   CurType: 0
   CanFly: 1
-  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
   Die: 0
 --- !u!114 &6042343786822210592
 MonoBehaviour:
@@ -147,10 +147,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6042343786822210619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b697473e50b104d99b9755d6ab387e, type: 3}
+  m_Script: {fileID: 11500000, guid: 237bfc558c8b85e48afd6ce00559de64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
+  HPportion: {fileID: 0}
   probability: 0
 --- !u!61 &6042343786822210623
 BoxCollider2D:

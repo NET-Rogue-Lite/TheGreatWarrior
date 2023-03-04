@@ -513,6 +513,7 @@ MonoBehaviour:
   Attack_range: 1.5
   Close_range: 8
   hpBar: {fileID: 6246484595124911447}
+  IsLookLeft: 0
   nextMove: 0
   Hit: 0
   CurType: 0
@@ -527,10 +528,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6246484595556593442}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c550614c355dd34486ca6e813bff901, type: 3}
+  m_Script: {fileID: 11500000, guid: 237bfc558c8b85e48afd6ce00559de64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
+  HPportion: {fileID: 0}
   probability: 0
 --- !u!95 &6246484595556593445
 Animator:
