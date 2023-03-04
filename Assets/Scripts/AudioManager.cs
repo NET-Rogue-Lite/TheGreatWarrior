@@ -71,14 +71,33 @@ public class AudioManager : MonoBehaviour
             case "GreenPig":
                 audioSources[i].clip = monsterAudios[7];
                 break;
-            case "Boss1":
+            case "Chicken":
                 audioSources[i].clip = monsterAudios[8];
                 break;
-            case "Boss1_attack":
+            case "Eagle":
                 audioSources[i].clip = monsterAudios[9];
                 break;
-
-
+            case "Turtle":
+                audioSources[i].clip = monsterAudios[10];
+                break;
+            case "Boss1_attack":
+                audioSources[i].clip = monsterAudios[11];
+                break;
+            case "Boss1":
+                audioSources[i].clip = monsterAudios[12];
+                break;
+            case "Boss2_attack":
+                audioSources[i].clip = monsterAudios[13];
+                break;
+            case "Boss2":
+                audioSources[i].clip = monsterAudios[14];
+                break;
+            case "Boss3_attack":
+                audioSources[i].clip = monsterAudios[15];
+                break;
+            case "Boss3":
+                audioSources[i].clip = monsterAudios[16];
+                break;
         }
         audioSources[i].Play();
         i = (i + 1) % 10;
@@ -194,8 +213,11 @@ public class AudioManager : MonoBehaviour
             case "Icefloor":
                 audioSources[i].clip = boss3Audios[3];
                 break;
-            case "Die":
+            case "Push":
                 audioSources[i].clip = boss3Audios[4];
+                break;
+            case "Die":
+                audioSources[i].clip = boss3Audios[5];
                 break;
         }
         audioSources[i].Play();
@@ -226,6 +248,11 @@ public class AudioManager : MonoBehaviour
         }
         audioSources[i].Play();
         i = (i + 1) % 10;
+    }
+
+    public void finalBossSound(string action)
+    {
+
     }
 
     public void itemSound()

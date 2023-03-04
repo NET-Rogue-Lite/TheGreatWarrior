@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public int stageIndex;
     public bool Next;
     public GameObject Player;
+    public GameObject gameClear;
     public PlayerMove PM;
     public StatManager statManager;
     public EquipManager equipManager;
@@ -22,12 +23,13 @@ public class GameManager : MonoBehaviour
     public GameObject[] BossStage;
     public GameObject Stage;
     public int i;
+    public int finalStage;
 
     public bool IsItemStagePortal;
     public bool IsSkillStagePortal;
     public bool IsEventStagePortal;
     public bool IsBossClearPortal;
-    Vector2 StartPosition;
+    public Vector2 StartPosition;
     // Start is called before the first frame update
 
     private void Awake()
@@ -149,7 +151,17 @@ public class GameManager : MonoBehaviour
         else if (stageIndex >= 12 && stageIndex <= 15)
             audioManager.BGMSound("Stage4");
 
+        if (stageIndex == finalStage)
+        {
+            GameClear();
+        }
+
     }
+    public void GameClear()
+    {
+        gameClear.SetActive(true);
+    }
+
     public void ToItemStage()
     {
         ItemStage[i].SetActive(true);

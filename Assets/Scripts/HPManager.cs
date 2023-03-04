@@ -8,6 +8,7 @@ public class HPManager : MonoBehaviour
 {
     public GameManager gameManager;
     public GameObject Player;
+    public GameObject GameOver;
     public StatManager Stat;
 
     public float maxHp;
@@ -29,7 +30,7 @@ public class HPManager : MonoBehaviour
         if (Ad<=0)
             return;
         HP -= Ad;
-        Debug.Log("curHp " + HP);
+        //Debug.Log("curHp " + HP);
         IsDie();
     }
     void FixedUpdate()
@@ -52,9 +53,12 @@ public class HPManager : MonoBehaviour
         }
     }
     void IsDie(){
-        if(HP <= 0){
-            //암튼 죽는 코드
-        }
+        if(HP <= 0)
+            Gameover();
+    }
+    public void Gameover()
+    {
+        GameOver.SetActive(true);
     }
     public void Onslider()
     {

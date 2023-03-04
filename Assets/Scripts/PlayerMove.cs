@@ -221,7 +221,7 @@ public class PlayerMove : MonoBehaviour
                 rigid.velocity = Vector2.zero;
                 anim.SetBool("IsClimb", true);
                 transform.position = new Vector2(transform.position.x,
-                transform.position.y + 0.02f);
+                transform.position.y + 0.2f);
             }
             if (gameManager.Next)
             {
@@ -238,7 +238,7 @@ public class PlayerMove : MonoBehaviour
                 rigid.velocity = Vector2.zero;
                 anim.SetBool("IsClimb", true);
                 transform.position = new Vector2(transform.position.x,
-                transform.position.y - 0.02f);
+                transform.position.y - 0.2f);
             }
         }
         if (anim.GetBool("IsClimb"))

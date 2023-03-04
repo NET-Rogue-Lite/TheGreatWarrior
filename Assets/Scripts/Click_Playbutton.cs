@@ -11,7 +11,10 @@ public class Click_Playbutton : MonoBehaviour
     public GameObject PassiveSkill;
     public GameObject Window;
     public GameObject WindowUpper;
+
     // public DiffControl Diff;
+
+
     public void ClassSelect()
     {
         StartUI.gameObject.SetActive(false);
@@ -76,4 +79,6 @@ public class Click_Playbutton : MonoBehaviour
     {
 
     }
+
+    
 }
