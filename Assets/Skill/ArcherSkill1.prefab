@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsHit: 0
+  IsRain: 0
 --- !u!114 &-5374222229128262058
 MonoBehaviour:
   m_ObjectHideFlags: 0

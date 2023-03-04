@@ -210,7 +210,7 @@ public class EventDrop : MonoBehaviour
     {
         for (int i = 0; i < Stage; i++) //스테이지 만큼 드랍 여러번 해줌
         {
-            transform.position = new Vector2(transform.position.x + 1 , transform.position.y);
+            transform.position = new Vector2(transform.position.x + 0.8f , transform.position.y);
             /*랜덤 장비아이템 1개 드랍*/
             probability = SetProbability();
             if (probability <= 25)

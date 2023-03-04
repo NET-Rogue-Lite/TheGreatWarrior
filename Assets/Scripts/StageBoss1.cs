@@ -94,11 +94,10 @@ public class StageBoss1 : MonoBehaviour
                     break;
                 case 1:
                     anim.SetTrigger("Spin");
-                    var direc = 0;
+                    var direc = 1;
                     if (spriteRenderer.flipX)
-                        direc = 1;
+                        direc = -1;
                     StartCoroutine(Skill1(direc));
-                    CancelSpin();
                     break;
                 case 2:
                     anim.SetTrigger("Jump");
@@ -134,25 +133,10 @@ public class StageBoss1 : MonoBehaviour
     {
         audioManager.boss1Sound("Tornado");
         yield return new WaitForSeconds(0.25f);
-        int count = 0;
-        float cur_x = transform.position.x;
-        while (count < 20)
-        {
-            if (direc == 1)
-                transform.position = new Vector2(Mathf.Lerp(transform.position.x, cur_x - 10, 0.15f), transform.position.y);
-            else
-                transform.position = new Vector2(Mathf.Lerp(transform.position.x, cur_x + 10, 0.15f), transform.position.y);
-            count++;
-            rigid.velocity = Vector2.zero;
-            yield return new WaitForSeconds(0.1f);
-        }
+        rigid.velocity = new Vector2(direc * 0.5f, 0);
+        yield return new WaitForSeconds(2.3f);
+        rigid.velocity = Vector2.zero;
     }
-
-    void CancelSpin()
-    {
-        transform.position = new Vector2(Mathf.Round(transform.position.x), transform.position.y);
-    }
-
     void Skill2()
     {
         transform.position = new Vector2(Player.transform.position.x, 5);

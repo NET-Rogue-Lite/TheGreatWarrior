@@ -211,36 +211,7 @@ public class PlayerMove : MonoBehaviour
             audioManager.playerSound("Dash");
 
         }
-        //밧줄 타는 코드
-        float v = Input.GetAxisRaw("Vertical");
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            if (CanClimb)
-            {
-                anim.SetBool("IsJumping", false);
-                rigid.velocity = Vector2.zero;
-                anim.SetBool("IsClimb", true);
-                transform.position = new Vector2(transform.position.x,
-                transform.position.y + 0.02f);
-            }
-            if (gameManager.Next)
-            {
-                gameManager.NextStage();
-                gameManager.Next = false;
-            }
-        }
-        //밧줄에서 내려가는 코드
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            if (CanClimb)
-            {
-                anim.SetBool("IsJumping", false);
-                rigid.velocity = Vector2.zero;
-                anim.SetBool("IsClimb", true);
-                transform.position = new Vector2(transform.position.x,
-                transform.position.y - 0.02f);
-            }
-        }
+        
         if (anim.GetBool("IsClimb"))
         {
             rigid.gravityScale = 0;
@@ -282,8 +253,6 @@ public class PlayerMove : MonoBehaviour
     }
     void FixedUpdate()
     {
-
-
         if (maxSpeedx > 6)
             maxSpeedx -= 0.5f;
         //move speed
@@ -317,6 +286,36 @@ public class PlayerMove : MonoBehaviour
                 // Debug.Log(rayHit.collider.name);
                 if (rayHit.distance < 1.0f)
                     anim.SetBool("IsJumping", false);
+            }
+        }
+        //밧줄 타는 코드
+        float v = Input.GetAxisRaw("Vertical");
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (CanClimb)
+            {
+                anim.SetBool("IsJumping", false);
+                rigid.velocity = Vector2.zero;
+                anim.SetBool("IsClimb", true);
+                transform.position = new Vector2(transform.position.x,
+                transform.position.y + 0.2f);
+            }
+            if (gameManager.Next)
+            {
+                gameManager.NextStage();
+                gameManager.Next = false;
+            }
+        }
+        //밧줄에서 내려가는 코드
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            if (CanClimb)
+            {
+                anim.SetBool("IsJumping", false);
+                rigid.velocity = Vector2.zero;
+                anim.SetBool("IsClimb", true);
+                transform.position = new Vector2(transform.position.x,
+                transform.position.y - 0.2f);
             }
         }
     }

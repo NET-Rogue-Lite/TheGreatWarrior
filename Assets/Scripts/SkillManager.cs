@@ -20,9 +20,9 @@ public class SkillManager : MonoBehaviour
     public float[] WarriorSkillCoolList;
     public float[] ArcherSkillCoolList;
     float[] SkillCoolList;
-    Dictionary<string, GameObject> SkillDict;
-    Dictionary<string, float> SkillCoolDict;
-    Dictionary<string, Sprite> SkillImgDict;
+    public static Dictionary<string, GameObject> SkillDict;
+    public static Dictionary<string, float> SkillCoolDict;
+    public static Dictionary<string, Sprite> SkillImgDict;
     public Image[] SkillUI;
     public TextMeshProUGUI[] SkillCoolTime;
     public int[] SkillLevel;

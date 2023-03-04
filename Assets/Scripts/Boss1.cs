@@ -63,7 +63,7 @@ public class Boss1 : MonoBehaviour
         }
         else
         {
-            playerDistance = Vector3.Distance(transform.position, Player.transform.position);
+            playerDistance = Vector2.Distance(transform.position, Player.transform.position);
             CheckPlayerClose();
             Attack();
             Move();
@@ -131,8 +131,13 @@ public class Boss1 : MonoBehaviour
     }
     private void Move()
     {
+        if(GetComponent<PolygonCollider2D>().enabled){
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
+            return;
+        }
         if (!isPlayer_close)
         {
+            
             rigid.velocity = new Vector2(Speed * nextMove, rigid.velocity.y);
             MapCheck();
         }
