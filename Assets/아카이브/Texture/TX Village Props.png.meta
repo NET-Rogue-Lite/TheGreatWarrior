@@ -435,7 +435,7 @@ TextureImporter:
       213: -2305204071527019509
     second: TX Village Props Chest Golden
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -495,6 +495,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 1
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -544,6 +545,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -556,7 +569,7 @@ TextureImporter:
         width: 45
         height: 45
       alignment: 9
-      pivot: {x: 0.5, y: 0}
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -577,7 +590,7 @@ TextureImporter:
         width: 35
         height: 35
       alignment: 9
-      pivot: {x: 0.5, y: 0}
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -635,12 +648,12 @@ TextureImporter:
       name: TX Village Props - Barrel
       rect:
         serializedVersion: 2
-        x: 195
+        x: 194
         y: 960
         width: 27
         height: 35
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1542,8 +1555,8 @@ TextureImporter:
         y: 512
         width: 17
         height: 10
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1563,8 +1576,8 @@ TextureImporter:
         y: 512
         width: 23
         height: 11
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1584,8 +1597,8 @@ TextureImporter:
         y: 512
         width: 11
         height: 7
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1626,8 +1639,8 @@ TextureImporter:
         y: 480
         width: 19
         height: 12
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1643,12 +1656,12 @@ TextureImporter:
       name: TX Village Props - Grass 05
       rect:
         serializedVersion: 2
-        x: 420
+        x: 419
         y: 480
         width: 24
         height: 9
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1668,8 +1681,8 @@ TextureImporter:
         y: 480
         width: 17
         height: 11
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1710,8 +1723,8 @@ TextureImporter:
         y: 416
         width: 57
         height: 28
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1731,8 +1744,8 @@ TextureImporter:
         y: 416
         width: 89
         height: 35
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1752,8 +1765,8 @@ TextureImporter:
         y: 416
         width: 95
         height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1812,11 +1825,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 833
-        y: 417
+        y: 418
         width: 153
         height: 161
       alignment: 9
-      pivot: {x: 0.52360046, y: 0}
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2928,8 +2941,8 @@ TextureImporter:
         y: 416
         width: 120
         height: 137
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3582,7 +3595,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TX Village Props - Apple: 21300178
+      TX Village Props - Statue Bouquet: 21300152
       TX Village Props - Campfire: 21300128
       TX Village Props - Banner Pillar: 21300122
       TX Village Props - Heavy Sword: 21300168
@@ -3720,10 +3733,10 @@ TextureImporter:
       TX Village Props - Pumpkin 02: 21300258
       TX Village Props - Torch: 21300022
       TX Village Props - Road Sign Text 02: 21300048
-      TX Village Props - Cauldron: 21300198
-      TX Village Props - Statue Bouquet: 21300152
-      TX Village Props - Hammer: 21300186
       TX Village Props - Spear: 21300164
+      TX Village Props - Apple: 21300178
+      TX Village Props - Hammer: 21300186
+      TX Village Props - Cauldron: 21300198
       TX Village Props - Bread: 21300182
       TX Village Props - Clother Hanger Pillar 01: 21300230
   spritePackingTag: 

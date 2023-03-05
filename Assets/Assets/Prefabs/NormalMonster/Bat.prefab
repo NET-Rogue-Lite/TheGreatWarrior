@@ -94,7 +94,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &4564849280006208423
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,7 +111,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &4564849280006208416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1dfebbfa0bbda4eb6df611efb9d1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 80
+  Hp: 25
   maxHp: 100
   Ad: 5
   Idle_speed: 2
@@ -135,7 +135,7 @@ MonoBehaviour:
   IsLookLeft: 0
   nextMove: 0
   Hit: 0
-  CurType: 5
+  CurType: 3
   CanFly: 1
   Die: 0
 --- !u!50 &4564849280006208411
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237bfc558c8b85e48afd6ce00559de64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPportion: {fileID: 0}
+  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
   probability: 0
 --- !u!1 &6042366723837561983
 GameObject:

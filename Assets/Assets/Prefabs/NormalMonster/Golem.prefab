@@ -474,7 +474,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &1251270993776802957
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -491,7 +491,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!61 &1251270993776802960
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -581,7 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237bfc558c8b85e48afd6ce00559de64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPportion: {fileID: 0}
+  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
   probability: 0
 --- !u!114 &1251270993776802967
 MonoBehaviour:

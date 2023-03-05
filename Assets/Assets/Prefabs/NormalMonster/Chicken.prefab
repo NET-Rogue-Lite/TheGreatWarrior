@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 6042343786822210623}
   - component: {fileID: 6042343786822210622}
   - component: {fileID: 6042343786822210621}
-  - component: {fileID: -1668960744440193156}
   - component: {fileID: 6042343786822210620}
   m_Layer: 11
   m_Name: Chicken
@@ -81,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 8004
   m_Sprite: {fileID: 8599900626152481272, guid: 505531a920a60324aa02b4ed57eba7a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,7 +94,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &6042343786822210594
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -112,7 +111,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &6042343786822210593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,8 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1dfebbfa0bbda4eb6df611efb9d1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 100
-  maxHp: 100
+  Hp: 30
+  maxHp: 30
   Ad: 5
   Idle_speed: 4
   Chase_speed: 8
@@ -136,7 +135,7 @@ MonoBehaviour:
   IsLookLeft: 0
   nextMove: 0
   Hit: 0
-  CurType: 0
+  CurType: 3
   CanFly: 1
   Die: 0
 --- !u!114 &6042343786822210592
@@ -151,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237bfc558c8b85e48afd6ce00559de64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPportion: {fileID: 0}
+  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
   probability: 0
 --- !u!61 &6042343786822210623
 BoxCollider2D:
@@ -233,20 +232,6 @@ PolygonCollider2D:
       - {x: 0.5189495, y: 0.15816188}
       - {x: 0.30874634, y: 0.46806526}
       - {x: -0.03125, y: 0.46875}
---- !u!114 &-1668960744440193156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6042343786822210619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 237bfc558c8b85e48afd6ce00559de64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HPportion: {fileID: 0}
-  probability: 0
 --- !u!50 &6042343786822210620
 Rigidbody2D:
   serializedVersion: 4

@@ -474,7 +474,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &8249433424478987906
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -491,7 +491,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!61 &8249433424478987911
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237bfc558c8b85e48afd6ce00559de64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPportion: {fileID: 0}
+  HPportion: {fileID: 7338676432063287739, guid: 5fb44582b715c0145b3a12ec7516d7d3, type: 3}
   probability: 0
 --- !u!114 &8249433424478987908
 MonoBehaviour:
@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1dfebbfa0bbda4eb6df611efb9d1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 45
+  Hp: 20
   maxHp: 45
   Ad: 4
   Idle_speed: 2
@@ -605,7 +605,7 @@ MonoBehaviour:
   IsLookLeft: 0
   nextMove: 0
   Hit: 0
-  CurType: 0
+  CurType: 3
   CanFly: 0
   Die: 0
 --- !u!50 &1072869271
