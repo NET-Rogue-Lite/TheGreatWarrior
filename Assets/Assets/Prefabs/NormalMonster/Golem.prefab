@@ -474,7 +474,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &1251270993776802957
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -491,7 +491,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!61 &1251270993776802960
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -597,7 +597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 300
   maxHp: 300
-  Ad: 20
+  Ad: 15
   Idle_speed: 1
   Chase_speed: 4
   Attack_range: 1.2

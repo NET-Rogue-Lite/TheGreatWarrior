@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] boss2Audios;
     public AudioClip[] boss3Audios;
     public AudioClip[] boss4Audios;
+    public AudioClip[] finalBossAudios;
     public AudioClip[] playerAudios;
     public AudioClip[] skillAudios;
     public AudioClip itemAudio;
@@ -227,7 +228,32 @@ public class AudioManager : MonoBehaviour
         audioSources[i].Play();
         i = (i + 1) % 10;
     }
-
+    public void finalBossSound(string action)
+    {
+        switch (action)
+        {
+            case "Damaged":
+                audioSources[i].clip = finalBossAudios[0];
+                break;
+            case "Attack1":
+                audioSources[i].clip = finalBossAudios[1];
+                break;
+            case "Attack2":
+                audioSources[i].clip = finalBossAudios[2];
+                break;
+            case "Attack3":
+                audioSources[i].clip = finalBossAudios[3];
+                break;
+            case "Warp":
+                audioSources[i].clip = finalBossAudios[4];
+                break;
+            case "Die":
+                audioSources[i].clip = finalBossAudios[5];
+                break;
+        }
+        audioSources[i].Play();
+        i = (i + 1) % 10;
+    }
     public void itemSound()
     {
         audioSources[i].clip = itemAudio;

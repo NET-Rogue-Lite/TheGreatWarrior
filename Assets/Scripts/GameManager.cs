@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public bool IsSkillStagePortal;
     public bool IsEventStagePortal;
     public bool IsBossClearPortal;
-    Vector2 StartPosition;
+    public Vector2 StartPosition;
     // Start is called before the first frame update
 
     private void Awake()
@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
     // }
     public void NextStage()
     {
+        ItemDestory();
         int CurStage = stageIndex;
         int NextStage = stageIndex + 1;
         BossStage[i == 0 ? 0 : i - 1].SetActive(false);
@@ -136,8 +137,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Time.timeScale = 0;
-            Debug.Log("게임클리어!");
+            if(GameObject.Find("FinalStage").gameObject.activeSelf == true){
+                GameObject.Find("FinalStage").transform.GetChild(0).gameObject.SetActive(false);
+                GameObject.Find("FinalStage").transform.GetChild(1).gameObject.SetActive(true);
+                return;
+            }
+            GameObject.Find("FinalStage").gameObject.SetActive(true);
+
         }
         stageIndex++;
         Player.transform.position = StartPosition;
@@ -148,7 +154,24 @@ public class GameManager : MonoBehaviour
             audioManager.BGMSound("Stage3");
         else if (stageIndex >= 12 && stageIndex <= 15)
             audioManager.BGMSound("Stage4");
-
+       
+    }
+    void ItemDestory(){
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Rune")){
+            Destroy(obj);
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Armor")){
+            Destroy(obj);
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Hat")){
+            Destroy(obj);
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Glove")){
+            Destroy(obj);
+        }
+        foreach (GameObject obj in  GameObject.FindGameObjectsWithTag("1")){
+            Destroy(obj);
+        }
     }
     public void ToItemStage()
     {

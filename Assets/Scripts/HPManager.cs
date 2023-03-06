@@ -8,6 +8,7 @@ public class HPManager : MonoBehaviour
 {
     public GameManager gameManager;
     public GameObject Player;
+    public GameObject GameOver;
     public StatManager Stat;
 
     public float maxHp;
@@ -53,8 +54,13 @@ public class HPManager : MonoBehaviour
     }
     void IsDie(){
         if(HP <= 0){
-            //암튼 죽는 코드
+            Gameover();
+            Player.transform.position = new Vector2(1000,-1000);
         }
+    }
+    public void Gameover()
+    {
+        GameOver.SetActive(true);
     }
     public void Onslider()
     {

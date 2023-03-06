@@ -19,6 +19,8 @@ public class DiffControl : MonoBehaviour
         Passive = 1;
         SkillLevel = new int[7]{1,1,1,1,1,1,1};
         SkillPoint = 5;// <- 'SkillPoint를 업적에서 가져온다'의 코드로 변경요망
+        Class = "Warrior";
+        Diff = 1;
     }
     
     void FixedUpdate() {

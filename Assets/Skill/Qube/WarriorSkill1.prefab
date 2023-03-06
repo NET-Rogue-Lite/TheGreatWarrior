@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4259015228524296555}
   m_Layer: 10
   m_Name: WarriorSkill1
-  m_TagString: Untagged
+  m_TagString: 1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

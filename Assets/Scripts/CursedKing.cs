@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CursedKing : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class CursedKing : MonoBehaviour
     bool is_Walking = false;
     bool isGround = false;
     public float warpcool;
+    public GameObject GameClearUI;
 
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
 
@@ -40,47 +42,74 @@ public class CursedKing : MonoBehaviour
         Hp = Hp * DiffControl.Diff;
         maxHp = Hp;
         warpcool = 15;
-        // if(equipManager.CurRune == "Cursed")
+        if (DiffControl.Diff == 4)
+        {
+            if (equipManager.CurRune == "Cursed Rune")
+            {
+                equipManager.EquipRune();
+            }
+            if (equipManager.CurRune == "CursedKing's Armor")
+            {
+                equipManager.EquipArmor();
+            }
+            if (equipManager.CurRune == "CursedKing's Helmat")
+            {
+                equipManager.EquipHat();
+            }
+            if (equipManager.CurRune == "CursedKing's Glove")
+            {
+                equipManager.EquipGlove();
+            }
+        }
+
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+
         RaycastHit2D rayHit = Physics2D.Raycast
         (rigid.position, Vector3.down, 5, LayerMask.GetMask("Map"));
-        if (!isGround){
-            if (rayHit.collider != null){
+        if (!isGround)
+        {
+            if (rayHit.collider != null)
+            {
                 isGround = true;
                 anim.SetBool("isGround", true);
             }
         }
-        else{
+        else
+        {
             playerDistance = Player.transform.position.x - transform.position.x;
             transform.rotation = Quaternion.Euler(0, (playerDistance < 0) ? 180 : 0, 0);
             Attack();
             Move();
         }
     }
-    
-    void Move(){
+
+    void Move()
+    {
         warpcool -= 0.02f;
-        if (!is_skilling && warpcool <= 0){
+        if (!is_skilling && warpcool <= 0)
+        {
             anim.SetTrigger("Warp");
         }
-        if( Mathf.Abs(playerDistance) > 4 && !is_skilling){
+        if (Mathf.Abs(playerDistance) > 4 && !is_skilling)
+        {
             is_Walking = true;
             anim.SetBool("IsWalk", true);
             rigid.velocity = new Vector2((Player.transform.position - transform.position).normalized.x * 3, rigid.velocity.y);
         }
-        else{
+        else
+        {
             anim.SetBool("IsWalk", false);
             is_Walking = false;
-            rigid.velocity =  new Vector2(0, rigid.velocity.y);
-        
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
+
         }
     }
 
-    void warp(){
+    void warp()
+    {
         transform.position = new Vector2(Player.transform.position.x + Random.Range(-5, 5), transform.position.y);
         warpcool = Random.Range(7f, 11f);
     }
@@ -92,29 +121,30 @@ public class CursedKing : MonoBehaviour
         {
             is_skilling = true;
             boxCollider2D.enabled = false;
-            rigid.velocity =  new Vector2(0, rigid.velocity.y);
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
             SkillCast();
-            Invoke("SkillCast",1.0f);
-            Invoke("skill_recool",2.0f);
+            Invoke("SkillCast", 1.0f);
+            Invoke("skill_recool", 2.0f);
         }
     }
-    void SkillCast(){
+    void SkillCast()
+    {
         int skill_num = Random.Range(0, 3);
         switch (skill_num)
-            {
-                case 0:
-                    anim.SetTrigger("Skill1");
-                    StartCoroutine(Skill1());
-                    break;
-                case 1:
-                    anim.SetTrigger("Skill2");
-                    StartCoroutine(Skill2());
-                    break;
-                case 2:
-                    anim.SetTrigger("Skill3");
-                    StartCoroutine(Skill3());
-                    break;
-            }
+        {
+            case 0:
+                anim.SetTrigger("Skill1");
+                StartCoroutine(Skill1());
+                break;
+            case 1:
+                anim.SetTrigger("Skill2");
+                StartCoroutine(Skill2());
+                break;
+            case 2:
+                anim.SetTrigger("Skill3");
+                StartCoroutine(Skill3());
+                break;
+        }
     }
 
     IEnumerator Skill1()
@@ -161,7 +191,7 @@ public class CursedKing : MonoBehaviour
             eventDrop.Drop(gameObject.name, gameObject.transform.position);
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);
-
+            GameClearUI.SetActive(true);
         }
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -178,7 +208,7 @@ public class CursedKing : MonoBehaviour
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
-            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage())/2); 
+            OnDamaged(PlayerDamage(other.gameObject.GetComponent<BasicAttack>().GetSkillDamage()) / 2);
             statManager.IsFighting = 5;
         }
     }
@@ -190,5 +220,4 @@ public class CursedKing : MonoBehaviour
             return Damage * 2 / 3;
         return Damage; // 일반타입
     }
-
 }

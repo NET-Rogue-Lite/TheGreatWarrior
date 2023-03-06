@@ -9,14 +9,14 @@ public class ItemBox : MonoBehaviour
     // Update is called once per frame
     void Awake(){
         CanOpen = false;
+        if(gameObject.name=="HiddenItemBox"){
+            CanOpen = true;
+        }
     }
     void FixedUpdate()
     {
         if (GameObject.FindWithTag("Monster") == null){
             CanOpen = true;
-        }
-        else {
-            CanOpen = false;
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {

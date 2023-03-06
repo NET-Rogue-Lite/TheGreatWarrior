@@ -34,7 +34,7 @@ public class SkillManager : MonoBehaviour
             SkillList = WarriorSkillList;
             SkillImg = WarriorSkillImg;
             SkillCoolList = WarriorSkillCoolList;
-            if (DiffControl.Passive==2) {
+            if (DiffControl.Passive==1) {
                 statManager.Ad+= 10;
                 Passive = "예리한 검날";}
             else{
@@ -51,7 +51,7 @@ public class SkillManager : MonoBehaviour
                 Passive = "예리한 사수";}
             else{
                 GameObject.Find("BasicAttack").GetComponent<ArcherAttack>().ArcherBonusAttack = true;
-                Passive = "한번에 두발";}
+                Passive = "한 번에 두발";}
         }
         SkillDict = new Dictionary<string, GameObject>();
         SkillCoolDict = new Dictionary<string, float>();
