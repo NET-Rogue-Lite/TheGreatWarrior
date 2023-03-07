@@ -35,7 +35,9 @@ public class GameManager : MonoBehaviour
     {
         StartPosition = new Vector2(25, 3);
         GameStart();
+        hPManager.HP = 100;
         statManager.MaxHp = hPManager.HP * 2;
+        hPManager.HP = 100;
         RandomStage = Random.Range(1, 2);
         i = 0;
         IsItemStagePortal = false;

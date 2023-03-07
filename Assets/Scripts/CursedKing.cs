@@ -134,17 +134,14 @@ public class CursedKing : MonoBehaviour
         switch (skill_num)
         {
             case 0:
-                audioManager.finalBossSound("Attack1");
                 anim.SetTrigger("Skill1");
                 StartCoroutine(Skill1());
                 break;
             case 1:
-                audioManager.finalBossSound("Attack2");
                 anim.SetTrigger("Skill2");
                 StartCoroutine(Skill2());
                 break;
             case 2:
-                audioManager.finalBossSound("Attack3");
                 anim.SetTrigger("Skill3");
                 StartCoroutine(Skill3());
                 break;
@@ -154,6 +151,7 @@ public class CursedKing : MonoBehaviour
     IEnumerator Skill1()
     {
         yield return new WaitForSeconds(0.7f);
+                audioManager.finalBossSound("Attack1");
         transform.Find("Skill1").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         transform.Find("Skill1").gameObject.SetActive(false);
@@ -162,6 +160,7 @@ public class CursedKing : MonoBehaviour
     IEnumerator Skill2()
     {
         yield return new WaitForSeconds(0.7f);
+                audioManager.finalBossSound("Attack2");
         transform.Find("Skill2").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         transform.Find("Skill2").gameObject.SetActive(false);
@@ -170,6 +169,7 @@ public class CursedKing : MonoBehaviour
     IEnumerator Skill3()
     {
         yield return new WaitForSeconds(0.7f);
+                audioManager.finalBossSound("Attack3");
         transform.Find("Skill3").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         transform.Find("Skill3").gameObject.SetActive(false);

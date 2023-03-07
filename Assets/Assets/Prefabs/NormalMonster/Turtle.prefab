@@ -94,7 +94,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &3004784926613810103
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,7 +111,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &3004784926613810096
 Rigidbody2D:
   serializedVersion: 4
@@ -244,7 +244,7 @@ MonoBehaviour:
   Ad: 3
   Idle_speed: 2
   Chase_speed: 3
-  Attack_range: 1.35
+  Attack_range: 0.9
   Close_range: 4
   hpBar: {fileID: 3004784926847094488}
   IsLookLeft: 0

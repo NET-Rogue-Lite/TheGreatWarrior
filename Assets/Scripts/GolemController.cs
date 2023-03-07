@@ -200,6 +200,7 @@ public class GolemController : MonoBehaviour
             Destroy(gameObject, 1);
             Die = true;
         }
+        audioManager.monsterSound("Damaged");
         nextMove = spriteRenderer.flipX == true ? -1 : 1;
         // rigid.AddForce(Vector2.left* nextMove*3+ Vector2.up * 3, ForceMode2D.Impulse);
         // spriteRenderer.color = new Color(1, 1, 1, 0.4f);

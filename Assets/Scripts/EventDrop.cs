@@ -16,6 +16,7 @@ public class EventDrop : MonoBehaviour
     Sprite[] HatItemImage;
     Sprite[] GloveItemImage;
     ItemManager itemManager;
+    Dictionary<string,bool> IsDropped;
     void Awake()
     {
         itemManager = GameObject.Find("ItemManager").gameObject.GetComponent<ItemManager>();
@@ -24,6 +25,7 @@ public class EventDrop : MonoBehaviour
         HatItemImage = itemManager.HatItemImage;
         GloveItemImage = itemManager.GloveItemImage;
         
+        IsDropped = new Dictionary<string, bool>();
         equipManager = GameObject.Find("EquipManager").GetComponent<EquipManager>();
         switch (DiffControl.Class)
         {
@@ -35,9 +37,24 @@ public class EventDrop : MonoBehaviour
                 break;
         }
     }
+    void DropFalse(){
+        IsDropped["HiddenItemBox"] = false;
+        IsDropped["ItemBox"] = false;
+    }
     public void Drop(string MonsterName , Vector2 Position)
     {   //0,1은 패시브스킬, 2,3은 짧쿨, 4,5는 긴쿨, 6,7은 궁극스킬
         transform.position = Position;
+        if(IsDropped.ContainsKey(MonsterName)){
+            if(IsDropped[MonsterName] == false)
+            {
+            }
+             else {
+                return;
+            }
+        }
+        else{
+            IsDropped.Add(MonsterName,true);
+        }
         if (MonsterName == "Boss1")
         {
             GameObject tempskill = Instantiate(SkillQube[0], transform.position, Quaternion.identity);
@@ -122,11 +139,13 @@ public class EventDrop : MonoBehaviour
         {
             SetProbability(5, 2);//2개에서 4개사이 드랍
             ItemBoxDrop(RandomNumber);
+            Invoke("DropFalse",5);
         }
         if (MonsterName == "HiddenItemBox")
         {
             //1개 드랍
             ItemBoxDrop(1);
+            Invoke("DropFalse",5);
         }
     }
     float SetProbability(int num = 0, int min = 0)

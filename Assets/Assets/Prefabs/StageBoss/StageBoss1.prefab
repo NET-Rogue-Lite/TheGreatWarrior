@@ -34,7 +34,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -476,7 +476,6 @@ GameObject:
   - component: {fileID: 4327603199524336424}
   - component: {fileID: 4327603199524336431}
   - component: {fileID: 4327603199524336430}
-  - component: {fileID: 5062749283863410863}
   m_Layer: 11
   m_Name: StageBoss1
   m_TagString: Monster
@@ -554,7 +553,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &4327603199524336417
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -571,7 +570,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &4327603199524336425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,14 +585,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 4174084551038538035}
   statManager: {fileID: 0}
+  audioManager: {fileID: 0}
   spit: {fileID: 8630472689625553000, guid: 74627339d37d82d4dad4d3f38682b31b, type: 3}
+  eventDrop: {fileID: 0}
+  portal: {fileID: 0}
   maxHp: 0
   Hp: 1500
   skill0: 2
   skill1: 4
   skill2: 8
-  CurType: 0
-  portal: {fileID: 0}
+  CurType: 3
 --- !u!61 &4327603199524336424
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -657,23 +658,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -2.84}
   m_Size: {x: 0.1, y: 0.1}
   m_Direction: 0
---- !u!114 &5062749283863410863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4327603199524336416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9022207a35e205e40b90fd6c48fc0810, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WarriorSkillQube:
-  - {fileID: 3777997692935808631, guid: 007b594a4acf8d0469415fac897ee1e7, type: 3}
-  - {fileID: 6708848457940000049, guid: 10a53b6f063de6c4c8edfb50483053ab, type: 3}
-  - {fileID: 3474120315699849183, guid: 3328996fa63b2764087ca37d7d922309, type: 3}
-  - {fileID: 2016098743196956485, guid: 630dccabcded16d48aecdb81c08ababa, type: 3}
-  - {fileID: 3777997692935808631, guid: 52223113475f57a4ab4eab9824e7a9cb, type: 3}
-  ArcherSkillQube: []
-  TempItemQube: {fileID: 6433485365273927068, guid: 431560460a11a954d926ae3a264447bb, type: 3}

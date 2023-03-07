@@ -35,6 +35,8 @@ public class HPManager : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if(HP>maxHp)
+            HP -= (HP%maxHp);
         maxHp = Stat.MaxHp;
         hpBar.value = HP / maxHp;
         shieldBar.value = Shield / maxHp;

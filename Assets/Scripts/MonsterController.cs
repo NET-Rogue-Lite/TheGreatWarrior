@@ -154,7 +154,7 @@ public class MonsterController : MonoBehaviour
         {
             if (isPlayer_close && !isAttack)
             {
-                if (rayHit2.collider != null)
+                if (rayHit2.collider != null || CanFly == 1)
                 {
                     return;
                 }
