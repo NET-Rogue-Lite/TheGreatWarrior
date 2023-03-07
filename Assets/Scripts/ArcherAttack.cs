@@ -48,10 +48,10 @@ public class ArcherAttack : MonoBehaviour
             SkillCasting = true;
             if(ArcherBonusAttack){
                 if(Random.Range(0,100)>= 50){
-                    Instantiate(BasicAttack, new Vector2(gameObject.transform.position.x , gameObject.transform.position.y) , Quaternion.identity);
+                    Instantiate(BasicAttack, new Vector2(gameObject.transform.position.x+0.3f , gameObject.transform.position.y+0.2f) , Quaternion.identity);
                 }
             }
-            Instantiate(BasicAttack, new Vector2(gameObject.transform.position.x , gameObject.transform.position.y) , Quaternion.identity);
+            Instantiate(BasicAttack, new Vector2(gameObject.transform.position.x+0.3f , gameObject.transform.position.y) , Quaternion.identity);
             // anim.SetBool("IsAttacking", true);
             Invoke("DisAppear", 0.5f);
         }

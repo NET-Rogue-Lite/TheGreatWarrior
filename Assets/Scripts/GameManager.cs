@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] ItemStage;
     public GameObject[] BossStage;
     public GameObject Stage;
+    public GameObject FinalStage;
     public int i;
 
     public bool IsItemStagePortal;
@@ -137,13 +138,15 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if(GameObject.Find("FinalStage").gameObject.activeSelf == true){
-                GameObject.Find("FinalStage").transform.GetChild(0).gameObject.SetActive(false);
-                GameObject.Find("FinalStage").transform.GetChild(1).gameObject.SetActive(true);
+            BossStage[3].SetActive(false);
+            if(FinalStage.gameObject.activeSelf == true){
+                Player.transform.position = StartPosition;
+                FinalStage.transform.GetChild(0).gameObject.SetActive(false);
+                FinalStage.transform.GetChild(1).gameObject.SetActive(true);
                 return;
             }
-            GameObject.Find("FinalStage").gameObject.SetActive(true);
-
+            FinalStage.SetActive(true);
+            Player.transform.position = StartPosition;
         }
         stageIndex++;
         Player.transform.position = StartPosition;

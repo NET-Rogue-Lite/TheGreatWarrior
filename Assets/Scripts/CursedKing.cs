@@ -110,6 +110,7 @@ public class CursedKing : MonoBehaviour
 
     void warp()
     {
+        audioManager.finalBossSound("Warp");
         transform.position = new Vector2(Player.transform.position.x + Random.Range(-5, 5), transform.position.y);
         warpcool = Random.Range(7f, 11f);
     }
@@ -133,14 +134,17 @@ public class CursedKing : MonoBehaviour
         switch (skill_num)
         {
             case 0:
+                audioManager.finalBossSound("Attack1");
                 anim.SetTrigger("Skill1");
                 StartCoroutine(Skill1());
                 break;
             case 1:
+                audioManager.finalBossSound("Attack2");
                 anim.SetTrigger("Skill2");
                 StartCoroutine(Skill2());
                 break;
             case 2:
+                audioManager.finalBossSound("Attack3");
                 anim.SetTrigger("Skill3");
                 StartCoroutine(Skill3());
                 break;
@@ -183,11 +187,11 @@ public class CursedKing : MonoBehaviour
         Debug.Log("OnDamaged");
         Hp -= damage;
         hpBar.value = Hp / maxHp;
-        audioManager.boss2Sound("Damaged");
+        audioManager.finalBossSound("Damaged");
         if (Hp <= 0)
         {
-            audioManager.boss2Sound("Die");
-            GetComponent<PolygonCollider2D>().enabled = false;
+            audioManager.finalBossSound("Die");
+            // GetComponent<PolygonCollider2D>().enabled = false;
             eventDrop.Drop(gameObject.name, gameObject.transform.position);
             anim.SetBool("IsDied", true);
             Destroy(gameObject, 1);

@@ -19,7 +19,15 @@ public class StatManager : MonoBehaviour
     }
     void Awake()
     {
-        Type = 6;
+        Type = 0;
+        switch(Class){
+            case "Warrior":
+                Def = 100;
+                break;
+            case "Archer":
+                Def = 70;
+                break;
+        }
     }
     // Update is called once per frame
 }

@@ -188,6 +188,7 @@ public class StageBoss4 : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
             anim.SetBool("IsDied", true);
             eventDrop.Drop(gameObject.name,gameObject.transform.position);
+            portal.SetActive(true);
             Destroy(gameObject, 1);
         }
     }

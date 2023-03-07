@@ -5,9 +5,10 @@ using UnityEngine;
 public class ItemBox : MonoBehaviour
 {
     bool CanOpen;
-    public EventDrop eventDrop;
+    EventDrop eventDrop;
     // Update is called once per frame
     void Awake(){
+        eventDrop = GameObject.Find("EventDrop").GetComponent<EventDrop>();
         CanOpen = false;
         if(gameObject.name=="HiddenItemBox"){
             CanOpen = true;

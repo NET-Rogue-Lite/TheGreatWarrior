@@ -27,6 +27,7 @@ public class Revive : MonoBehaviour
 
     private void OnEnable() {
         GameOverText.text = "Game Over\n" + "CanRevive : " + CanRevive.ToString();    
+        Time.timeScale = 0;
     }
     public void Retry()
     {
@@ -39,16 +40,19 @@ public class Revive : MonoBehaviour
 
         else
         {
+            Time.timeScale = 1;
             hpManager.HP = hpManager.maxHp;
             hpManager.hpBar.value = hpManager.HP / hpManager.maxHp;
             gameOver.SetActive(false);
             Player.transform.position = gameManager.StartPosition;
+            Player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             CanRevive--;
         }
     }   
 
     public void Exit()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Start_Scene");
     }
 

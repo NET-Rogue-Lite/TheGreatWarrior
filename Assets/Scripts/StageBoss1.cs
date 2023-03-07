@@ -133,7 +133,7 @@ public class StageBoss1 : MonoBehaviour
     {
         audioManager.boss1Sound("Tornado");
         yield return new WaitForSeconds(0.25f);
-        rigid.velocity = new Vector2(direc * 0.5f, 0);
+        rigid.velocity = new Vector2(direc * 8.5f, 0);
         yield return new WaitForSeconds(2.3f);
         rigid.velocity = Vector2.zero;
     }

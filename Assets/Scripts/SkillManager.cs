@@ -35,7 +35,7 @@ public class SkillManager : MonoBehaviour
             SkillImg = WarriorSkillImg;
             SkillCoolList = WarriorSkillCoolList;
             if (DiffControl.Passive==1) {
-                statManager.Ad+= 10;
+                statManager.Ad = 20;
                 Passive = "예리한 검날";}
             else{
                 statManager.Def += 50;
@@ -112,7 +112,7 @@ public class SkillManager : MonoBehaviour
                 }
                 if (SkillBoard[Button].name == "WarriorSkill1")
                 {
-                    statManager.ShieldOn(0.5f);
+                    statManager.ShieldOn(0.5f * Mathf.Sqrt(SkillLevel[1]));
                     statManager.MaxHp+=1;
                 }
                 GameObject CastSkill = Instantiate(SkillBoard[Button], Player.transform.position, Quaternion.identity);

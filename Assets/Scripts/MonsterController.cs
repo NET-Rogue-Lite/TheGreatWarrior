@@ -45,18 +45,20 @@ public class MonsterController : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        eventDrop = GameObject.Find("EventDrop").GetComponent<EventDrop>();
         spriteRenderer.flipX = (nextMove == -1)? !IsLookLeft : IsLookLeft;
         Think();
         StrongType = (CurType + 1) % 5;
         WeakType = (CurType - 1) % 5;
         Hp = Hp * DiffControl.Diff;
         maxHp = Hp;
-        eventDrop = GameObject.Find("EventDrop").GetComponent<EventDrop>();
         //Invoke("Think", 5);
     }
 
     void FixedUpdate()
     {
+        if(rigid.velocity.y > 5)
+            rigid.velocity = new Vector2(rigid.velocity.x, 5); 
         if (Die)
         {
 

@@ -112,13 +112,19 @@ public class Boss3 : MonoBehaviour
         if (isAttack)
         {
             Invoke("Rest", 0.8f);
-            GetComponent<PolygonCollider2D>().enabled = true;
+            
             Invoke("RestBack", 5f);
         }
         else
         {
-            GetComponent<PolygonCollider2D>().enabled = false;
+            
         }
+    }
+    public void TriggerOn(){
+        GetComponent<PolygonCollider2D>().enabled = true;
+    }
+    public void TriggerOff(){
+        GetComponent<PolygonCollider2D>().enabled = false;
     }
 
     void Rest(){
