@@ -10,7 +10,7 @@ public class ItemBox : MonoBehaviour
     void Awake(){
         eventDrop = GameObject.Find("EventDrop").GetComponent<EventDrop>();
         CanOpen = false;
-        if(gameObject.name=="HiddenItemBox"){
+        if(gameObject.name=="HiddenItemBox" || gameObject.name=="SkillBox"){
             CanOpen = true;
         }
     }
@@ -23,6 +23,7 @@ public class ItemBox : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Player"){
             if(CanOpen){
+                CanOpen = false;
                 eventDrop.gameObject.transform.position = gameObject.transform.position;
                 eventDrop.Drop(gameObject.name,gameObject.transform.position);
                 Destroy(gameObject);

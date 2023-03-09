@@ -7,6 +7,7 @@ public class ArcherAttack : MonoBehaviour
     // Start is called before the first frame update
     Animator anim;
     public bool SkillCasting = false;
+    public bool Casting;
     GameObject Player;
     public int Monsternum;
     public float AttackDamage;
@@ -25,9 +26,9 @@ public class ArcherAttack : MonoBehaviour
         skillManager = GameObject.Find("SkillManager").GetComponent<SkillManager>();
         anim = GetComponent<Animator>();
         Player = GameObject.FindGameObjectWithTag("Player");
-        if (gameObject.name == "WarriorSkill2(Clone)" && !SkillCasting){
-            gameObject.transform.position = new Vector2(gameObject.transform.position.x + (Player.GetComponent<SpriteRenderer>().flipX == true ? -3 : 3) , gameObject.transform.position.y + 5);
-        }
+        // if (gameObject.name == "WarriorSkill2(Clone)" && !SkillCasting){
+        //     gameObject.transform.position = new Vector2(gameObject.transform.position.x + (Player.GetComponent<SpriteRenderer>().flipX == true ? -3 : 3) , gameObject.transform.position.y + 5);
+        // }
         
     }
 
@@ -41,19 +42,23 @@ public class ArcherAttack : MonoBehaviour
         }
         return AttackDamage * Mathf.Sqrt(SkillLevel);
     }
+    void Update() {
+        
+        Casting = Player.GetComponent<Animator>().GetBool("IsCasting");
+    }
     void FixedUpdate()
     {
-        
-        if (gameObject.name == "BasicAttack" && anim.GetBool("IsAttacking") && !SkillCasting){
+
+        if (gameObject.name == "BasicAttack" && anim.GetBool("IsAttacking") && !SkillCasting && !Casting){
             SkillCasting = true;
             if(ArcherBonusAttack){
                 if(Random.Range(0,100)>= 50){
-                    Instantiate(BasicAttack, new Vector2(gameObject.transform.position.x+0.3f , gameObject.transform.position.y+0.2f) , Quaternion.identity);
+                    Instantiate(BasicAttack, new Vector2(gameObject.transform.position.x+ (Player.GetComponent<SpriteRenderer>().flipX == true ? -0.3f : 0.3f) , gameObject.transform.position.y+0.2f) , Quaternion.identity);
                 }
             }
-            Instantiate(BasicAttack, new Vector2(gameObject.transform.position.x+0.3f , gameObject.transform.position.y) , Quaternion.identity);
+            Instantiate(BasicAttack, new Vector2(gameObject.transform.position.x+ (Player.GetComponent<SpriteRenderer>().flipX == true ? -0.3f : 0.3f) , gameObject.transform.position.y) , Quaternion.identity);
             // anim.SetBool("IsAttacking", true);
-            Invoke("DisAppear", 0.5f);
+            Invoke("DisAppear", 0.52f);
         }
         if (gameObject.name == "BasicAttack" ){
             gameObject.GetComponent<SpriteRenderer>().flipX = Player.GetComponent<SpriteRenderer>().flipX;

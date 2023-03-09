@@ -139,7 +139,7 @@ public class StageBoss1 : MonoBehaviour
     }
     void Skill2()
     {
-        transform.position = new Vector2(Player.transform.position.x, 5);
+        transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y+5);
     }
 
     public void OnDamaged(float damage)

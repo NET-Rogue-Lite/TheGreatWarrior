@@ -16,20 +16,29 @@ public class ArrowMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         sprite.flipX = flip;
-        rigid.velocity = IsRain == false ? (Vector2.right * 24 * (flip == true? -1 : 1) + Vector2.up * 1.5f) : Vector2.down * 1.5f;
+        rigid.velocity = IsRain == false ? (Vector2.right * 24 * (flip == true? -1 : 1) + Vector2.up * 1.5f) : Vector2.down * 10.5f;
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.tag== "Player" || other.gameObject.layer ==LayerMask.NameToLayer("PlayerAttack")){
             return;
         }
+        if(IsRain){
+            if(other.gameObject.layer ==LayerMask.NameToLayer("Map"))
+                return;
+        }
         Debug.Log("Name" + other.gameObject.name);
         Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag== "Player" || other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack")){
+        if(other.gameObject.tag== "Player" || other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack")
+         || other.gameObject.tag == "Rope" || other.gameObject.name == "Portal"){
             return;
+        }
+        if(IsRain){
+            if(other.gameObject.layer ==LayerMask.NameToLayer("Map"))
+                return;
         }
         Debug.Log("Name" + other.gameObject.name);
         Destroy(gameObject);

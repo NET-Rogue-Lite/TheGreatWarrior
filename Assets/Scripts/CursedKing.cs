@@ -42,26 +42,34 @@ public class CursedKing : MonoBehaviour
         Hp = Hp * DiffControl.Diff;
         maxHp = Hp;
         warpcool = 15;
+    }
+    void OnEnable() {
+        Debug.Log("ONENABLE KING");
+        Debug.Log("난이도는 : " + DiffControl.Diff.ToString());
+        Debug.Log(equipManager.CurRune);
+        Debug.Log(equipManager.CurRune);
+        Debug.Log(equipManager.CurRune);
+        Debug.Log(equipManager.CurRune);
+        
         if (DiffControl.Diff == 4)
         {
             if (equipManager.CurRune == "Cursed Rune")
             {
                 equipManager.EquipRune();
             }
-            if (equipManager.CurRune == "CursedKing's Armor")
+            if (equipManager.CurArmor == "CursedKing's Armor")
             {
                 equipManager.EquipArmor();
             }
-            if (equipManager.CurRune == "CursedKing's Helmat")
+            if (equipManager.CurHat == "CursedKing's Helmat")
             {
                 equipManager.EquipHat();
             }
-            if (equipManager.CurRune == "CursedKing's Glove")
+            if (equipManager.CurGlove == "CursedKing's Glove")
             {
                 equipManager.EquipGlove();
             }
         }
-
     }
     // Update is called once per frame
     void FixedUpdate()

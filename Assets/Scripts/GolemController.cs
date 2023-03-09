@@ -149,7 +149,7 @@ public class GolemController : MonoBehaviour
         RaycastHit2D rayHit1 = Physics2D.Raycast(rigid.position + Vector2.right * (nextMove) * 0.5f + Vector2.down * 0.5f, Vector3.down, 3, LayerMask.GetMask("Map"));
         Debug.DrawRay(rigid.position + Vector2.right * (nextMove) * 2.7f + Vector2.down, Vector3.down * 2, new Color(0, 1, 0));
         RaycastHit2D rayHit2 = Physics2D.Raycast(rigid.position + Vector2.right * (nextMove) * 2.7f + Vector2.down * 0.5f, Vector3.down, 3, LayerMask.GetMask("Map"));
-
+        
         if (rayHit1.collider == null)
         {
             if (isPlayer_close && !isAttack)
@@ -181,7 +181,7 @@ public class GolemController : MonoBehaviour
             spriteRenderer.flipX = (nextMove == -1);
         }
 
-        float nextThinkTime = Random.Range(0.5f, 2f);
+        float nextThinkTime = Random.Range(20, 30f);
         Invoke("Think", nextThinkTime);
     }
 

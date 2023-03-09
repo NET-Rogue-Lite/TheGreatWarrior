@@ -285,103 +285,103 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1576}
     - Class: 114
-      Script: {instanceID: 1702}
+      Script: {instanceID: 1774}
     - Class: 114
-      Script: {instanceID: 1880}
+      Script: {instanceID: 1952}
     - Class: 114
-      Script: {instanceID: 2072}
+      Script: {instanceID: 2144}
     - Class: 114
-      Script: {instanceID: 2176}
+      Script: {instanceID: 2248}
     - Class: 114
-      Script: {instanceID: 2582}
+      Script: {instanceID: 2654}
     - Class: 114
-      Script: {instanceID: 2632}
+      Script: {instanceID: 2704}
     - Class: 114
-      Script: {instanceID: 2802}
+      Script: {instanceID: 2874}
     - Class: 114
-      Script: {instanceID: 2814}
+      Script: {instanceID: 2886}
     - Class: 114
-      Script: {instanceID: 2860}
+      Script: {instanceID: 2932}
     - Class: 114
-      Script: {instanceID: 2946}
+      Script: {instanceID: 3018}
     - Class: 114
-      Script: {instanceID: 2962}
+      Script: {instanceID: 3034}
     - Class: 114
-      Script: {instanceID: 3194}
+      Script: {instanceID: 3266}
     - Class: 114
-      Script: {instanceID: 3274}
+      Script: {instanceID: 3346}
     - Class: 114
-      Script: {instanceID: 3308}
+      Script: {instanceID: 3380}
     - Class: 114
-      Script: {instanceID: 3672}
+      Script: {instanceID: 3744}
     - Class: 114
-      Script: {instanceID: 3696}
+      Script: {instanceID: 3768}
     - Class: 114
-      Script: {instanceID: 3994}
+      Script: {instanceID: 4066}
     - Class: 114
-      Script: {instanceID: 4360}
+      Script: {instanceID: 4432}
     - Class: 114
-      Script: {instanceID: 4378}
+      Script: {instanceID: 4450}
     - Class: 114
-      Script: {instanceID: 4728}
+      Script: {instanceID: 4800}
     - Class: 114
-      Script: {instanceID: 4768}
+      Script: {instanceID: 4840}
     - Class: 114
-      Script: {instanceID: 4822}
+      Script: {instanceID: 4894}
     - Class: 114
-      Script: {instanceID: 4860}
+      Script: {instanceID: 4932}
     - Class: 114
-      Script: {instanceID: 5314}
+      Script: {instanceID: 5386}
     - Class: 114
-      Script: {instanceID: 5716}
+      Script: {instanceID: 5788}
     - Class: 114
-      Script: {instanceID: 5864}
+      Script: {instanceID: 5936}
     - Class: 114
-      Script: {instanceID: 5906}
+      Script: {instanceID: 5978}
     - Class: 114
-      Script: {instanceID: 5922}
+      Script: {instanceID: 5994}
     - Class: 114
-      Script: {instanceID: 6026}
+      Script: {instanceID: 6098}
     - Class: 114
-      Script: {instanceID: 6320}
+      Script: {instanceID: 6392}
     - Class: 114
-      Script: {instanceID: 6456}
+      Script: {instanceID: 6528}
     - Class: 114
-      Script: {instanceID: 6770}
+      Script: {instanceID: 6842}
     - Class: 114
-      Script: {instanceID: 6782}
+      Script: {instanceID: 6854}
     - Class: 114
-      Script: {instanceID: 6882}
+      Script: {instanceID: 6954}
     - Class: 114
-      Script: {instanceID: 6978}
+      Script: {instanceID: 7050}
     - Class: 114
-      Script: {instanceID: 7384}
+      Script: {instanceID: 7456}
     - Class: 114
-      Script: {instanceID: 7930}
+      Script: {instanceID: 8002}
     - Class: 114
-      Script: {instanceID: 8076}
+      Script: {instanceID: 8148}
     - Class: 114
-      Script: {instanceID: 8370}
+      Script: {instanceID: 8442}
     - Class: 114
-      Script: {instanceID: 8578}
+      Script: {instanceID: 8650}
     - Class: 114
-      Script: {instanceID: 8642}
+      Script: {instanceID: 8714}
     - Class: 114
-      Script: {instanceID: 8646}
+      Script: {instanceID: 8718}
     - Class: 114
-      Script: {instanceID: 8710}
+      Script: {instanceID: 8782}
     - Class: 114
-      Script: {instanceID: 8830}
+      Script: {instanceID: 8902}
     - Class: 114
-      Script: {instanceID: 9026}
+      Script: {instanceID: 9098}
     - Class: 114
-      Script: {instanceID: 9142}
+      Script: {instanceID: 9214}
     - Class: 114
-      Script: {instanceID: 9218}
+      Script: {instanceID: 9290}
     - Class: 114
-      Script: {instanceID: 9484}
+      Script: {instanceID: 9556}
     - Class: 114
-      Script: {instanceID: 9706}
+      Script: {instanceID: 9778}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -450,29 +450,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1576}
     - Class: 114
-      Script: {instanceID: 1600}
+      Script: {instanceID: 1672}
     - Class: 114
-      Script: {instanceID: 1854}
+      Script: {instanceID: 1926}
     - Class: 114
-      Script: {instanceID: 2350}
+      Script: {instanceID: 2422}
     - Class: 114
-      Script: {instanceID: 2860}
+      Script: {instanceID: 2932}
     - Class: 114
-      Script: {instanceID: 3300}
+      Script: {instanceID: 3372}
     - Class: 114
-      Script: {instanceID: 4770}
+      Script: {instanceID: 4842}
     - Class: 114
-      Script: {instanceID: 5114}
+      Script: {instanceID: 5186}
     - Class: 114
-      Script: {instanceID: 6026}
+      Script: {instanceID: 6098}
     - Class: 114
-      Script: {instanceID: 6770}
+      Script: {instanceID: 6842}
     - Class: 114
-      Script: {instanceID: 6978}
+      Script: {instanceID: 7050}
     - Class: 114
-      Script: {instanceID: 8932}
+      Script: {instanceID: 9004}
     - Class: 114
-      Script: {instanceID: 9458}
+      Script: {instanceID: 9530}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -858,7 +858,7 @@ ScriptsOnlyBuild:
     className: BasicAttack
   - hash:
       serializedVersion: 2
-      Hash: 92eceb275e3276087036ab41cdebdf01
+      Hash: 0da5f813a2246c22f0cdf9fea76fb3a0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Boss3
@@ -1602,7 +1602,7 @@ ScriptsOnlyBuild:
     className: StateMachine
   - hash:
       serializedVersion: 2
-      Hash: 20b64367fe96a00605e91d3f0c8c3a1e
+      Hash: bdf49c6fc6b16d748b00dafcf2c93ce4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ArcherAttack
@@ -1688,4 +1688,5 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/Start_Scene.unity
   - Assets/Scenes/Game_Scene.unity
-  playerPath: "C:/Users/mingu/Unity/\uBE4C\uB4DC\uD30C\uC77C/Great Warrior.exe"
+  playerPath: "C:/OnlyUnity/\uBE4C\uB4DC\uD30C\uC77C/TheGreatWarrior_Alpha_1.0.0/Great
+    Warrior.exe"

@@ -45,10 +45,8 @@ public class EventDrop : MonoBehaviour
     {   //0,1은 패시브스킬, 2,3은 짧쿨, 4,5는 긴쿨, 6,7은 궁극스킬
         transform.position = Position;
         if(IsDropped.ContainsKey(MonsterName)){
-            if(IsDropped[MonsterName] == false)
+            if(IsDropped[MonsterName] == true)
             {
-            }
-             else {
                 return;
             }
         }
@@ -146,6 +144,16 @@ public class EventDrop : MonoBehaviour
             //1개 드랍
             ItemBoxDrop(1);
             Invoke("DropFalse",5);
+        }
+        if (MonsterName == "SkillBox")
+        {
+            float temp = SetProbability(SkillQube.Length);
+            Debug.Log("Drop : " + temp.ToString());
+            /*랜덤스킬 1개 드랍*/
+            GameObject tempskill = Instantiate(SkillQube[RandomNumber], transform.position, Quaternion.identity);
+            int index = tempskill.name.IndexOf("(Clone)");
+            if (index > 0) 
+                tempskill.name = tempskill.name.Substring(0, index);
         }
     }
     float SetProbability(int num = 0, int min = 0)

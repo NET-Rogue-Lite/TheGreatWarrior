@@ -16,13 +16,21 @@ public class EquipManager : MonoBehaviour
     //어둠속성은 4444는 무조건 모두에게 약점속성. 단, 1.5배임.
         new Dictionary<string, float[]>()
         {
+            
+            
             {"BasicRune", new float[] {0,0}},
-            {"WaterRune", new float[] {20,1}},
-            {"FireRune", new float[] {20,2}},
+            {"WaterRune", new float[] {10,1}},
+            {"FireRune", new float[] {10,2}},
+            {"WoodRune", new float[] {10,3}},
+            {"SoliRune", new float[] {10,4}},
+            {"ThunderRune", new float[] {10,5}},
+            {"NormalRune", new float[] {15,0}},
+            {"IceRune", new float[] {20,1}},
+            {"MagmaRune", new float[] {20,2}},
             {"TreeRune", new float[] {20,3}},
-            {"SoliRune", new float[] {20,4}},
-            {"ThunderRune", new float[] {20,5}},
-            {"NormalRune", new float[] {20,0}},
+            {"RockRune", new float[] {20,4}},
+            {"PlasmaRune", new float[] {20,5}},
+            {"PowerRune", new float[] {30,0}},
             {"Cursed Rune", new float[] {30,4444}}
         };
     public Dictionary<string, float> ArmorList = //방어구는 방어력

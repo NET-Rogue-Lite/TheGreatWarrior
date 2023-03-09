@@ -17,7 +17,10 @@ public class Revive : MonoBehaviour
     public int CanRevive;
     void Awake()
     {
-        CanRevive = 4;
+        if (DiffControl.Diff == 4)
+            CanRevive = 0;
+        else 
+            CanRevive = 4;
         gameManager = GameObject.Find("GameManager").gameObject.GetComponent<GameManager>();
         hpManager = GameObject.Find("HPManager").gameObject.GetComponent<HPManager>();
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -31,14 +34,7 @@ public class Revive : MonoBehaviour
     }
     public void Retry()
     {
-        if (DiffControl.Diff == 4)
-        {
-            CanRevive = 0;
-            RetryText.GetComponent<UnityEngine.UI.Text>().text = "Exit";
-            // Exit();
-        }
-
-        else
+        if(CanRevive > 0)
         {
             Time.timeScale = 1;
             hpManager.HP = hpManager.maxHp;
@@ -47,6 +43,9 @@ public class Revive : MonoBehaviour
             Player.transform.position = gameManager.StartPosition;
             Player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             CanRevive--;
+        }
+        else {
+            RetryText.GetComponent<UnityEngine.UI.Text>().text = "Exit->";
         }
     }   
 

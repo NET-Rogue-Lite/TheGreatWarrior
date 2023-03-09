@@ -145,13 +145,12 @@ public class MonsterController : MonoBehaviour
     }
     private void MapCheck()
     {
-        Debug.DrawRay(rigid.position + Vector2.right * (nextMove) * 0.5f + Vector2.down, Vector3.down * 2, new Color(0, 1, 0));
-        RaycastHit2D rayHit1 = Physics2D.Raycast(rigid.position + Vector2.right * (nextMove) * 0.5f + Vector2.down * 0.5f, Vector3.down, 3, LayerMask.GetMask("Map"));
-        Debug.DrawRay(rigid.position + Vector2.right * (nextMove) * 2.7f + Vector2.down, Vector3.down * 2, new Color(0, 1, 0));
-        RaycastHit2D rayHit2 = Physics2D.Raycast(rigid.position + Vector2.right * (nextMove) * 2.7f + Vector2.down * 0.5f, Vector3.down, 3, LayerMask.GetMask("Map"));
-
+        Debug.DrawRay(rigid.position + Vector2.right * (nextMove) * 0.5f, Vector3.down * 3.5f, new Color(0, 1, 0));
+        RaycastHit2D rayHit1 = Physics2D.Raycast(rigid.position + Vector2.right * (nextMove) * 0.5f, Vector3.down, 3.5f, LayerMask.GetMask("Map"));
+        Debug.DrawRay(rigid.position + Vector2.right * (nextMove) * 2.7f, Vector3.down * 3.5f, new Color(0, 1, 0));
+        RaycastHit2D rayHit2 = Physics2D.Raycast(rigid.position + Vector2.right * (nextMove) * 2.7f, Vector3.down, 3.5f, LayerMask.GetMask("Map"));
         if (rayHit1.collider == null)
-        {
+        {   
             if (isPlayer_close && !isAttack)
             {
                 if (rayHit2.collider != null || CanFly == 1)
@@ -159,7 +158,12 @@ public class MonsterController : MonoBehaviour
                     return;
                 }
             }
-            // CancelInvoke();
+            if(Hit)
+            {
+
+            } else{
+                CancelInvoke();
+            }
             Invoke("Think", 1);
             nextMove = -nextMove;
 
@@ -179,7 +183,7 @@ public class MonsterController : MonoBehaviour
             spriteRenderer.flipX = (nextMove == -1)? !IsLookLeft : IsLookLeft;
         }
 
-        float nextThinkTime = Random.Range(0.5f, 2f);
+        float nextThinkTime = Random.Range(2.5f, 4f);
         Invoke("Think", nextThinkTime);
     }
 

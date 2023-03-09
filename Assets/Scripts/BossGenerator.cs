@@ -11,6 +11,8 @@ public class BossGenerator : MonoBehaviour
         int index = temp.name.IndexOf("(Clone)");
         if (index > 0)
             temp.name = temp.name.Substring(0, index);
-
+        if (temp.name == "Boss3"){
+            temp.transform.localEulerAngles = new Vector3(0,180,0);
+        }
     }
 }

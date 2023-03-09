@@ -34,8 +34,8 @@ public class Boss3 : MonoBehaviour
     public int CurType;
     int StrongType;
     int WeakType;
-    public int CanFly;
     public bool Die = false;
+    bool Rest = false;
     EventDrop eventDrop;
     //물1 > 불2 > 나무3 > 흙4 > 번개5 > 물 무속성은 6물
     void Awake()
@@ -69,11 +69,17 @@ public class Boss3 : MonoBehaviour
             if (Hit)
             {
                 anim.SetTrigger("Hurt");
-                rigid.velocity = Vector2.zero;
+                Close_range = 20;
             }
-            CheckPlayerClose();
-            Attack();
-            Move();
+            else {
+                Close_range = 8;
+            }
+            if (!Rest){
+             
+                CheckPlayerClose();
+                Attack();
+                Move();   
+            }
         }
     }
 
@@ -91,7 +97,6 @@ public class Boss3 : MonoBehaviour
             Speed = Chase_speed;
             isPlayer_close = true;
             isAttack = false;
-            GetComponent<BoxCollider2D>().enabled = false;
         }
         else
         {
@@ -101,23 +106,19 @@ public class Boss3 : MonoBehaviour
             }
             Speed = Idle_speed;
             isPlayer_close = false;
-            GetComponent<BoxCollider2D>().enabled = true;
             isAttack = false;
         }
     }
 
     private void Attack()
     {
+        // if(!Rest)
         anim.SetBool("IsAttack", isAttack);
-        if (isAttack)
+        if (isAttack && !Rest)
         {
-            Invoke("Rest", 0.8f);
-            
-            Invoke("RestBack", 5f);
-        }
-        else
-        {
-            
+            Rest = true;
+            Invoke("BeRest",Random.Range(1f,3.5f));
+            Invoke("RestBack", 4f);
         }
     }
     public void TriggerOn(){
@@ -126,15 +127,17 @@ public class Boss3 : MonoBehaviour
     public void TriggerOff(){
         GetComponent<PolygonCollider2D>().enabled = false;
     }
-
-    void Rest(){
-        Attack_range = 0;
-        Close_range = 0;
+    public void DirChange(){
+        spriteRenderer.flipX = ((Player.transform.position - transform.position).normalized.x < 0);    
+    }
+    void BeRest(){
+        anim.SetBool("IsAttack", false);
     }
 
     void RestBack(){
-        Attack_range = 5;
-        Close_range = 6;
+        // Attack_range = 5;
+        // Close_range = 8;
+        Rest = false;
     }
 
     private void Move()
@@ -144,18 +147,23 @@ public class Boss3 : MonoBehaviour
         else
             anim.SetBool("IsWalk", false);
 
+        if(GetComponent<PolygonCollider2D>().enabled){
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
+            return;
+        }
+
         if (!isPlayer_close)
         {
-            rigid.velocity = new Vector2(Speed * nextMove, rigid.velocity.y);
-            if (nextMove != 0)
+            rigid.velocity = new Vector2(Speed * nextMove, rigid.velocity.y);            
+            spriteRenderer.flipX = (nextMove == -1);
             MapCheck();
         }
         else if (!isAttack)
         {
             rigid.velocity = new Vector2((Player.transform.position - transform.position).normalized.x * Speed,
-            (Player.transform.position - transform.position).normalized.y * Speed * CanFly +  rigid.velocity.y);
+            rigid.velocity.y);
             nextMove = rigid.velocity.x / Mathf.Abs(rigid.velocity.x);
-            spriteRenderer.flipX = (rigid.velocity.x < 0);
+            spriteRenderer.flipX = (nextMove == -1);
             MapCheck();
         }
         else
@@ -167,21 +175,22 @@ public class Boss3 : MonoBehaviour
 
     private void MapCheck()
     {
-        Debug.DrawRay(rigid.position + Vector2.right * (nextMove) * 0.5f + Vector2.down, Vector3.down * 2, new Color(0, 1, 0));
-        RaycastHit2D rayHit1 = Physics2D.Raycast(rigid.position + Vector2.right * (nextMove) * 0.5f + Vector2.down * 0.5f, Vector3.down, 3, LayerMask.GetMask("Map"));
-        Debug.DrawRay(rigid.position + Vector2.right * (nextMove) * 2.7f + Vector2.down, Vector3.down * 2, new Color(0, 1, 0));
-        RaycastHit2D rayHit2 = Physics2D.Raycast(rigid.position + Vector2.right * (nextMove) * 2.7f + Vector2.down * 0.5f, Vector3.down, 3, LayerMask.GetMask("Map"));
-
+        Debug.DrawRay(rigid.position + Vector2.right * (nextMove) * 0.5f, Vector3.down * 3.5f, new Color(0, 1, 0));
+        RaycastHit2D rayHit1 = Physics2D.Raycast(rigid.position + Vector2.right * (nextMove) * 0.5f, Vector3.down, 3.5f, LayerMask.GetMask("Map"));
+        Debug.DrawRay(rigid.position + Vector2.right * (nextMove) * 2.7f, Vector3.down * 3.5f, new Color(0, 1, 0));
+        RaycastHit2D rayHit2 = Physics2D.Raycast(rigid.position + Vector2.right * (nextMove) * 2.7f, Vector3.down, 3.5f, LayerMask.GetMask("Map"));
         if (rayHit1.collider == null)
         {
             if (isPlayer_close && !isAttack)
             {
-                if (rayHit2.collider != null)
-                {
-                    return;
-                }
+                return;
             }
-            // CancelInvoke();
+            if(Hit)
+            {
+
+            } else{
+                CancelInvoke();
+            }
             Invoke("Think", 1);
             nextMove = -nextMove;
 

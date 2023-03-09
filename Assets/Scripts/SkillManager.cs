@@ -88,6 +88,10 @@ public class SkillManager : MonoBehaviour
                 SkillCool[i] = 0;
                 SkillUI[i].sprite = SkillImgDict[name];
                 return true;
+            } else {
+                if(SkillBoard[i].name == name){
+                    return false;
+                }
             }
         }
         return false;

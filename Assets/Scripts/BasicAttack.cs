@@ -48,6 +48,12 @@ public class BasicAttack : MonoBehaviour
         }
         if (gameObject.name == "ArcherSkill4(Clone)"){
             gameObject.transform.position = new Vector2(gameObject.transform.position.x + (Player.GetComponent<SpriteRenderer>().flipX == true ? -0.5f : 0.5f) , gameObject.transform.position.y);
+            SkillCasting = true;
+            GameObject.Find("BasicAttack").GetComponent<Animator>().SetTrigger("KnockBack");
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(10 * (Player.GetComponent<SpriteRenderer>().flipX == true ? -1 : 1),0);
+            // Player.GetComponent<Animator>().SetBool("IsCasting", false);
+            Invoke("AfterSkill",0.35f);
+            // anim.SetBool("IsAttacking", true);
         }
     }
 
@@ -142,15 +148,7 @@ public class BasicAttack : MonoBehaviour
         if (gameObject.name == "ArcherSkill3(Clone)" ){
             // SkillCasting = true;
             Player.GetComponent<Animator>().SetBool("IsCasting", false);
-            Invoke("AfterSkill",2.0f);
-            // anim.SetBool("IsAttacking", true);
-        }
-        if (gameObject.name == "ArcherSkill4(Clone)" ){
-            SkillCasting = true;
-            GameObject.Find("BasicAttack").GetComponent<Animator>().SetTrigger("KnockBack");
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(10 * (Player.GetComponent<SpriteRenderer>().flipX == true ? -1 : 1),0);
-            // Player.GetComponent<Animator>().SetBool("IsCasting", false);
-            Invoke("AfterSkill",0.35f);
+            Invoke("AfterSkill",0.85f);
             // anim.SetBool("IsAttacking", true);
         }
         if (gameObject.name == "ArcherSkill5(Clone)" ){
@@ -160,8 +158,8 @@ public class BasicAttack : MonoBehaviour
             Invoke("AfterSkill",20f);
         }
         if (gameObject.name == "ArcherSkill6(Clone)"){
-            // SkillCasting = true;
             Player.GetComponent<Animator>().SetBool("IsCasting", false);
+            Player.GetComponent<Rigidbody2D>().velocity = new Vector2 (0,  Player.GetComponent<Rigidbody2D>().velocity.y);
             Invoke("AfterSkill",0.1f);
             // anim.SetBool("IsAttacking", true);
         }
@@ -178,15 +176,22 @@ public class BasicAttack : MonoBehaviour
     void AfterSkill()
     {
         Debug.Log("AfterSkill");
-        Player.GetComponent<Animator>().SetBool("IsCasting", false);
         SkillCasting = false;
-        Destroy(gameObject);
+        if( gameObject.name =="ArcherSkill6(Clone)"){
+            Destroy(gameObject, 1.0f);
+            
+        } else {
+            Player.GetComponent<Animator>().SetBool("IsCasting", false);
+            Destroy(gameObject);
+        }
         if (gameObject.name == "WarriorSkill4(Clone)"){
                 // statManager.Ad -= 5 * Monsternum;
                 Monsternum = 0;
         }
     }
-
+    void CastingFalse(){
+        Player.GetComponent<Animator>().SetBool("IsCasting", false);
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (gameObject.name == "WarriorSkill2(Clone)"){
