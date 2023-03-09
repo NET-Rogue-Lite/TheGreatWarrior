@@ -216,7 +216,10 @@ public class StageBoss4 : MonoBehaviour
     {
         float Damage = Dmg * statManager.Ad;
 
-        if (statManager.Type == WeakType) // 약점타입
+        
+        if(statManager.Type == 4444)
+            return Damage * 1.5f;
+        else if (statManager.Type == WeakType) // 약점타입
             return Damage * 2;
         else if (statManager.Type == StrongType) // 강점타입
             return Damage / 2;

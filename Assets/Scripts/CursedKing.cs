@@ -220,7 +220,7 @@ public class CursedKing : MonoBehaviour
     {
         float Damage = Dmg * statManager.Ad;
 
-        if (statManager.Type != CurType) // 약점타입
+        if (statManager.Type != CurType) // 어둠 공격 아니면
             return Damage * 2 / 3;
         return Damage; // 일반타입
     }

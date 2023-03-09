@@ -435,7 +435,7 @@ MonoBehaviour:
   Attack_range: 5
   Close_range: 10
   hpBar: {fileID: 3131769320183007807}
-  IsLookLeft: 0
+  IsLookLeft: 1
   nextMove: 0
   Hit: 0
   CurType: 3

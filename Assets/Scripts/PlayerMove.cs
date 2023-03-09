@@ -45,6 +45,16 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.P)){
+            gameObject.transform.position = GameObject.Find("Portal").gameObject.transform.position;
+            
+        }
+        if(Input.GetKeyDown(KeyCode.O)){
+            statManager.Ad = 2000;
+            statManager.MaxHp = 20000;
+            hPManager.HP = 20000;
+        }
+        
         time += Time.deltaTime;
         float h = spriteRenderer.flipX == false ? 1 : -1;
         //미니맵 열기
@@ -294,6 +304,8 @@ public class PlayerMove : MonoBehaviour
         {
             if (CanClimb)
             {
+                boxcollider.isTrigger = true;
+                // GetComponent<CapsuleCollider2D>().isTrigger = true;
                 anim.SetBool("IsJumping", false);
                 rigid.velocity = Vector2.zero;
                 anim.SetBool("IsClimb", true);
@@ -311,6 +323,9 @@ public class PlayerMove : MonoBehaviour
         {
             if (CanClimb)
             {
+                boxcollider.isTrigger = true;
+                GetComponent<CircleCollider2D>().isTrigger = true;
+                // GetComponent<CapsuleCollider2D>().isTrigger = true;
                 anim.SetBool("IsJumping", false);
                 rigid.velocity = Vector2.zero;
                 anim.SetBool("IsClimb", true);
@@ -325,11 +340,15 @@ public class PlayerMove : MonoBehaviour
         {
             CanClimb = false;
             anim.SetBool("IsClimb", false);
+            boxcollider.isTrigger = false;
+                GetComponent<CircleCollider2D>().isTrigger = false;
+            // GetComponent<CapsuleCollider2D>().isTrigger = false;
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Map"))
         {
             boxcollider.isTrigger = false;
-            GetComponent<CapsuleCollider2D>().isTrigger = false;
+                GetComponent<CircleCollider2D>().isTrigger = false;
+            // GetComponent<CapsuleCollider2D>().isTrigger = false;
         }
     }
     void OnTriggerStay2D(Collider2D other)
@@ -376,6 +395,7 @@ public class PlayerMove : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("trigger");
         GameObject Other = other.gameObject;
         string Tag = other.gameObject.tag;
         int Layer = other.gameObject.layer;
@@ -388,7 +408,8 @@ public class PlayerMove : MonoBehaviour
             if (gameObject.tag == "Player")
             {
                 boxcollider.isTrigger = true;
-                GetComponent<CapsuleCollider2D>().isTrigger = true;
+                GetComponent<CircleCollider2D>().isTrigger = true;
+                // GetComponent<CapsuleCollider2D>().isTrigger = true;
             }
         }
         
@@ -417,6 +438,7 @@ public class PlayerMove : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log("collision");
         GameObject Other = other.gameObject;
         string Tag = other.gameObject.tag;
         int Layer = other.gameObject.layer;

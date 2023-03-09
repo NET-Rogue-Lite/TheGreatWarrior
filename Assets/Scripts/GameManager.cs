@@ -116,8 +116,8 @@ public class GameManager : MonoBehaviour
             Player.transform.position = StartPosition;
             return;
         }
-        else if (CurStage == i * 4 + RandomStage)
-        {
+        else if (CurStage == i * 4 + RandomStage && CurStage < 17)
+        { 
             Stages[CurStage].SetActive(false);
             ChooseStage[i].SetActive(true);
             RandomStage = Random.Range(0, 2);
