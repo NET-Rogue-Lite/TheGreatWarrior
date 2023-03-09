@@ -45,15 +45,15 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P)){
-            gameObject.transform.position = GameObject.Find("Portal").gameObject.transform.position;
+        // if(Input.GetKeyDown(KeyCode.P)){
+        //     gameObject.transform.position = GameObject.Find("Portal").gameObject.transform.position;
             
-        }
-        if(Input.GetKeyDown(KeyCode.O)){
-            statManager.Ad = 2000;
-            statManager.MaxHp = 20000;
-            hPManager.HP = 20000;
-        }
+        // }
+        // if(Input.GetKeyDown(KeyCode.O)){
+        //     statManager.Ad = 2000;
+        //     statManager.MaxHp = 20000;
+        //     hPManager.HP = 20000;
+        // }
         
         time += Time.deltaTime;
         float h = spriteRenderer.flipX == false ? 1 : -1;
