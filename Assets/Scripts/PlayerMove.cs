@@ -26,6 +26,7 @@ public class PlayerMove : MonoBehaviour
     bool IsPickUp;
     public GameObject MiniMap;
     bool OpenMiniMap;
+    float F5Cool;
     void Awake()
     {
         OpenMiniMap = false;
@@ -35,6 +36,7 @@ public class PlayerMove : MonoBehaviour
         boxcollider = GetComponent<BoxCollider2D>();
         maxSpeedy = maxSpeedx * 5;
         IsPickUp = false;
+        F5Cool = 0;
     }
     // Start is called before the first frame update
     public void SetClass()
@@ -45,10 +47,12 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if(Input.GetKeyDown(KeyCode.P)){
-        //     gameObject.transform.position = GameObject.Find("Portal").gameObject.transform.position;
-            
-        // }
+        if(Input.GetKeyDown(KeyCode.F5)){
+            if(F5Cool < 0.01f){
+                gameObject.transform.position = new Vector3(25,3,0);
+                F5Cool = 200f;
+            }
+        }
         // if(Input.GetKeyDown(KeyCode.O)){
         //     statManager.Ad = 2000;
         //     statManager.MaxHp = 20000;
@@ -262,7 +266,8 @@ public class PlayerMove : MonoBehaviour
         anim.SetBool("IsAttacking", false);
     }
     void FixedUpdate()
-    {
+    {   
+        F5Cool -= 0.02f;
         if (maxSpeedx > 6)
             maxSpeedx -= 0.5f;
         //move speed
